@@ -35,20 +35,28 @@
                 android:paddingEnd="30dp"
                 android:inputType="text"
                 android:maxLines="1"
+                android:textColor="@color/bluemarin"
+                android:textSize="25dp"
+                android:hint="Usuario"
+                android:textColorHint="@color/bluemarin_trans"
                 android:imeOptions="actionDone"
                 >
             </EditText>
             <EditText
                 android:layout_width="270dp"
                 android:layout_height="60dp"
+                android:textColor="@color/bluemarin"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/design_textbox"
                 android:layout_margin="30dp"
                 android:paddingStart="60dp"
                 android:paddingEnd="30dp"
-                android:inputType="text"
                 android:maxLines="1"
+                android:textSize="25dp"
                 android:imeOptions="actionDone"
+                android:hint="Contraseña"
+                android:textColorHint="@color/bluemarin_trans"
+                android:inputType="textPassword"
                 >
             </EditText>
             <Button
