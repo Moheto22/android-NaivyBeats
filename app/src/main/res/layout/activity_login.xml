@@ -31,7 +31,11 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/design_textbox"
-
+                android:paddingStart="60dp"
+                android:paddingEnd="30dp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
                 >
             </EditText>
             <EditText
@@ -40,6 +44,11 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/design_textbox"
                 android:layout_margin="30dp"
+                android:paddingStart="60dp"
+                android:paddingEnd="30dp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
                 >
             </EditText>
             <Button
