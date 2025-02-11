@@ -1,4 +1,4 @@
-package com.example.naivybeats.Modules;
+package com.example.naivybeats.models.user;
 
 import java.sql.Date;
 
