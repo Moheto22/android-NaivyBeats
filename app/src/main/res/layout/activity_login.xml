@@ -9,9 +9,6 @@
     android:layout_weight="18"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -99,5 +96,4 @@
             android:layout_marginLeft="70dp"
             android:background="@drawable/password_icon">
         </ImageView>
-    </FrameLayout>
 </FrameLayout>

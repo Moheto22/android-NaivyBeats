@@ -1,4 +1,4 @@
-package com.example.naivybeats.Activitys
+package com.example.naivybeats.activitys
 
 import android.annotation.SuppressLint
 import android.os.Bundle
