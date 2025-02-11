@@ -1,4 +1,4 @@
-package com.example.naivybeats.Modules;
+package com.example.naivybeats.models.city;
 
 public class City
 {

@@ -1,4 +1,6 @@
-package com.example.naivybeats.Modules;
+package com.example.naivybeats.models.musician;
+
+import com.example.naivybeats.models.user.Users;
 
 import java.sql.Date;
 import java.sql.Time;
