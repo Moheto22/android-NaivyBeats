@@ -1,3 +1,8 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">NaivyBeats</string>
+    <string name="password_editText_eng">Password</string>
+    <string name="user_name_editText_eng">User</string>
+    <string name="button_continue_eng">Continue</string>
+    <string name="text_dont_have_user_eng">If you not have an account, Sign up here!</string>
+
 </resources>
