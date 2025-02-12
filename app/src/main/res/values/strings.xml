@@ -6,5 +6,10 @@
     <string name="text_dont_have_user_eng">If you not have an account, Sign up here!</string>
     <string name="text_have_user_eng">If you have an account, Login here!</string>
     <string name="title_choose_type_user_eng">Which side are you on?</string>
-    Which side are you on?
+    <string name="title_option_musician_eng">Artist</string>
+    <string name="title_option_local_eng">Space</string>
+    <string name="title_create_user_eng">Create your new Account!</string>
+    <string name="complet_name_editText_eng">Complete name</string>
+    <string name="surname_editText_eng">Surname</string>
+    <string name="email_editText_eng">Email</string>
 </resources>

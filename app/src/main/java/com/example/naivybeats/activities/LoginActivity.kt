@@ -1,8 +1,8 @@
-package com.example.naivybeats.activitys
+package com.example.naivybeats.activities
 
+import Tools
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -22,12 +22,22 @@ class LoginActivity : AppCompatActivity() {
         var button = findViewById<Button>(R.id.buttonContinue)
         var textViewNotUser = findViewById<TextView>(R.id.notUser)
         var imageLogo = findViewById<ImageView>(R.id.imageLogo)
-        val animationStart = AnimationUtils.loadAnimation(this, R.anim.animation_turn_up)
-        val animationFocus = AnimationUtils.loadAnimation(this, R.anim.animation_focus)
-        textViewNotUser.startAnimation(animationStart)
-        button.startAnimation(animationStart)
-        editTextPassword.startAnimation(animationStart)
-        editTextUser.startAnimation(animationStart)
-        imageLogo.startAnimation(animationFocus)
+        stratInitialAnimations(editTextUser,editTextPassword, imageLogo,textViewNotUser,button)
+        textViewNotUser.setOnClickListener(){
+            Tools.createActivitySimple(this,TypeOfUserActivity::class.java)
+        }
     }
+    private fun stratInitialAnimations(
+        editTextUser: EditText,
+        editTextPassword: EditText,
+        imageLogo: ImageView,
+        textViewNotUser: TextView,
+        button: Button) {
+        Tools.animationFocus(this,imageLogo)
+        Tools.animationTurnUp(this,editTextUser)
+        Tools.animationTurnUp(this,editTextPassword)
+        Tools.animationTurnUp(this,button)
+        Tools.animationTurnUp(this,textViewNotUser)
+    }
+
 }

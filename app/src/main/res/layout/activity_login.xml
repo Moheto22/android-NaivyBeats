@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@drawable/login_light"
-    android:layout_weight="18"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
         <LinearLayout
@@ -75,11 +74,12 @@
                 android:id="@+id/notUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/beig"
+                android:textColor="@color/bluesky"
                 android:textSize="15dp"
-                android:textStyle="bold"
+                android:textStyle="bold|italic"
                 android:text="@string/text_dont_have_user_eng"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                >
             </TextView>
         </LinearLayout>
         <ImageView
