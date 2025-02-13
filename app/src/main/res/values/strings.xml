@@ -9,7 +9,12 @@
     <string name="title_option_musician_eng">Artist</string>
     <string name="title_option_local_eng">Space</string>
     <string name="title_create_user_eng">Create your new Account!</string>
-    <string name="complet_name_editText_eng">Complete name</string>
+    <string name="complet_name_editText_eng">Name</string>
     <string name="surname_editText_eng">Surname</string>
     <string name="email_editText_eng">Email</string>
+    <string name="error_not_write_name_eng">You have not written your name</string>
+    <string name="error_not_write_surname_eng">You have not written your surname</string>
+    <string name="error_not_write_email_eng">You have not written your email</string>
+    <string name="error_not_write_password_eng">You have not written your password</string>
+    <string name="error_not_correct_Login_eng">The email or the password are not correct</string>
 </resources>

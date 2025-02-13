@@ -24,13 +24,16 @@ class TypeOfUserActivity : AppCompatActivity() {
         val right_text = findViewById<TextView>(R.id.right_text)
 
         stratInitialAnimations(filter,left_block,left_text,left_image,right_block,right_image,right_text,have_user,title)
+
         have_user.setOnClickListener(){
             Tools.createActivitySimple(this,LoginActivity::class.java)
         }
-        right_image.setOnClickListener(){
-
+        right_block.setOnClickListener(){
+            Tools.createActivityNewDataUser(this, CreateDataNewUserMusicActivity::class.java, "Space")
         }
-
+        left_block.setOnClickListener(){
+            Tools.createActivityNewDataUser(this, CreateDataNewUserMusicActivity::class.java, "Artist")
+        }
     }
 
     private fun stratInitialAnimations(

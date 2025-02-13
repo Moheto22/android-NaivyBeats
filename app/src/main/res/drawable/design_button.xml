@@ -7,7 +7,7 @@
                 android:startColor="@color/beig"
                 android:endColor="@color/beig"
                 android:type="linear"/>
-            <corners android:radius="30dp"/>
+            <corners android:radius="20dp"/>
             <stroke>
 
             </stroke>
