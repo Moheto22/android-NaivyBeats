@@ -26,9 +26,13 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".activities.CreateDataNewUserMusicActivity"
+            android:name=".activities.CreateDataNewUserArtistActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".activities.Crea"
+            android:exported="true"/>
+
     </application>
 
 </manifest>

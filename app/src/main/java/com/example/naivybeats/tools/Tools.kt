@@ -5,7 +5,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.naivybeats.R
-import com.example.naivybeats.activities.CreateDataNewUserMusicActivity
+import com.example.naivybeats.activities.CreateDataNewUserArtistActivity
 
 class Tools {
     companion object {
@@ -19,7 +19,6 @@ class Tools {
 
         fun createActivityNewDataUser(context: Context, activityClass: Class<*>, userType: String) {
         val intent = Intent(context, activityClass)
-        intent.putExtra(CreateDataNewUserMusicActivity.constantsProject.userType, userType)
         context.startActivity(intent)
         }
 

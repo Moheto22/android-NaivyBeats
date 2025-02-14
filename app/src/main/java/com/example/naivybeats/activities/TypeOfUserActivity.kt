@@ -1,5 +1,6 @@
 package com.example.naivybeats.activities
 
+import CreateDataNewUserSpaceActivity
 import Tools
 import android.os.Bundle
 import android.widget.ImageView
@@ -29,10 +30,10 @@ class TypeOfUserActivity : AppCompatActivity() {
             Tools.createActivitySimple(this,LoginActivity::class.java)
         }
         right_block.setOnClickListener(){
-            Tools.createActivityNewDataUser(this, CreateDataNewUserMusicActivity::class.java, "Space")
+            Tools.createActivitySimple(this, CreateDataNewUserSpaceActivity::class.java)
         }
         left_block.setOnClickListener(){
-            Tools.createActivityNewDataUser(this, CreateDataNewUserMusicActivity::class.java, "Artist")
+            Tools.createActivitySimple(this, CreateDataNewUserArtistActivity::class.java)
         }
     }
 

@@ -17,4 +17,5 @@
     <string name="error_not_write_email_eng">You have not written your email</string>
     <string name="error_not_write_password_eng">You have not written your password</string>
     <string name="error_not_correct_Login_eng">The email or the password are not correct</string>
+    <string name="name_place_editText_eng">Name of the space</string>
 </resources>
