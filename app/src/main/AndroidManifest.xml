@@ -30,8 +30,9 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".activities.Crea"
-            android:exported="true"/>
+        android:name=".activities.CreateDataNewUserSpaceActivity"
+        android:exported="true">
+        </activity>
 
     </application>
 

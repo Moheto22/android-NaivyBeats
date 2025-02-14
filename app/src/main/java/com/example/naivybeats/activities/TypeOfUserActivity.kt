@@ -1,6 +1,5 @@
 package com.example.naivybeats.activities
 
-import CreateDataNewUserSpaceActivity
 import Tools
 import android.os.Bundle
 import android.widget.ImageView

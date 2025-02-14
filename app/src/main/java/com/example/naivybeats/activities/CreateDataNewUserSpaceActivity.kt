@@ -1,3 +1,6 @@
+package com.example.naivybeats.activities
+
+import Tools
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -5,7 +8,6 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.naivybeats.R
-import com.example.naivybeats.activities.LoginActivity
 
 class CreateDataNewUserSpaceActivity : AppCompatActivity() {
 
@@ -50,7 +52,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         val listEditText = listOf<EditText>(findViewById(R.id.name_space), findViewById(R.id.name), findViewById(
             R.id.email), findViewById(R.id.password))
         list.forEach { index ->
-            Tools.animationHorizontalShake(this,listEditText[index])
+            Tools.animationHorizontalShake(this, listEditText[index])
         }
     }
 
@@ -62,12 +64,12 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         button: Button,
         have_user: TextView
                                       ) {
-        Tools.animationFocus(this,title)
-        Tools.animationTurnUp(this,name)
-        Tools.animationTurnUp(this,email)
-        Tools.animationTurnUp(this,password)
-        Tools.animationTurnUp(this,button)
-        Tools.animationTurnUp(this,have_user)
+        Tools.animationFocus(this, title)
+        Tools.animationTurnUp(this, name)
+        Tools.animationTurnUp(this, email)
+        Tools.animationTurnUp(this, password)
+        Tools.animationTurnUp(this, button)
+        Tools.animationTurnUp(this, have_user)
     }
 
 }
