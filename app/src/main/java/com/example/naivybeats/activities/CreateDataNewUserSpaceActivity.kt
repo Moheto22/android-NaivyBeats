@@ -47,7 +47,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
     }
 
     private fun shakeEditTexts(list: MutableList<Int>) {
-        val listEditText = listOf<EditText>(findViewById(R.id.name), findViewById(
+        val listEditText = listOf<EditText>(findViewById(R.id.name_space), findViewById(R.id.name), findViewById(
             R.id.email), findViewById(R.id.password))
         list.forEach { index ->
             Tools.animationHorizontalShake(this,listEditText[index])
