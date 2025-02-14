@@ -26,6 +26,10 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".activities.GetDirectionActivity"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".activities.CreateDataNewUserArtistActivity"
             android:exported="true">
         </activity>

@@ -19,9 +19,10 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         val editTextName = findViewById<EditText>(R.id.name_space)
         val editTextEmail = findViewById<EditText>(R.id.email)
         val editTextPassword = findViewById<EditText>(R.id.password)
+        val editTextNumber = findViewById<EditText>(R.id.number)
         val have_user = findViewById<TextView>(R.id.isUser)
         val button = findViewById<Button>(R.id.buttonContinue)
-        stratInitialAnimations(title,editTextName,editTextEmail,editTextPassword,button,have_user)
+        stratInitialAnimations(title,editTextName,editTextEmail,editTextNumber,editTextPassword,button,have_user)
 
         have_user.setOnClickListener(){
             Tools.createActivitySimple(this, LoginActivity::class.java)
@@ -33,24 +34,29 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
             if(name.isEmpty()){
                 list.add(0)
             }
-
             val email = editTextEmail.text
             if(email.isEmpty()){
                 list.add(1)
             }
+            val number = editTextNumber.text
+            if(number.isEmpty()){
+                list.add(2)
+            }
             val password = editTextPassword.text
             if (password.isEmpty()){
-                list.add(2)
+                list.add(3)
             }
             if (!list.isEmpty()){
                 shakeEditTexts(list)
+            }else{
+                Tools.createActivitySimple(this,GetDirectionActivity::class.java)
             }
         }
     }
 
     private fun shakeEditTexts(list: MutableList<Int>) {
         val listEditText = listOf<EditText>(findViewById(R.id.name_space), findViewById(R.id.name), findViewById(
-            R.id.email), findViewById(R.id.password))
+            R.id.email), findViewById(R.id.number),findViewById(R.id.password))
         list.forEach { index ->
             Tools.animationHorizontalShake(this, listEditText[index])
         }
@@ -60,6 +66,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         title: TextView,
         name: EditText,
         email: EditText,
+        number: EditText,
         password: EditText,
         button: Button,
         have_user: TextView
@@ -67,6 +74,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         Tools.animationFocus(this, title)
         Tools.animationTurnUp(this, name)
         Tools.animationTurnUp(this, email)
+        Tools.animationTurnUp(this,number)
         Tools.animationTurnUp(this, password)
         Tools.animationTurnUp(this, button)
         Tools.animationTurnUp(this, have_user)

@@ -1,7 +1,6 @@
 package com.example.naivybeats.activities
 
 import Tools
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -20,10 +19,11 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
         val editTextName = findViewById<EditText>(R.id.name)
         val editTextSurname = findViewById<EditText>(R.id.surname)
         val editTextEmail = findViewById<EditText>(R.id.email)
+        val editTextNumber = findViewById<EditText>(R.id.number)
         val editTextPassword = findViewById<EditText>(R.id.password)
         val have_user = findViewById<TextView>(R.id.isUser)
         val button = findViewById<Button>(R.id.buttonContinue)
-        stratInitialAnimations(title,editTextName,editTextSurname,editTextEmail,editTextPassword,button,have_user)
+        stratInitialAnimations(title,editTextName,editTextSurname,editTextEmail,editTextNumber,editTextPassword,button,have_user)
 
         have_user.setOnClickListener(){
             Tools.createActivitySimple(this,LoginActivity::class.java)
@@ -43,18 +43,24 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
             if(email.isEmpty()){
                 list.add(2)
             }
+            val number = editTextNumber.text
+            if(number.isEmpty()){
+                list.add(3)
+            }
             val password = editTextPassword.text
             if (password.isEmpty()){
-                list.add(3)
+                list.add(4)
             }
             if (!list.isEmpty()){
                 shakeEditTexts(list)
+            }else{
+                Tools.createActivitySimple(this,GetDirectionActivity::class.java)
             }
         }
     }
 
     private fun shakeEditTexts(list: MutableList<Int>) {
-        val listEditText = listOf<EditText>(findViewById(R.id.name),findViewById(R.id.surname),findViewById(R.id.email),findViewById(R.id.password))
+        val listEditText = listOf<EditText>(findViewById(R.id.name),findViewById(R.id.surname),findViewById(R.id.email),findViewById(R.id.number),findViewById(R.id.password))
         list.forEach { index ->
             Tools.animationHorizontalShake(this,listEditText[index])
         }
@@ -65,13 +71,16 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
         name: EditText,
         surname: EditText,
         email: EditText,
+        number: EditText,
         password: EditText,
         button: Button,
-        have_user: TextView) {
+        have_user: TextView
+                                      ) {
         Tools.animationFocus(this,title)
         Tools.animationTurnUp(this,name)
         Tools.animationTurnUp(this,surname)
         Tools.animationTurnUp(this,email)
+        Tools.animationTurnUp(this,number)
         Tools.animationTurnUp(this,password)
         Tools.animationTurnUp(this,button)
         Tools.animationTurnUp(this,have_user)

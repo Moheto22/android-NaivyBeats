@@ -6,6 +6,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.CreateDataNewUserArtistActivity
+import com.example.naivybeats.activities.GetDirectionActivity
 
 class Tools {
     companion object {
@@ -20,6 +21,13 @@ class Tools {
         fun createActivityNewDataUser(context: Context, activityClass: Class<*>, userType: String) {
         val intent = Intent(context, activityClass)
         context.startActivity(intent)
+        }
+        fun createActivityGetAdressFromArtsit(context: Context,userType:String,name:String,surname:String,number:Int,email: String,password : String) {
+            val intent = Intent(context, GetDirectionActivity::class.java)
+            intent.putExtra(GetDirectionActivity.constantsProject.name, name)
+            intent.putExtra(GetDirectionActivity.constantsProject.surname,surname)
+            intent.putExtra(GetDirectionActivity.constantsProject.email,email)
+            context.startActivity(intent)
         }
 
         fun createActivitySimple(context: Context, activityClass: Class<*>) {
