@@ -15,7 +15,6 @@ class GetDirectionActivity : AppCompatActivity(){
         const val surname = "SURNAME"
         const val password = "PASSWORD"
         const val email = "EMAIL"
-        const val name_space = "NAME_SPACE"
         const val number = "NUMBER"
         const val type = "TYPE"
     }
@@ -23,7 +22,14 @@ class GetDirectionActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_get_direction_new_user)
-
+        val intent = intent
+        val name = intent.getStringExtra(constantsProject.name)
+        val type = intent.getStringExtra(constantsProject.type)
+        if(type == "artist"){
+            val surname = intent.getStringExtra(constantsProject.surname)
+        }
+        val email = intent.getStringExtra(constantsProject.email)
+        val number  = intent?.getIntExtra(constantsProject.number)
         val title = findViewById<TextView>(R.id.title)
         val province = findViewById<AutoCompleteTextView>(R.id.province)
         val municipality = findViewById<AutoCompleteTextView>(R.id.municipality)
@@ -36,6 +42,11 @@ class GetDirectionActivity : AppCompatActivity(){
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, opciones)
         province.setAdapter(adapter)
         municipality.setAdapter(adapter)
+
+        isUser.setOnClickListener(){
+            Tools.createActivitySimple(this, LoginActivity::class.java)
+        }
+
     }
     private fun stratInitialAnimations(
         title: TextView,

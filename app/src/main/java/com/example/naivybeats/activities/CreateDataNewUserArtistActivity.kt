@@ -43,8 +43,8 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
             if(email.isEmpty()){
                 list.add(2)
             }
-            val number = editTextNumber.text
-            if(number.isEmpty()){
+            val number = editTextNumber.text.toString().toIntOrNull()
+            if(number == null){
                 list.add(3)
             }
             val password = editTextPassword.text
@@ -54,7 +54,7 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
             if (!list.isEmpty()){
                 shakeEditTexts(list)
             }else{
-                Tools.createActivitySimple(this,GetDirectionActivity::class.java)
+                Tools.createActivityGetAdressFromArtist(this,name.toString(),surname.toString(),number as Int,email.toString(),password.toString())
             }
         }
     }

@@ -30,26 +30,26 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
 
         button.setOnClickListener(){
             var list = mutableListOf<Int>()
-            val name = editTextName.text
+            val name = editTextName.text.toString()
             if(name.isEmpty()){
                 list.add(0)
             }
-            val email = editTextEmail.text
+            val email = editTextEmail.text.toString()
             if(email.isEmpty()){
                 list.add(1)
             }
-            val number = editTextNumber.text
-            if(number.isEmpty()){
+            val number = editTextNumber.text.toString().toIntOrNull()
+            if(number == null){
                 list.add(2)
             }
-            val password = editTextPassword.text
+            val password = editTextPassword.text.toString()
             if (password.isEmpty()){
                 list.add(3)
             }
             if (!list.isEmpty()){
                 shakeEditTexts(list)
             }else{
-                Tools.createActivitySimple(this,GetDirectionActivity::class.java)
+                Tools.createActivityGetAdressFromSpace(this, name, number, email, password)
             }
         }
     }

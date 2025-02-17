@@ -22,11 +22,23 @@ class Tools {
         val intent = Intent(context, activityClass)
         context.startActivity(intent)
         }
-        fun createActivityGetAdressFromArtsit(context: Context,userType:String,name:String,surname:String,number:Int,email: String,password : String) {
+        fun createActivityGetAdressFromArtist(context: Context,name:String,surname:String,number:Int?,email: String,password : String) {
             val intent = Intent(context, GetDirectionActivity::class.java)
+            intent.putExtra(GetDirectionActivity.constantsProject.type,"artist")
             intent.putExtra(GetDirectionActivity.constantsProject.name, name)
             intent.putExtra(GetDirectionActivity.constantsProject.surname,surname)
             intent.putExtra(GetDirectionActivity.constantsProject.email,email)
+            intent.putExtra(GetDirectionActivity.constantsProject.number,number)
+            intent.putExtra(GetDirectionActivity.constantsProject.password,password)
+            context.startActivity(intent)
+        }
+        fun createActivityGetAdressFromSpace(context: Context,name:String,number :Int?,email: String,password : String) {
+            val intent = Intent(context, GetDirectionActivity::class.java)
+            intent.putExtra(GetDirectionActivity.constantsProject.type,"space")
+            intent.putExtra(GetDirectionActivity.constantsProject.name, name)
+            intent.putExtra(GetDirectionActivity.constantsProject.email,email)
+            intent.putExtra(GetDirectionActivity.constantsProject.number,number)
+            intent.putExtra(GetDirectionActivity.constantsProject.password,password)
             context.startActivity(intent)
         }
 
