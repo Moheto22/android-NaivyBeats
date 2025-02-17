@@ -47,8 +47,34 @@ class GetDirectionActivity : AppCompatActivity(){
         isUser.setOnClickListener(){
             Tools.createActivitySimple(this, LoginActivity::class.java)
         }
+        button.setOnClickListener(){
+            var list = mutableListOf<Int>()
+            var province = province.text.toString()
+            if (province.isEmpty()){
+                list.add(0)
+            }
+            var municipality = municipality.text.toString()
+            if (municipality.isEmpty()){
+                list.add(1)
+            }
+            var direction = adress.text.toString()
+            if (direction.isEmpty()){
+                list.add(2)
+            }
+            if (!list.isEmpty()){
+                shakeEditTexts(list)
+            }
+        }
 
     }
+
+    private fun shakeEditTexts(list: MutableList<Int>) {
+        val listEditText = listOf<EditText>(findViewById(R.id.province),findViewById(R.id.municipality),findViewById(R.id.adress))
+        list.forEach { index ->
+            Tools.animationHorizontalShake(this, listEditText[index])
+        }
+    }
+
     private fun stratInitialAnimations(
         title: TextView,
         province: AutoCompleteTextView,
