@@ -29,6 +29,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         }
 
         button.setOnClickListener(){
+
             var list = mutableListOf<Int>()
             val name = editTextName.text.toString()
             if(name.isEmpty()){
@@ -38,9 +39,10 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
             if(email.isEmpty()){
                 list.add(1)
             }
-            val number = editTextNumber.text.toString().toIntOrNull()
+            var number = editTextNumber.text.toString().toIntOrNull()
             if(number == null){
                 list.add(2)
+                number = -1
             }
             val password = editTextPassword.text.toString()
             if (password.isEmpty()){

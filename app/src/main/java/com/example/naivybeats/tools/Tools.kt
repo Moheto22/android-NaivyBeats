@@ -22,7 +22,7 @@ class Tools {
         val intent = Intent(context, activityClass)
         context.startActivity(intent)
         }
-        fun createActivityGetAdressFromArtist(context: Context,name:String,surname:String,number:Int?,email: String,password : String) {
+        fun createActivityGetAdressFromArtist(context: Context,name:String,surname:String,number:Int,email: String,password : String) {
             val intent = Intent(context, GetDirectionActivity::class.java)
             intent.putExtra(GetDirectionActivity.constantsProject.type,"artist")
             intent.putExtra(GetDirectionActivity.constantsProject.name, name)
@@ -32,7 +32,7 @@ class Tools {
             intent.putExtra(GetDirectionActivity.constantsProject.password,password)
             context.startActivity(intent)
         }
-        fun createActivityGetAdressFromSpace(context: Context,name:String,number :Int?,email: String,password : String) {
+        fun createActivityGetAdressFromSpace(context: Context,name:String,number :Int,email: String,password : String) {
             val intent = Intent(context, GetDirectionActivity::class.java)
             intent.putExtra(GetDirectionActivity.constantsProject.type,"space")
             intent.putExtra(GetDirectionActivity.constantsProject.name, name)

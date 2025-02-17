@@ -29,7 +29,8 @@ class GetDirectionActivity : AppCompatActivity(){
             val surname = intent.getStringExtra(constantsProject.surname)
         }
         val email = intent.getStringExtra(constantsProject.email)
-        val number  = intent?.getIntExtra(constantsProject.number)
+        val number  = intent.getIntExtra(constantsProject.number,-1)
+        val password = intent.getStringExtra(constantsProject.password)
         val title = findViewById<TextView>(R.id.title)
         val province = findViewById<AutoCompleteTextView>(R.id.province)
         val municipality = findViewById<AutoCompleteTextView>(R.id.municipality)
