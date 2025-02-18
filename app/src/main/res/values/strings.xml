@@ -25,5 +25,16 @@
     <string name="button_afernoon_eng">Afternoon</string>
     <string name="button_night_eng">Night</string>
     <string name="button_whenever_eng">Whenever</string>
+    <string name="button_tecno_eng">Tecno</string>
+    <string name="button_blues_eng">Blues</string>
+    <string name="button_reggueton_eng">Reggueton</string>
+    <string name="button_jazz_eng">Jazz</string>
+    <string name="button_rock_eng">Rock</string>
+    <string name="button_pop_eng">Pop</string>
+    <string name="button_hiphop_eng">Hip-hop</string>
+    <string name="button_clasic_eng">Classic</string>
+    <string name="button_flamenco_eng">Flamenco</string>
+    <string name="button_trap_eng">Trap</string>
+
 
 </resources>

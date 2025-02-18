@@ -37,6 +37,10 @@
         android:name=".activities.CreateDataNewUserSpaceActivity"
         android:exported="true">
         </activity>
+        <activity
+            android:name=".activities.ChoseStyleArtistActivity"
+            android:exported="true">
+        </activity>
 
     </application>
 

@@ -1,4 +1,5 @@
 package com.example.naivybeats.activities
+import Tools
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -63,6 +64,8 @@ class GetDirectionActivity : AppCompatActivity(){
             }
             if (!list.isEmpty()){
                 shakeEditTexts(list)
+            }else{
+                Tools.createActivitySimple(this,ChoseStyleArtistActivity::class.java)
             }
         }
 

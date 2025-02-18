@@ -26,7 +26,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="140dp"
             android:layout_marginBottom="20dp"
-            android:text="@string/title_get_direction"
+            android:text="@string/title_get_direction_eng"
             android:textStyle="bold"
             />
         <AutoCompleteTextView
@@ -39,7 +39,7 @@
             android:textAlignment="center"
             android:textColor="@color/bluemarin"
             android:textSize="25dp"
-            android:hint="@string/auto_complet_province"
+            android:hint="@string/auto_complet_province_eng"
             android:textColorHint="@color/bluemarin_trans"
             android:inputType="text"/>
         <AutoCompleteTextView
@@ -52,7 +52,7 @@
             android:textAlignment="center"
             android:textColor="@color/bluemarin"
             android:textSize="25dp"
-            android:hint="@string/auto_complet_municipality"
+            android:hint="@string/auto_complet_municipality_eng"
             android:textColorHint="@color/bluemarin_trans"
             android:inputType="text"/>
         <EditText
@@ -67,7 +67,7 @@
             android:textAlignment="center"
             android:textColor="@color/bluemarin"
             android:textSize="25dp"
-            android:hint="@string/editText_complet_adress"
+            android:hint="@string/editText_complet_adress_eng"
             android:textColorHint="@color/bluemarin_trans"
             android:imeOptions="actionDone"
             >
