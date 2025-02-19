@@ -1,4 +1,4 @@
-package com.example.naivybeats.models.superUser;
+package com.example.naivybeats.models.ticket;
 
 import java.sql.Date;
 

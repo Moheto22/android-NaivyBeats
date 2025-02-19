@@ -1,4 +1,4 @@
-package com.example.naivybeats.models.superUser;
+package com.example.naivybeats.models.superUser.model;
 
 public class SuperUser
 {
