@@ -23,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
         var textViewNotUser = findViewById<TextView>(R.id.notUser)
         var imageLogo = findViewById<ImageView>(R.id.imageLogo)
         stratInitialAnimations(editTextUser,editTextPassword, imageLogo,textViewNotUser,button)
+
         textViewNotUser.setOnClickListener(){
             Tools.createActivitySimple(this,TypeOfUserActivity::class.java)
         }

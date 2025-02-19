@@ -2,17 +2,20 @@ package com.example.naivybeats.activities
 
 import Tools
 import android.os.Bundle
+import android.util.Range
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.naivybeats.R
 
 class ChoseStyleArtistActivity : AppCompatActivity() {
+    private val buttonStates = HashMap<Button, Boolean>()
+    private var listOfButtons : List<Button> = TODO()
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_chose_style_artist)
@@ -35,17 +38,41 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         val tecno = findViewById<Button>(R.id.tecno)
         val button_continue = findViewById<Button>(R.id.buttonContinue)
         val is_user = findViewById<TextView>(R.id.isUser)
+        listOfButtons = listOf<Button>(morning,afternoon,night,whenever,jazz,hiphop,rock,
+                          pop,classic,trap,blues,reggueton,flamenco,tecno)
+
 
         startInitialAnimations(title,subtitle_time,subtitle_style,morning,afternoon,night,whenever,jazz,hiphop,rock,pop,classic,trap,blues,reggueton,flamenco,tecno,button_continue,is_user)
         val onClickButton = View.OnClickListener { view ->
-
             when (view) {
                 is Button -> {
-                    if (view.getBackground().constantState == R.drawable.design_button_type_choose_not_pressed)
-                    view.setBackgroundColor(Color.RED)
-                }
 
+                    if (!buttonStates[view]!!) {
+                        view.setBackgroundResource(R.drawable.design_button_type_choose)
+                        buttonStates[view] = true
+                        if (listOfButtons.indexOf(view) == 3){
+                            offTimeButtons()
+                        }
+                    }else{
+                        view.setBackgroundResource(R.drawable.design_button_type_choose_not_pressed)
+                        buttonStates[view] = false
+                    }
+                }
             }
+        }
+        listOfButtons.forEach { button ->
+            buttonStates[button] = false
+            button.setOnClickListener(onClickButton)
+        }
+
+
+    }
+
+    private fun offTimeButtons() {
+        val range = 0..2
+        range.forEach{ index ->
+            listOfButtons[index].setBackgroundResource(R.drawable.design_button_type_choose_not_pressed)
+            buttonStates[listOfButtons[index]] = false
         }
     }
 
