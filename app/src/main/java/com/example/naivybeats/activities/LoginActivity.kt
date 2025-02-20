@@ -10,6 +10,11 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.naivybeats.R
+import com.example.naivybeats.models.superUser.controller.SuperUserController
+import com.example.naivybeats.models.user.model.Users
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -17,6 +22,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+
+
+        var users: List<Users>
         var editTextUser = findViewById<EditText>(R.id.userName)
         var editTextPassword = findViewById<EditText>(R.id.password)
         var button = findViewById<Button>(R.id.buttonContinue)
@@ -38,6 +46,13 @@ class LoginActivity : AppCompatActivity() {
         Tools.animationTurnUp(this,editTextPassword)
         Tools.animationTurnUp(this,button)
         Tools.animationTurnUp(this,textViewNotUser)
+    }
+
+    private fun getAllUsers(): Boolean
+    {
+        CoroutineScope(Dispatchers.IO).launch {
+
+        }
     }
 
 }

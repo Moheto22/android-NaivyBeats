@@ -8,12 +8,7 @@ import retrofit2.Call
 class SuperUserController {
     private val service = RetrofitClient.createService(SuperUserService::class.java)
 
-    suspend fun getSuperUsers(): List<SuperUser>? {
-        return try {
-            service.getSuperUsers()
-
-        } catch (e: Exception) {
-            null
-        }
+    suspend fun getSuperUsers(): List<SuperUser> {
+        return   service.getSuperUsers()
     }
 }
