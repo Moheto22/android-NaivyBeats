@@ -1,6 +1,6 @@
 package com.example.naivybeats.models.restaurant;
 
-import com.example.naivybeats.models.user.Users;
+import com.example.naivybeats.models.user.model.Users;
 
 import java.sql.Date;
 import java.sql.Time;

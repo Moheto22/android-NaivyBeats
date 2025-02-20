@@ -1,4 +1,4 @@
-package com.example.naivybeats.models.user;
+package com.example.naivybeats.models.user.model;
 
 public class Rate
 {
