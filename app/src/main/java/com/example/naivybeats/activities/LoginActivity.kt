@@ -9,43 +9,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.models.superUser.controller.SuperUserController
-import com.example.naivybeats.models.time.controller.TimeController
-import com.example.naivybeats.models.time.model.Time
-import com.example.naivybeats.models.user.controller.UserController
 import com.example.naivybeats.models.user.model.Users
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
-    companion object{
-        var  userController = UserController()
-        var timeController = TimeController()
-    }
-
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-        var users: List<Users>
-        var times: List<Time>
-        lifecycleScope.launch {
-            try {
-                times = getAllTimes()
-                users = getAllUsers()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                println("Error al obtener datos: ${e.message}")
-            }
-        }
 
+        var users: List<Users>
         var editTextUser = findViewById<EditText>(R.id.userName)
         var editTextPassword = findViewById<EditText>(R.id.password)
         var button = findViewById<Button>(R.id.buttonContinue)
@@ -70,17 +49,12 @@ class LoginActivity : AppCompatActivity() {
         Tools.animationTurnUp(this,textViewNotUser)
     }
 
-    private suspend fun getAllUsers(): List<Users>
+    private fun getAllUsers(): Boolean
     {
-        return withContext(Dispatchers.IO) {
-            userController.getAllUsers()
-        }
-    }
+        CoroutineScope(Dispatchers.IO).launch {
 
-    private suspend fun getAllTimes(): List<Time>{
-        return withContext(Dispatchers.IO) {
-            timeController.getAllTimes()
         }
+        return true
     }
 
 }

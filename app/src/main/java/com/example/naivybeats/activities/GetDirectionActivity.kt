@@ -68,7 +68,6 @@ class GetDirectionActivity : AppCompatActivity(){
                 Tools.createActivitySimple(this,ChoseStyleArtistActivity::class.java)
             }
         }
-
     }
 
     private fun shakeEditTexts(list: MutableList<Int>) {
