@@ -2,43 +2,47 @@ package com.example.naivybeats.models.user.model;
 
 import java.sql.Date;
 
-public abstract class Users
+public class Users
 {
-    int userId;
+    int user_id;
     String name;
     String photo;
     String email;
     String password;
-    int phoneNumber;
-    Date creationDate;
-    Date editionDate;
-    int municipalityId;
+    int phone_number;
+    Date creation_date;
+    Date edition_date;
+    int province_id;
+    Double latitud;
+    Double longitud;
 
     public Users()
     {
     }
 
-    public Users(int userId, String name, String photo, String email, String password, int phoneNumber, Date creationDate, Date editionDate, int municipalityId)
+    public Users(int userId, String name, String photo, Double longitud, Double latitud, int municipalityId, Date editionDate, Date creationDate, int phoneNumber, String password, String email)
     {
-        this.userId = userId;
+        this.user_id = userId;
         this.name = name;
         this.photo = photo;
-        this.email = email;
+        this.longitud = longitud;
+        this.latitud = latitud;
+        this.province_id = municipalityId;
+        this.edition_date = editionDate;
+        this.creation_date = creationDate;
+        this.phone_number = phoneNumber;
         this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.creationDate = creationDate;
-        this.editionDate = editionDate;
-        this.municipalityId = municipalityId;
+        this.email = email;
     }
 
     public int getUserId()
     {
-        return userId;
+        return user_id;
     }
 
     public void setUserId(int userId)
     {
-        this.userId = userId;
+        this.user_id = userId;
     }
 
     public String getName()
@@ -83,41 +87,61 @@ public abstract class Users
 
     public int getPhoneNumber()
     {
-        return phoneNumber;
+        return phone_number;
     }
 
     public void setPhoneNumber(int phoneNumber)
     {
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phoneNumber;
     }
 
     public Date getCreationDate()
     {
-        return creationDate;
+        return creation_date;
     }
 
     public void setCreationDate(Date creationDate)
     {
-        this.creationDate = creationDate;
+        this.creation_date = creationDate;
     }
 
     public Date getEditionDate()
     {
-        return editionDate;
+        return edition_date;
     }
 
     public void setEditionDate(Date editionDate)
     {
-        this.editionDate = editionDate;
+        this.edition_date = editionDate;
     }
 
     public int getMunicipalityId()
     {
-        return municipalityId;
+        return province_id;
     }
 
     public void setMunicipalityId(int municipalityId)
     {
-        this.municipalityId = municipalityId;
+        this.province_id = municipalityId;
+    }
+
+    public Double getLatitud()
+    {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud)
+    {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud()
+    {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud)
+    {
+        this.longitud = longitud;
     }
 }

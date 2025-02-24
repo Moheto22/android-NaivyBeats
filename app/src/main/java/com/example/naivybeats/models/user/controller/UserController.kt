@@ -4,6 +4,7 @@ import com.example.naivybeats.RetrofitClient
 import com.example.naivybeats.models.superUser.service.SuperUserService
 import com.example.naivybeats.models.user.model.Users
 import com.example.naivybeats.models.user.service.UserService
+import kotlin.collections.List
 
 class UserController {
     private val service = RetrofitClient.createService(UserService::class.java)
@@ -12,4 +13,4 @@ class UserController {
     {
        return service.getAllUsers()
     }
-}
+ }

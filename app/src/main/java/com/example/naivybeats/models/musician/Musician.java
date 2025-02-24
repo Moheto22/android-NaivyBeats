@@ -1,32 +1,33 @@
 package com.example.naivybeats.models.musician;
 
+import com.example.naivybeats.models.style.Style;
 import com.example.naivybeats.models.user.model.Users;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 public class Musician extends Users
 {
-    Time preferredTime;
+    List<Style> styles;
 
     public Musician()
     {
     }
 
-    public Musician(int userId, String name, String photo, String email, String password, int phoneNumber, Date creationDate, Date editionDate, int municipalityId, Time preferredTime)
+    public Musician(int userId, String name, String photo, Double longitud, Double latitud, int municipalityId, Date editionDate, Date creationDate, int phoneNumber, String password, String email, List<Style> styles)
     {
-        super(userId, name, photo, email, password, phoneNumber, creationDate, editionDate, municipalityId);
-        this.preferredTime = preferredTime;
+        super(userId, name, photo, longitud, latitud, municipalityId, editionDate, creationDate, phoneNumber, password, email);
+        this.styles = styles;
     }
 
-    public Time getPreferredTime()
+    public List<Style> getStyles()
     {
-        return preferredTime;
+        return styles;
     }
 
-    public void setPreferredTime(Time preferredTime)
+    public void setStyles(List<Style> styles)
     {
-        this.preferredTime = preferredTime;
+        this.styles = styles;
     }
-
 }
