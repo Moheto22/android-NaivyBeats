@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.naivybeats.R
+import com.example.naivybeats.activities.GetDirectionActivity.constantsProject
 
 class ChoseStyleArtistActivity : AppCompatActivity() {
     private val buttonStates = HashMap<Button, Boolean>()
@@ -21,7 +22,6 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         const val password = "PASSWORD"
         const val email = "EMAIL"
         const val number = "NUMBER"
-        const val type = "TYPE"
         const val municipality = "MUNICIPALITY"
         const val province = "PROVINCE"
         const val adress = "ADRESS"
@@ -30,6 +30,12 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_chose_style_artist)
+        val name = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.name)
+        val surname = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.surname)
+        val email = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.email)
+        val number  = intent.getIntExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.number, -1)
+        val password = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.password)
+
         val title = findViewById<TextView>(R.id.title)
         val subtitle_time = findViewById<TextView>(R.id.subtitle_time)
         val subtitle_style = findViewById<TextView>(R.id.subtitle_style)
