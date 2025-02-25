@@ -11,14 +11,31 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.naivybeats.R
+import com.example.naivybeats.activities.GetDirectionActivity.constantsProject
 
 class ChoseStyleArtistActivity : AppCompatActivity() {
     private val buttonStates = HashMap<Button, Boolean>()
-    private var listOfButtons : List<Button> = TODO()
+    private var listOfButtons = listOf<Button>()
+    object constantsProject {
+        const val name = "NAME"
+        const val surname = "SURNAME"
+        const val password = "PASSWORD"
+        const val email = "EMAIL"
+        const val number = "NUMBER"
+        const val municipality = "MUNICIPALITY"
+        const val province = "PROVINCE"
+        const val adress = "ADRESS"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_chose_style_artist)
+        val name = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.name)
+        val surname = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.surname)
+        val email = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.email)
+        val number  = intent.getIntExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.number, -1)
+        val password = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.password)
+
         val title = findViewById<TextView>(R.id.title)
         val subtitle_time = findViewById<TextView>(R.id.subtitle_time)
         val subtitle_style = findViewById<TextView>(R.id.subtitle_style)
@@ -46,12 +63,19 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         val onClickButton = View.OnClickListener { view ->
             when (view) {
                 is Button -> {
-
                     if (!buttonStates[view]!!) {
                         view.setBackgroundResource(R.drawable.design_button_type_choose)
                         buttonStates[view] = true
                         if (listOfButtons.indexOf(view) == 3){
                             offTimeButtons()
+                        }else if(listOfButtons.indexOf(view) in 0..2){
+                            listOfButtons[3].setBackgroundResource(R.drawable.design_button_type_choose_not_pressed)
+                            buttonStates[listOfButtons[3]] = false
+                        }
+                        if(buttonStates[listOfButtons[0]] == true && buttonStates[listOfButtons[1]] == true && buttonStates[listOfButtons[2]] == true){
+                            offTimeButtons()
+                            listOfButtons[3].setBackgroundResource(R.drawable.design_button_type_choose)
+                            buttonStates[listOfButtons[3]] = true
                         }
                     }else{
                         view.setBackgroundResource(R.drawable.design_button_type_choose_not_pressed)
@@ -64,8 +88,39 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
             buttonStates[button] = false
             button.setOnClickListener(onClickButton)
         }
+        button_continue.setOnClickListener(){
+            val list_preferences_styles = getPreferencesStyles()
+            val list_preferences_time = getPreferencesTime()
+
+        }
 
 
+    }
+
+    private fun getPreferencesTime(): List<String> {
+        val listResult = mutableListOf<String>()
+        val listOfValues = listOf("morning","afternoon","night")
+        if (buttonStates[listOfButtons[3]] == true){
+            listResult.add("whenever")
+        }else {
+            for (i in 0..2){
+                if (buttonStates[listOfButtons[i]] == true){
+                    listResult.add(listOfValues[i])
+                }
+            }
+        }
+        return listResult
+    }
+
+    private fun getPreferencesStyles(): List<String> {
+        val listResult = mutableListOf<String>()
+        val listOfValues = listOf("Hip-hop","Pop","Tecno","Classic","Flamenco","Reggueton","Rock","Blues","Jazz","Trap")
+        for (i in 4..listOfButtons.size){
+            if (buttonStates[listOfButtons[i]] == true){
+                listResult.add(listOfValues[i])
+            }
+        }
+        return listResult
     }
 
     private fun offTimeButtons() {

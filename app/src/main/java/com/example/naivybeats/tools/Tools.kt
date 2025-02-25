@@ -3,9 +3,10 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.EditText
 import android.widget.Toast
 import com.example.naivybeats.R
-import com.example.naivybeats.activities.CreateDataNewUserArtistActivity
+import com.example.naivybeats.activities.ChoseStyleArtistActivity
 import com.example.naivybeats.activities.GetDirectionActivity
 
 class Tools {
@@ -39,6 +40,28 @@ class Tools {
             intent.putExtra(GetDirectionActivity.constantsProject.email,email)
             intent.putExtra(GetDirectionActivity.constantsProject.number,number)
             intent.putExtra(GetDirectionActivity.constantsProject.password,password)
+            context.startActivity(intent)
+        }
+
+        fun createActivityGetStylesTime(
+            context: Context,
+            name: String?,
+            surname: String?,
+            password: String?,
+            number: Int,
+            email: String?,
+            province: String,
+            municipality: String,
+            adress: String) {
+            val intent = Intent(context, ChoseStyleArtistActivity::class.java)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.name, name)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.surname,surname)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.email,email)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.number,number)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.password,password)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.province,province)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.municipality,municipality)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.adress,adress)
             context.startActivity(intent)
         }
 

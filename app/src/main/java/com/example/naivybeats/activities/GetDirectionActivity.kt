@@ -26,8 +26,9 @@ class GetDirectionActivity : AppCompatActivity(){
         val intent = intent
         val name = intent.getStringExtra(constantsProject.name)
         val type = intent.getStringExtra(constantsProject.type)
+        var surname = ""
         if(type == "artist"){
-            val surname = intent.getStringExtra(constantsProject.surname)
+            surname = intent.getStringExtra(constantsProject.surname)!!
         }
         val email = intent.getStringExtra(constantsProject.email)
         val number  = intent.getIntExtra(constantsProject.number,-1)
@@ -66,9 +67,9 @@ class GetDirectionActivity : AppCompatActivity(){
                 shakeEditTexts(list)
             }else{
                 Tools.createActivitySimple(this,ChoseStyleArtistActivity::class.java)
+                Tools.createActivityGetStylesTime(this,name,surname,password,number,email,province,municipality,direction)
             }
         }
-
     }
 
     private fun shakeEditTexts(list: MutableList<Int>) {
