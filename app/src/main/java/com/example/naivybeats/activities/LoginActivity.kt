@@ -21,6 +21,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.net.HttpURLConnection
+import java.net.URL
 
 class LoginActivity : AppCompatActivity() {
     companion object{
@@ -33,19 +35,19 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+        testApiConnection()
 
         var users: List<Users>
         var times: List<Time>
+
         lifecycleScope.launch {
             try {
                 times = getAllTimes()
-                users = getAllUsers()
             } catch (e: Exception) {
                 e.printStackTrace()
                 println("Error al obtener datos: ${e.message}")
             }
         }
-
         var editTextUser = findViewById<EditText>(R.id.userName)
         var editTextPassword = findViewById<EditText>(R.id.password)
         var button = findViewById<Button>(R.id.buttonContinue)
@@ -70,17 +72,35 @@ class LoginActivity : AppCompatActivity() {
         Tools.animationTurnUp(this,textViewNotUser)
     }
 
-    private suspend fun getAllUsers(): List<Users>
-    {
+    private suspend fun getAllTimes(): List<Time> {
         return withContext(Dispatchers.IO) {
-            userController.getAllUsers()
+            try {
+                timeController.getAllTimes() ?: emptyList()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                println("Error al obtener tiempos: ${e.message}")
+                emptyList()
+            }
         }
     }
 
-    private suspend fun getAllTimes(): List<Time>{
-        return withContext(Dispatchers.IO) {
-            timeController.getAllTimes()
-        }
-    }
+    fun testApiConnection() {
+        Thread {
+            try {
+                val url = URL("https://10.0.0.202:44338/api/times")
+                val conn = url.openConnection() as HttpURLConnection
+                conn.requestMethod = "GET"
+                conn.connect()
 
+                val responseCode = conn.responseCode
+                println("Código de respuesta: $responseCode")
+
+                val stream = conn.inputStream.bufferedReader().use { it.readText() }
+                println("Respuesta: $stream")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                println("Error en la conexión: ${e.message}")
+            }
+        }.start()
+    }
 }

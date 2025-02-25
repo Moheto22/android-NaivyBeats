@@ -1,38 +1,41 @@
 package com.example.naivybeats.models.time.model;
 
 import com.example.naivybeats.models.musician.Musician;
+import com.example.naivybeats.models.musician.MusicianWrapper;
+import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Time
-{
-    int id;
-    String name;
-    List<Musician> musicians;
+public class Time {
+    @SerializedName("id")
+    private int id;
 
-    public Time(int id, String name)
-    {
-        this.id = id;
-        this.name = name;
-    }
+    @SerializedName("name")
+    private String name;
 
-    public int getId()
-    {
+    @SerializedName("Musician")
+    private MusicianWrapper musicianWrapper;
+
+    public Time() {}
+
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
+    public List<Musician> getMusicians() {
+        return (musicianWrapper != null) ? musicianWrapper.getMusicians() : new ArrayList<>();
+    }
+
 }

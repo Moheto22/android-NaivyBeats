@@ -1,6 +1,5 @@
-package com.example.naivybeats.models.musician;
+package com.example.naivybeats.models.time.model;
 
-import com.example.naivybeats.models.time.model.Time;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;

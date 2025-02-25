@@ -1,16 +1,17 @@
 package com.example.naivybeats.models.user.controller
 
 import com.example.naivybeats.RetrofitClient
+import com.example.naivybeats.models.BaseController
 import com.example.naivybeats.models.superUser.service.SuperUserService
 import com.example.naivybeats.models.user.model.Users
 import com.example.naivybeats.models.user.service.UserService
 import kotlin.collections.List
 
-class UserController {
+class UserController: BaseController() {
     private val service = RetrofitClient.createService(UserService::class.java)
 
-    suspend fun getAllUsers(): List<Users>
+    fun getAllUsers(): List<Users>?
     {
-       return service.getAllUsers()
+       return executeCall(service.getAllUsers())
     }
  }

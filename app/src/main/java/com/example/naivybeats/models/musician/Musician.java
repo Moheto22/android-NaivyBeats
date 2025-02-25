@@ -1,33 +1,34 @@
 package com.example.naivybeats.models.musician;
 
-import com.example.naivybeats.models.style.Style;
+import com.example.naivybeats.models.style.StyleWrapper;
+import com.example.naivybeats.models.time.model.TimeWrapper;
 import com.example.naivybeats.models.user.model.Users;
-
-import java.sql.Date;
-import java.sql.Time;
+import com.example.naivybeats.models.time.model.Time;
+import com.google.gson.annotations.SerializedName;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Musician extends Users
-{
-    List<Style> styles;
+public class Musician extends Users {
+    private StyleWrapper styleWrapper;
+    @SerializedName("Times")
+    private TimeWrapper timeWrapper;
+    private List<Musician> musicians;
 
-    public Musician()
-    {
+    public Musician() {}
+
+    public List<Time> getTimes() {
+        return (timeWrapper != null) ? timeWrapper.getTimes() : new ArrayList<>();
     }
 
-    public Musician(int userId, String name, String photo, Double longitud, Double latitud, int municipalityId, Date editionDate, Date creationDate, int phoneNumber, String password, String email, List<Style> styles)
-    {
-        super(userId, name, photo, longitud, latitud, municipalityId, editionDate, creationDate, phoneNumber, password, email);
-        this.styles = styles;
+    public void setTimeWrapper(TimeWrapper timeWrapper) {
+        this.timeWrapper = timeWrapper;
     }
 
-    public List<Style> getStyles()
-    {
-        return styles;
+    public List<Musician> getMusicians() {
+        return musicians;
     }
 
-    public void setStyles(List<Style> styles)
-    {
-        this.styles = styles;
+    public void setMusicians(List<Musician> musicians) {
+        this.musicians = musicians;
     }
 }
