@@ -1,17 +1,14 @@
-package com.example.naivybeats.activities
+package com.example.naivybeats.activities.login
 
 import Tools
 import android.os.Bundle
-import android.util.Range
 import android.view.View
-import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.naivybeats.R
-import com.example.naivybeats.activities.GetDirectionActivity.constantsProject
+import com.example.naivybeats.activities.menu.MainMenuActivity
 
 class ChoseStyleArtistActivity : AppCompatActivity() {
     private val buttonStates = HashMap<Button, Boolean>()
@@ -30,11 +27,11 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_chose_style_artist)
-        val name = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.name)
-        val surname = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.surname)
-        val email = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.email)
-        val number  = intent.getIntExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.number, -1)
-        val password = intent.getStringExtra(com.example.naivybeats.activities.ChoseStyleArtistActivity.constantsProject.password)
+        val name = intent.getStringExtra(constantsProject.name)
+        val surname = intent.getStringExtra(constantsProject.surname)
+        val email = intent.getStringExtra(constantsProject.email)
+        val number  = intent.getIntExtra(constantsProject.number, -1)
+        val password = intent.getStringExtra(constantsProject.password)
 
         val title = findViewById<TextView>(R.id.title)
         val subtitle_time = findViewById<TextView>(R.id.subtitle_time)
@@ -91,7 +88,7 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         button_continue.setOnClickListener(){
             val list_preferences_styles = getPreferencesStyles()
             val list_preferences_time = getPreferencesTime()
-
+            Tools.createActivitySimple(this, MainMenuActivity::class.java)
         }
 
 
@@ -115,7 +112,7 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
     private fun getPreferencesStyles(): List<String> {
         val listResult = mutableListOf<String>()
         val listOfValues = listOf("Hip-hop","Pop","Tecno","Classic","Flamenco","Reggueton","Rock","Blues","Jazz","Trap")
-        for (i in 4..listOfButtons.size){
+        for (i in 5..<listOfButtons.size-4){
             if (buttonStates[listOfButtons[i]] == true){
                 listResult.add(listOfValues[i])
             }

@@ -1,4 +1,4 @@
-package com.example.naivybeats.activities
+package com.example.naivybeats.activities.login
 
 import Tools
 import android.os.Bundle

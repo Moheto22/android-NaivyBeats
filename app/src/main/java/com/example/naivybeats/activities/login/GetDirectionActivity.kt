@@ -1,4 +1,4 @@
-package com.example.naivybeats.activities
+package com.example.naivybeats.activities.login
 import Tools
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -31,7 +31,7 @@ class GetDirectionActivity : AppCompatActivity(){
             surname = intent.getStringExtra(constantsProject.surname)!!
         }
         val email = intent.getStringExtra(constantsProject.email)
-        val number  = intent.getIntExtra(constantsProject.number,-1)
+        val number  = intent.getIntExtra(constantsProject.number, -1)
         val password = intent.getStringExtra(constantsProject.password)
         val title = findViewById<TextView>(R.id.title)
         val province = findViewById<AutoCompleteTextView>(R.id.province)
@@ -66,7 +66,7 @@ class GetDirectionActivity : AppCompatActivity(){
             if (!list.isEmpty()){
                 shakeEditTexts(list)
             }else{
-                Tools.createActivitySimple(this,ChoseStyleArtistActivity::class.java)
+                Tools.createActivitySimple(this, ChoseStyleArtistActivity::class.java)
                 Tools.createActivityGetStylesTime(this,name,surname,password,number,email,province,municipality,direction)
             }
         }

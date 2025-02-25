@@ -1,4 +1,4 @@
-package com.example.naivybeats.activities
+package com.example.naivybeats.activities.login
 
 import Tools
 import android.os.Bundle
@@ -26,7 +26,7 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
         stratInitialAnimations(title,editTextName,editTextSurname,editTextEmail,editTextNumber,editTextPassword,button,have_user)
 
         have_user.setOnClickListener(){
-            Tools.createActivitySimple(this,LoginActivity::class.java)
+            Tools.createActivitySimple(this, LoginActivity::class.java)
         }
 
         button.setOnClickListener(){

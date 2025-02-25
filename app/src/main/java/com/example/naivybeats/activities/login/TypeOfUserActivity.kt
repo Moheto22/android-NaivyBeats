@@ -1,4 +1,4 @@
-package com.example.naivybeats.activities
+package com.example.naivybeats.activities.login
 
 import Tools
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.naivybeats.R
+
 class TypeOfUserActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +27,7 @@ class TypeOfUserActivity : AppCompatActivity() {
         stratInitialAnimations(filter,left_block,left_text,left_image,right_block,right_image,right_text,have_user,title)
 
         have_user.setOnClickListener(){
-            Tools.createActivitySimple(this,LoginActivity::class.java)
+            Tools.createActivitySimple(this, LoginActivity::class.java)
         }
         right_block.setOnClickListener(){
             Tools.createActivitySimple(this, CreateDataNewUserSpaceActivity::class.java)

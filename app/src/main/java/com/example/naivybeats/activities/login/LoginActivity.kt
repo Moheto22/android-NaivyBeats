@@ -1,4 +1,4 @@
-package com.example.naivybeats.activities
+package com.example.naivybeats.activities.login
 
 import Tools
 import android.annotation.SuppressLint
@@ -11,14 +11,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
-import com.example.naivybeats.models.superUser.controller.SuperUserController
 import com.example.naivybeats.models.time.controller.TimeController
 import com.example.naivybeats.models.time.model.Time
 import com.example.naivybeats.models.user.controller.UserController
 import com.example.naivybeats.models.user.model.Users
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.HttpURLConnection
@@ -56,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
         stratInitialAnimations(editTextUser,editTextPassword, imageLogo,textViewNotUser,button)
 
         textViewNotUser.setOnClickListener(){
-            Tools.createActivitySimple(this,TypeOfUserActivity::class.java)
+            Tools.createActivitySimple(this, TypeOfUserActivity::class.java)
         }
     }
     private fun stratInitialAnimations(

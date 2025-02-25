@@ -18,7 +18,7 @@
         android:theme="@style/Theme.NaivyBeats"
         tools:targetApi="31">
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,23 +27,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.TypeOfUserActivity"
+            android:name=".activities.login.TypeOfUserActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".activities.GetDirectionActivity"
+            android:name=".activities.login.GetDirectionActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".activities.CreateDataNewUserArtistActivity"
+            android:name=".activities.login.CreateDataNewUserArtistActivity"
             android:exported="true">
         </activity>
         <activity
-        android:name=".activities.CreateDataNewUserSpaceActivity"
+            android:name=".activities.menu.MainMenuActivity"
+            android:exported="true">
+        </activity>
+        <activity
+        android:name=".activities.login.CreateDataNewUserSpaceActivity"
         android:exported="true">
         </activity>
         <activity
-            android:name=".activities.ChoseStyleArtistActivity"
+            android:name=".activities.login.ChoseStyleArtistActivity"
             android:exported="true">
         </activity>
     </application>

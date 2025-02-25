@@ -3,11 +3,10 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.EditText
 import android.widget.Toast
 import com.example.naivybeats.R
-import com.example.naivybeats.activities.ChoseStyleArtistActivity
-import com.example.naivybeats.activities.GetDirectionActivity
+import com.example.naivybeats.activities.login.ChoseStyleArtistActivity
+import com.example.naivybeats.activities.login.GetDirectionActivity
 
 class Tools {
     companion object {
@@ -25,21 +24,21 @@ class Tools {
         }
         fun createActivityGetAdressFromArtist(context: Context,name:String,surname:String,number:Int,email: String,password : String) {
             val intent = Intent(context, GetDirectionActivity::class.java)
-            intent.putExtra(GetDirectionActivity.constantsProject.type,"artist")
+            intent.putExtra(GetDirectionActivity.constantsProject.type, "artist")
             intent.putExtra(GetDirectionActivity.constantsProject.name, name)
-            intent.putExtra(GetDirectionActivity.constantsProject.surname,surname)
-            intent.putExtra(GetDirectionActivity.constantsProject.email,email)
-            intent.putExtra(GetDirectionActivity.constantsProject.number,number)
-            intent.putExtra(GetDirectionActivity.constantsProject.password,password)
+            intent.putExtra(GetDirectionActivity.constantsProject.surname, surname)
+            intent.putExtra(GetDirectionActivity.constantsProject.email, email)
+            intent.putExtra(GetDirectionActivity.constantsProject.number, number)
+            intent.putExtra(GetDirectionActivity.constantsProject.password, password)
             context.startActivity(intent)
         }
         fun createActivityGetAdressFromSpace(context: Context,name:String,number :Int,email: String,password : String) {
             val intent = Intent(context, GetDirectionActivity::class.java)
-            intent.putExtra(GetDirectionActivity.constantsProject.type,"space")
+            intent.putExtra(GetDirectionActivity.constantsProject.type, "space")
             intent.putExtra(GetDirectionActivity.constantsProject.name, name)
-            intent.putExtra(GetDirectionActivity.constantsProject.email,email)
-            intent.putExtra(GetDirectionActivity.constantsProject.number,number)
-            intent.putExtra(GetDirectionActivity.constantsProject.password,password)
+            intent.putExtra(GetDirectionActivity.constantsProject.email, email)
+            intent.putExtra(GetDirectionActivity.constantsProject.number, number)
+            intent.putExtra(GetDirectionActivity.constantsProject.password, password)
             context.startActivity(intent)
         }
 
@@ -55,13 +54,13 @@ class Tools {
             adress: String) {
             val intent = Intent(context, ChoseStyleArtistActivity::class.java)
             intent.putExtra(ChoseStyleArtistActivity.constantsProject.name, name)
-            intent.putExtra(ChoseStyleArtistActivity.constantsProject.surname,surname)
-            intent.putExtra(ChoseStyleArtistActivity.constantsProject.email,email)
-            intent.putExtra(ChoseStyleArtistActivity.constantsProject.number,number)
-            intent.putExtra(ChoseStyleArtistActivity.constantsProject.password,password)
-            intent.putExtra(ChoseStyleArtistActivity.constantsProject.province,province)
-            intent.putExtra(ChoseStyleArtistActivity.constantsProject.municipality,municipality)
-            intent.putExtra(ChoseStyleArtistActivity.constantsProject.adress,adress)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.surname, surname)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.email, email)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.number, number)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.password, password)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.province, province)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.municipality, municipality)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.adress, adress)
             context.startActivity(intent)
         }
 
@@ -87,6 +86,10 @@ class Tools {
         }
         fun showError(context: Context,messaje: String){
             Toast.makeText(context, messaje, Toast.LENGTH_SHORT).show()
+        }
+        fun animationPop(context: Context,view: View){
+            val animation = AnimationUtils.loadAnimation(context, R.anim.animation_pop)
+            view.startAnimation(animation)
         }
 
     }
