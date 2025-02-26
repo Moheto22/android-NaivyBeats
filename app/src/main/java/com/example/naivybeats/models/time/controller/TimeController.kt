@@ -9,7 +9,7 @@ import com.example.naivybeats.models.time.service.TimeService
 class TimeController: BaseController() {
     private val service = RetrofitClient.createService(TimeService::class.java)
 
-    fun getAllTimes(): List<Time>? {
+    fun getAllTimes(): List<Time> {
         val response = executeCall(service.getAllTimes())
         return response?.times ?: emptyList()
     }
