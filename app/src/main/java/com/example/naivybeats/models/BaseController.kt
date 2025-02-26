@@ -22,5 +22,4 @@ open class BaseController {
             null
         }
     }
-
 }

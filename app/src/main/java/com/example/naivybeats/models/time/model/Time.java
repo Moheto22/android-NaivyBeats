@@ -35,7 +35,7 @@ public class Time {
         this.name = name;
     }
     public List<Musician> getMusicians() {
-        return (musicianWrapper != null) ? musicianWrapper.getMusicians() : new ArrayList<>();
+        return musicianWrapper.getMusicians();
     }
 
 }

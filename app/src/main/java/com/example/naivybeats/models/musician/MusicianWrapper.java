@@ -8,9 +8,9 @@ import java.util.List;
 public class MusicianWrapper
 {
     @SerializedName("$values")
-    private List<Musician> musicians;
+    private List<Musician> musicians = new ArrayList<>();
 
     public List<Musician> getMusicians() {
-        return musicians != null ? musicians : new ArrayList<>();
+        return musicians;
     }
 }

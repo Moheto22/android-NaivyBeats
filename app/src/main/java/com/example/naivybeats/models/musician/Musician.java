@@ -17,7 +17,7 @@ public class Musician extends Users {
     public Musician() {}
 
     public List<Time> getTimes() {
-        return (timeWrapper != null) ? timeWrapper.getTimes() : new ArrayList<>();
+        return timeWrapper.getTimes();
     }
 
     public void setTimeWrapper(TimeWrapper timeWrapper) {

@@ -1,4 +1,4 @@
-package com.example.naivybeats.activities.login
+package com.example.naivybeats.activities
 
 import Tools
 import android.annotation.SuppressLint
@@ -11,11 +11,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
+import com.example.naivybeats.models.superUser.controller.SuperUserController
 import com.example.naivybeats.models.time.controller.TimeController
 import com.example.naivybeats.models.time.model.Time
 import com.example.naivybeats.models.user.controller.UserController
 import com.example.naivybeats.models.user.model.Users
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.HttpURLConnection
@@ -38,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
-                times = getAllTimes()
+               times = getAllTimes()
             } catch (e: Exception) {
                 e.printStackTrace()
                 println("Error al obtener datos: ${e.message}")
@@ -52,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
         stratInitialAnimations(editTextUser,editTextPassword, imageLogo,textViewNotUser,button)
 
         textViewNotUser.setOnClickListener(){
-            Tools.createActivitySimple(this, TypeOfUserActivity::class.java)
+            Tools.createActivitySimple(this,TypeOfUserActivity::class.java)
         }
     }
     private fun stratInitialAnimations(
@@ -71,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
     private suspend fun getAllTimes(): List<Time> {
         return withContext(Dispatchers.IO) {
             try {
-                timeController.getAllTimes() ?: emptyList()
+                timeController.getAllTimes()
             } catch (e: Exception) {
                 e.printStackTrace()
                 println("Error al obtener tiempos: ${e.message}")
@@ -79,5 +82,4 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
 }

@@ -8,9 +8,9 @@ import java.util.List;
 public class TimeWrapper
 {
     @SerializedName("$values")
-    private List<Time> times;
+    private List<Time> times = new ArrayList<>();
 
     public List<Time> getTimes() {
-        return times != null ? times : new ArrayList<>();
+        return times;
     }
 }
