@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.login.ChoseStyleArtistActivity
 import com.example.naivybeats.activities.login.GetDirectionActivity
+import com.example.naivybeats.activities.menu.MainMenuActivity
 
 class Tools {
     companion object {
@@ -30,6 +31,11 @@ class Tools {
             intent.putExtra(GetDirectionActivity.constantsProject.email, email)
             intent.putExtra(GetDirectionActivity.constantsProject.number, number)
             intent.putExtra(GetDirectionActivity.constantsProject.password, password)
+            context.startActivity(intent)
+        }
+        fun createActivityMenuMain(context: Context,type : String) {
+            val intent = Intent(context, MainMenuActivity::class.java)
+            intent.putExtra(MainMenuActivity.constantsProject.TYPE, type)
             context.startActivity(intent)
         }
         fun createActivityGetAdressFromSpace(context: Context,name:String,number :Int,email: String,password : String) {
