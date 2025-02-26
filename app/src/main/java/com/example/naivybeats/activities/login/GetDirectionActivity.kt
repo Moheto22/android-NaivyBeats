@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.naivybeats.R
+import com.example.naivybeats.activities.LoginActivity
 
 class GetDirectionActivity : AppCompatActivity(){
     object constantsProject {
