@@ -58,6 +58,10 @@ class LoginActivity : AppCompatActivity() {
         textViewNotUser.setOnClickListener(){
             Tools.createActivitySimple(this, TypeOfUserActivity::class.java)
         }
+
+        button.setOnClickListener(){
+
+        }
     }
     private fun stratInitialAnimations(
         editTextUser: EditText,
