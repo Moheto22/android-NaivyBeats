@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
+import com.example.naivybeats.activities.login.TypeOfUserActivity
 import com.example.naivybeats.models.superUser.controller.SuperUserController
 import com.example.naivybeats.models.time.controller.TimeController
 import com.example.naivybeats.models.time.model.Time
@@ -55,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
         stratInitialAnimations(editTextUser,editTextPassword, imageLogo,textViewNotUser,button)
 
         textViewNotUser.setOnClickListener(){
-            Tools.createActivitySimple(this,TypeOfUserActivity::class.java)
+            Tools.createActivitySimple(this, TypeOfUserActivity::class.java)
         }
     }
     private fun stratInitialAnimations(
