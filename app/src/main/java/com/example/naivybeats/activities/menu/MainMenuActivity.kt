@@ -1,12 +1,14 @@
 package com.example.naivybeats.activities.menu
 
 import Tools
+import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.naivybeats.R
@@ -41,6 +43,8 @@ class MainMenuActivity: AppCompatActivity() {
         val chat = findViewById<ImageView>(R.id.chat)
         val edit = findViewById<ImageView>(R.id.edit)
         startAnimations(home,search,publication,chat,edit,listTextButtons)
+
+
 
         home.setOnClickListener(){
             if (location!=0){
@@ -131,6 +135,10 @@ class MainMenuActivity: AppCompatActivity() {
                 }
             }
         }
+
+    }
+
+    private fun left_rightAnimationFragment(fragmentChat: Fragment) {
 
     }
 

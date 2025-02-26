@@ -32,7 +32,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
-        testApiConnection()
 
         var users: List<Users>
         var times: List<Time>
@@ -81,23 +80,4 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun testApiConnection() {
-        Thread {
-            try {
-                val url = URL("https://10.0.0.202:44338/api/times")
-                val conn = url.openConnection() as HttpURLConnection
-                conn.requestMethod = "GET"
-                conn.connect()
-
-                val responseCode = conn.responseCode
-                println("Código de respuesta: $responseCode")
-
-                val stream = conn.inputStream.bufferedReader().use { it.readText() }
-                println("Respuesta: $stream")
-            } catch (e: Exception) {
-                e.printStackTrace()
-                println("Error en la conexión: ${e.message}")
-            }
-        }.start()
-    }
 }
