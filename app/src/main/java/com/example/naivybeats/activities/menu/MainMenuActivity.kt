@@ -52,11 +52,7 @@ class MainMenuActivity: AppCompatActivity() {
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,home)
                 if (type == "artist") {
-                    supportFragmentManager.commit {
-                        replace<FragmentMenuArtist>(R.id.frameContainer)
-                        setReorderingAllowed(true)
-                        addToBackStack("replacement")
-                    }
+                    left_rightAnimationFragmentHomeArtist()
                 }else{
                     supportFragmentManager.commit {
                         replace<FragmentMenuSpace>(R.id.frameContainer)
@@ -137,8 +133,16 @@ class MainMenuActivity: AppCompatActivity() {
 
     }
 
-    private fun left_rightAnimationFragment(fragmentChat: Fragment) {
-
+    private fun left_rightAnimationFragmentHomeArtist() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_right_left,
+                R.anim.animation_left_right
+                               )
+            replace<FragmentMenuSpace>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
     }
 
     private fun startAnimations(
