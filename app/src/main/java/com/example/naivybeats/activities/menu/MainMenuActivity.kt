@@ -1,5 +1,6 @@
 package com.example.naivybeats.activities.menu
 
+
 import Tools
 import android.content.Context
 import android.graphics.Typeface
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.naivybeats.R
+
 
 class MainMenuActivity: AppCompatActivity() {
     object constantsProject {
@@ -43,6 +45,9 @@ class MainMenuActivity: AppCompatActivity() {
         val chat = findViewById<ImageView>(R.id.chat)
         val edit = findViewById<ImageView>(R.id.edit)
         startAnimations(home,search,publication,chat,edit,listTextButtons)
+
+
+
 
 
 
@@ -131,7 +136,6 @@ class MainMenuActivity: AppCompatActivity() {
                 }
             }
         }
-
     }
 
     private fun left_rightAnimationFragmentHomeArtist() {
@@ -153,7 +157,7 @@ class MainMenuActivity: AppCompatActivity() {
         chat: ImageView,
         edit: ImageView,
         listTextButtons: List<TextView>,
-        ) {
+                               ) {
         Tools.animationFocus(this,home)
         Tools.animationFocus(this,search)
         Tools.animationFocus(this,publication)
@@ -162,7 +166,5 @@ class MainMenuActivity: AppCompatActivity() {
         listTextButtons.forEach { item ->
             Tools.animationTurnUp(this,item)
         }
-
-
     }
 }
