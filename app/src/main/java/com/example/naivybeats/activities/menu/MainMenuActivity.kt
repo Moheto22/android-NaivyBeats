@@ -2,14 +2,12 @@ package com.example.naivybeats.activities.menu
 
 
 import Tools
-import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.naivybeats.R
@@ -23,6 +21,7 @@ class MainMenuActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main_menu)
+        var direction = 0
         val type = intent.getStringExtra(constantsProject.TYPE)
         if (type == "artist") {
             supportFragmentManager.commit {
@@ -58,33 +57,30 @@ class MainMenuActivity: AppCompatActivity() {
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,home)
                 if (type == "artist") {
-                    left_rightAnimationFragmentHomeArtist()
+                    left_AnimationFragmentHomeArtist()
                 }else{
-                    supportFragmentManager.commit {
-                        replace<FragmentMenuSpace>(R.id.frameContainer)
-                        setReorderingAllowed(true)
-                        addToBackStack("replacement")
-                    }
+                    left_AnimationFragmentHomeSpace()
                 }
             }
         }
         search.setOnClickListener(){
             if(location!=1){
                 listTextButtons[location].setTypeface(null, Typeface.NORMAL)
+                direction = 1 - location
                 location = 1
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,search)
-                if (type == "artist") {
-                    supportFragmentManager.commit {
-                        replace<FragmentSearchArtist>(R.id.frameContainer)
-                        setReorderingAllowed(true)
-                        addToBackStack("replacement")
+                if (direction > 0){
+                    if (type == "artist") {
+                        right_AnimationFragmentSearchArtist()
+                    }else{
+                        right_AnimationFragmentSearchSpace()
                     }
                 }else{
-                    supportFragmentManager.commit {
-                        replace<FragmentSearchSpace>(R.id.frameContainer)
-                        setReorderingAllowed(true)
-                        addToBackStack("replacement")
+                    if (type == "artist") {
+                        left_AnimationFragmentSearchArtist()
+                    }else{
+                        left_AnimationFragmentSearchSpace()
                     }
                 }
             }
@@ -92,20 +88,21 @@ class MainMenuActivity: AppCompatActivity() {
         publication.setOnClickListener(){
             if(location!=2){
                 listTextButtons[location].setTypeface(null, Typeface.NORMAL)
+                direction = 2 - location
                 location = 2
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,publication)
-                if (type == "artist") {
-                    supportFragmentManager.commit {
-                        replace<FragmentPublicateContent>(R.id.frameContainer)
-                        setReorderingAllowed(true)
-                        addToBackStack("replacement")
+                if (direction > 0){
+                    if (type == "artist") {
+                        right_AnimationFragmentPublicateContent()
+                    }else{
+                        right_AnimationFragmentPublicateOfert()
                     }
                 }else{
-                    supportFragmentManager.commit {
-                        replace<FragmentPublicateOfert>(R.id.frameContainer)
-                        setReorderingAllowed(true)
-                        addToBackStack("replacement")
+                    if (type == "artist") {
+                        left_AnimationFragmentPublicateContent()
+                    }else{
+                        left_AnimationFragmentPublicateOfert()
                     }
                 }
             }
@@ -113,13 +110,14 @@ class MainMenuActivity: AppCompatActivity() {
         chat.setOnClickListener(){
             if(location!=3){
                 listTextButtons[location].setTypeface(null, Typeface.NORMAL)
+                direction = 3 - location
                 location = 3
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,chat)
-                supportFragmentManager.commit {
-                    replace<FragmentChat>(R.id.frameContainer)
-                    setReorderingAllowed(true)
-                    addToBackStack("replacement")
+                if (direction > 0){
+                    right_AnimationFragmentChat()
+                }else{
+                    left_AnimationFragmentChat()
                 }
             }
         }
@@ -129,22 +127,160 @@ class MainMenuActivity: AppCompatActivity() {
                 location = 4
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,edit)
-                supportFragmentManager.commit {
-                    replace<FragmentEditData>(R.id.frameContainer)
-                    setReorderingAllowed(true)
-                    addToBackStack("replacement")
-                }
+                right_AnimationFragmentEditData()
             }
         }
     }
-
-    private fun left_rightAnimationFragmentHomeArtist() {
+    private fun right_AnimationFragmentSearchArtist() {
         supportFragmentManager.commit {
             setCustomAnimations(
-                R.anim.animation_right_left,
-                R.anim.animation_left_right
+                R.anim.animation_out_right,
+                R.anim.animation_in_left
+                               )
+            replace<FragmentSearchArtist>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+
+    private fun left_AnimationFragmentSearchArtist() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_left,
+                R.anim.animation_in_right
+                               )
+            replace<FragmentSearchArtist>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+
+    private fun right_AnimationFragmentSearchSpace() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_right,
+                R.anim.animation_in_left
+                               )
+            replace<FragmentSearchSpace>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+
+    private fun left_AnimationFragmentSearchSpace() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_left,
+                R.anim.animation_in_right
+                               )
+            replace<FragmentSearchSpace>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+
+    private fun left_AnimationFragmentPublicateContent() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_left,
+                R.anim.animation_in_right
+                               )
+            replace<FragmentPublicateContent>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+
+    private fun right_AnimationFragmentPublicateContent() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_right,
+                R.anim.animation_in_left
+                               )
+            replace<FragmentPublicateContent>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+    private fun right_AnimationFragmentPublicateOfert() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_right,
+                R.anim.animation_in_left
+                               )
+            replace<FragmentPublicateOfert>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+
+    private fun left_AnimationFragmentPublicateOfert() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_left,
+                R.anim.animation_in_right
+                               )
+            replace<FragmentPublicateOfert>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+
+    private fun right_AnimationFragmentChat() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_right,
+                R.anim.animation_in_left
+                               )
+            replace<FragmentChat>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+
+    private fun left_AnimationFragmentChat() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_left,
+                R.anim.animation_in_right
+                               )
+            replace<FragmentChat>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+
+    private fun left_AnimationFragmentHomeArtist() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_left,
+                R.anim.animation_in_right
+                               )
+            replace<FragmentMenuArtist>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+
+    private fun left_AnimationFragmentHomeSpace() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_left,
+                R.anim.animation_in_right
                                )
             replace<FragmentMenuSpace>(R.id.frameContainer)
+            setReorderingAllowed(true)
+            addToBackStack("replacement")
+        }
+    }
+
+    private fun right_AnimationFragmentEditData() {
+        supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.animation_out_right,
+                R.anim.animation_in_left
+                               )
+            replace<FragmentEditData>(R.id.frameContainer)
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
