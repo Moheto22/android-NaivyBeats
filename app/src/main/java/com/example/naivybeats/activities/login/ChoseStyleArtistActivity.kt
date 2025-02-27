@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.naivybeats.R
-import com.example.naivybeats.activities.menu.MainMenuActivity
 
 class ChoseStyleArtistActivity : AppCompatActivity() {
     private val buttonStates = HashMap<Button, Boolean>()

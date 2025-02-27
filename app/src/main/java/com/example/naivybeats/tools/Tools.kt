@@ -5,13 +5,9 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.login.ChoseStyleArtistActivity
 import com.example.naivybeats.activities.login.GetDirectionActivity
-import com.example.naivybeats.activities.menu.FragmentChat
-import com.example.naivybeats.activities.menu.FragmentMenuArtist
 import com.example.naivybeats.activities.menu.MainMenuActivity
 
 class Tools {
