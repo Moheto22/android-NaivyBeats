@@ -1,4 +1,4 @@
-package com.example.naivybeats.models.musician;
+package com.example.naivybeats.models.musician.model;
 
 import java.sql.Date;
 

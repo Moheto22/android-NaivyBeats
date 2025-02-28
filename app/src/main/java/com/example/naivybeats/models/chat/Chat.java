@@ -9,9 +9,7 @@ public class Chat
     int restaurantId;
     int musicianId;
 
-    public Chat()
-    {
-    }
+    public Chat() {}
 
     public Chat(int chatId, Date creationDate, int restaurantId, int musicianId)
     {

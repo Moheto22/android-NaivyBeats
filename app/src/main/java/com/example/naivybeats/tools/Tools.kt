@@ -5,14 +5,12 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.login.ChoseStyleArtistActivity
 import com.example.naivybeats.activities.login.GetDirectionActivity
-import com.example.naivybeats.activities.menu.FragmentChat
-import com.example.naivybeats.activities.menu.FragmentMenuArtist
 import com.example.naivybeats.activities.menu.MainMenuActivity
+import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.user.model.Users
 
 class Tools {
     companion object {
@@ -31,19 +29,14 @@ class Tools {
 
         fun createActivityGetAdressFromArtist(
             context: Context,
-            name: String,
-            surname: String,
-            number: Int,
-            email: String,
-            password: String
+            musician: Musician
                                              ) {
             val intent = Intent(context, GetDirectionActivity::class.java)
             intent.putExtra(GetDirectionActivity.constantsProject.type, "artist")
-            intent.putExtra(GetDirectionActivity.constantsProject.name, name)
-            intent.putExtra(GetDirectionActivity.constantsProject.surname, surname)
-            intent.putExtra(GetDirectionActivity.constantsProject.email, email)
-            intent.putExtra(GetDirectionActivity.constantsProject.number, number)
-            intent.putExtra(GetDirectionActivity.constantsProject.password, password)
+            intent.putExtra(GetDirectionActivity.constantsProject.name, musician.name)
+            intent.putExtra(GetDirectionActivity.constantsProject.email, musician.email)
+            intent.putExtra(GetDirectionActivity.constantsProject.number, musician.phoneNumber)
+            intent.putExtra(GetDirectionActivity.constantsProject.password, musician.password)
             context.startActivity(intent)
         }
 
@@ -72,7 +65,6 @@ class Tools {
         fun createActivityGetStylesTime(
             context: Context,
             name: String?,
-            surname: String?,
             password: String?,
             number: Int,
             email: String?,
@@ -82,7 +74,6 @@ class Tools {
                                        ) {
             val intent = Intent(context, ChoseStyleArtistActivity::class.java)
             intent.putExtra(ChoseStyleArtistActivity.constantsProject.name, name)
-            intent.putExtra(ChoseStyleArtistActivity.constantsProject.surname, surname)
             intent.putExtra(ChoseStyleArtistActivity.constantsProject.email, email)
             intent.putExtra(ChoseStyleArtistActivity.constantsProject.number, number)
             intent.putExtra(ChoseStyleArtistActivity.constantsProject.password, password)
@@ -94,6 +85,13 @@ class Tools {
 
         fun createActivitySimple(context: Context, activityClass: Class<*>) {
             val intent = Intent(context, activityClass)
+            context.startActivity(intent)
+        }
+
+        fun createActivityPutExtra(context: Context, activityClass: Class<*>, user: Users) {
+            val intent = Intent(context, activityClass)
+
+            intent.putExtra("USER", user)
             context.startActivity(intent)
         }
 
