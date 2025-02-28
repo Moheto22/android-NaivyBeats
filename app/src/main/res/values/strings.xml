@@ -41,6 +41,10 @@
     <string name="publicate_button_menu_eng">Publicate</string>
     <string name="chat_button_menu_eng">Chat</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="description_eng">Description</string>
+    <string name="prefered_styles_eng">Prefered styles</string>
+    <string name="read_more_eng">Read more</string>
+    <string name="postulate_eng">Postulate</string>
+    <string name="follow_eng">Follow</string>
 
 </resources>
