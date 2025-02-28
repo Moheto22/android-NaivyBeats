@@ -46,5 +46,9 @@
     <string name="read_more_eng">Read more</string>
     <string name="postulate_eng">Postulate</string>
     <string name="follow_eng">Follow</string>
+    <string name="following_eng">Following</string>
+    <string name="send_oferr_eng">Send Offer</string>
+    <string name="offer_sended_eng">Offer sended</string>
+
 
 </resources>
