@@ -7,9 +7,11 @@ import com.example.naivybeats.models.user.model.Users;
 import com.example.naivybeats.models.time.model.Time;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Musician extends Users {
+public class Musician extends Users implements Serializable
+{
     private StyleWrapper styleWrapper;
     @SerializedName("Times")
     private TimeWrapper timeWrapper;

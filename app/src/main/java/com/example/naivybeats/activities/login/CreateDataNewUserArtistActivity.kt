@@ -52,8 +52,9 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
             if (!list.isEmpty()){
                 shakeEditTexts(list)
             }else{
-                newMusician(editTextName, editTextEmail, editTextNumber, editTextPassword)
-                Tools.createActivityGetAdressFromArtist(this,)
+
+                var musician = newMusician(editTextName, editTextEmail, editTextNumber, editTextPassword)
+                Tools.createActivityGetAdressFromArtist(this, musician)
             }
         }
     }

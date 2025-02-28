@@ -12,23 +12,15 @@ import com.example.naivybeats.R
 class ChoseStyleArtistActivity : AppCompatActivity() {
     private val buttonStates = HashMap<Button, Boolean>()
     private var listOfButtons = listOf<Button>()
+
     object constantsProject {
-        const val name = "NAME"
-        const val password = "PASSWORD"
-        const val email = "EMAIL"
-        const val number = "NUMBER"
-        const val municipality = "MUNICIPALITY"
-        const val province = "PROVINCE"
-        const val adress = "ADRESS"
+        const val musician = "MUSICIAN"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_chose_style_artist)
-        val name = intent.getStringExtra(constantsProject.name)
-        val email = intent.getStringExtra(constantsProject.email)
-        val number  = intent.getIntExtra(constantsProject.number, -1)
-        val password = intent.getStringExtra(constantsProject.password)
+        val name = intent.getStringExtra(constantsProject.musician)
 
         val title = findViewById<TextView>(R.id.title)
         val subtitle_time = findViewById<TextView>(R.id.subtitle_time)

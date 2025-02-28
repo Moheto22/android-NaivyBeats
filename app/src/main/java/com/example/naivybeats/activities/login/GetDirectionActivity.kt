@@ -10,26 +10,21 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.LoginActivity
+import com.example.naivybeats.models.musician.model.Musician
 
 class GetDirectionActivity : AppCompatActivity(){
     object constantsProject {
-        const val name = "NAME"
-        const val password = "PASSWORD"
-        const val email = "EMAIL"
-        const val number = "NUMBER"
-        const val type = "TYPE"
+        const val musician = "MUSICIAN"
+        const val restaurant= "RESTAURANT"
+
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_get_direction_new_user)
         val intent = intent
-        val name = intent.getStringExtra(constantsProject.name)
-        val type = intent.getStringExtra(constantsProject.type)
+        val musician = intent.getSerializableExtra(constantsProject.musician) as Musician
 
-        val email = intent.getStringExtra(constantsProject.email)
-        val number  = intent.getIntExtra(constantsProject.number, -1)
-        val password = intent.getStringExtra(constantsProject.password)
         val title = findViewById<TextView>(R.id.title)
         val province = findViewById<AutoCompleteTextView>(R.id.province)
         val municipality = findViewById<AutoCompleteTextView>(R.id.municipality)
@@ -46,6 +41,7 @@ class GetDirectionActivity : AppCompatActivity(){
         isUser.setOnClickListener(){
             Tools.createActivitySimple(this, LoginActivity::class.java)
         }
+
         button.setOnClickListener(){
             var list = mutableListOf<Int>()
             var province = province.text.toString()
@@ -64,7 +60,7 @@ class GetDirectionActivity : AppCompatActivity(){
                 shakeEditTexts(list)
             }else{
                 Tools.createActivitySimple(this, ChoseStyleArtistActivity::class.java)
-                Tools.createActivityGetStylesTime(this,name, password,number,email,province,municipality,direction)
+                Tools.createActivityGetStylesTime(this, musician)
             }
         }
     }
