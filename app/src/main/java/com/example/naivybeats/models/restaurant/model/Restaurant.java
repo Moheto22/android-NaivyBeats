@@ -1,4 +1,4 @@
-package com.example.naivybeats.models.restaurant;
+package com.example.naivybeats.models.restaurant.model;
 
 import com.example.naivybeats.models.user.model.Users;
 

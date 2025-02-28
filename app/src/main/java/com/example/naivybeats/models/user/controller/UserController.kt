@@ -12,6 +12,7 @@ class UserController: BaseController() {
 
     fun getAllUsers(): List<Users>?
     {
-       return executeCall(service.getAllUsers())
+       val response = executeCall(service.getAllUsers())
+       return response?.users
     }
  }

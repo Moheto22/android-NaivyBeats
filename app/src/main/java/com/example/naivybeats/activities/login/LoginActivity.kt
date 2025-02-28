@@ -7,28 +7,31 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.login.TypeOfUserActivity
-import com.example.naivybeats.models.superUser.controller.SuperUserController
+import com.example.naivybeats.activities.menu.MainMenuActivity
+import com.example.naivybeats.models.musician.controller.MusicianController
+import com.example.naivybeats.models.restaurant.controller.RestaurantController
+import com.example.naivybeats.models.restaurant.model.Restaurant
 import com.example.naivybeats.models.time.controller.TimeController
 import com.example.naivybeats.models.time.model.Time
 import com.example.naivybeats.models.user.controller.UserController
 import com.example.naivybeats.models.user.model.Users
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.net.HttpURLConnection
-import java.net.URL
+import java.nio.charset.StandardCharsets
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+
 
 class LoginActivity : AppCompatActivity() {
     companion object{
-        var  userController = UserController()
-        var timeController = TimeController()
+        var userController = UserController()
+        var musicianController = MusicianController()
+        var restaurantController = RestaurantController()
     }
 
     @SuppressLint("MissingInflatedId")
@@ -38,21 +41,13 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         var users: List<Users>
-        var times: List<Time>
 
-        lifecycleScope.launch {
-            try {
-               times = getAllTimes()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                println("Error al obtener datos: ${e.message}")
-            }
-        }
         var editTextUser = findViewById<EditText>(R.id.userName)
         var editTextPassword = findViewById<EditText>(R.id.password)
         var button = findViewById<Button>(R.id.buttonContinue)
         var textViewNotUser = findViewById<TextView>(R.id.notUser)
         var imageLogo = findViewById<ImageView>(R.id.imageLogo)
+
         stratInitialAnimations(editTextUser,editTextPassword, imageLogo,textViewNotUser,button)
 
         textViewNotUser.setOnClickListener(){
@@ -60,7 +55,15 @@ class LoginActivity : AppCompatActivity() {
         }
 
         button.setOnClickListener(){
-
+            lifecycleScope.launch {
+                try {
+                    users = userController.getAllUsers()?: emptyList()
+                    checkIfUserExists(users, editTextUser, editTextPassword)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    println("Error al obtener datos: ${e.message}")
+                }
+            }
         }
     }
     private fun stratInitialAnimations(
@@ -76,15 +79,63 @@ class LoginActivity : AppCompatActivity() {
         Tools.animationTurnUp(this,textViewNotUser)
     }
 
-    private suspend fun getAllTimes(): List<Time> {
-        return withContext(Dispatchers.IO) {
-            try {
-                timeController.getAllTimes()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                println("Error al obtener tiempos: ${e.message}")
-                emptyList()
+
+
+    private fun checkIfUserExists(users: List<Users>, editTextUser: EditText, editTextPassword: EditText) {
+        val username = editTextUser.text.toString().trim()
+        val password = editTextPassword.text.toString().trim()
+
+        if (username.isEmpty() || password.isEmpty()) {
+           return Toast.makeText(this, "⚠️ Por favor, completa todos los campos", Toast.LENGTH_LONG).show()
+        }
+
+        var user = users.find { it.name == username }
+
+        if (user != null) {
+            if (user.password == hashPassword(password)) {
+                lifecycleScope.launch {
+                   user = userOrRestaurant(user!!)
+                }
+                Tools.createActivityPutExtra(this, MainMenuActivity::class.java, user!!)
+
+            } else {
+               return Toast.makeText(this, "❌ Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show()
             }
+        } else {
+            return Toast.makeText(this, "❌ Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
+    fun hashPassword(password: String): String {
+        try {
+            val digest = MessageDigest.getInstance("SHA-256")
+            val encodedHash = digest.digest(password.toByteArray(StandardCharsets.UTF_8))
+            return bytesToHex(encodedHash)
+        } catch (e: NoSuchAlgorithmException) {
+            throw RuntimeException("Error al generar hash SHA-256", e)
+        }
+    }
+
+    private fun bytesToHex(hash: ByteArray): String {
+        val hexString = StringBuilder()
+        for (b in hash) {
+            val hex = Integer.toHexString(0xff and b.toInt())
+            if (hex.length == 1) {
+                hexString.append('0')
+            }
+            hexString.append(hex)
+        }
+        return hexString.toString()
+    }
+
+    private suspend fun userOrRestaurant(user: Users): Users? {
+        val userLog = musicianController.getMusicianById(user.userId)
+
+        return if (userLog == null) {
+            restaurantController.getRestaurantById(user.userId)
+        } else {
+            userLog
         }
     }
 }

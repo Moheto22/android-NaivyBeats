@@ -14,7 +14,6 @@ import com.example.naivybeats.activities.LoginActivity
 class GetDirectionActivity : AppCompatActivity(){
     object constantsProject {
         const val name = "NAME"
-        const val surname = "SURNAME"
         const val password = "PASSWORD"
         const val email = "EMAIL"
         const val number = "NUMBER"
@@ -27,10 +26,7 @@ class GetDirectionActivity : AppCompatActivity(){
         val intent = intent
         val name = intent.getStringExtra(constantsProject.name)
         val type = intent.getStringExtra(constantsProject.type)
-        var surname = ""
-        if(type == "artist"){
-            surname = intent.getStringExtra(constantsProject.surname)!!
-        }
+
         val email = intent.getStringExtra(constantsProject.email)
         val number  = intent.getIntExtra(constantsProject.number, -1)
         val password = intent.getStringExtra(constantsProject.password)
@@ -68,7 +64,7 @@ class GetDirectionActivity : AppCompatActivity(){
                 shakeEditTexts(list)
             }else{
                 Tools.createActivitySimple(this, ChoseStyleArtistActivity::class.java)
-                Tools.createActivityGetStylesTime(this,name,surname,password,number,email,province,municipality,direction)
+                Tools.createActivityGetStylesTime(this,name, password,number,email,province,municipality,direction)
             }
         }
     }

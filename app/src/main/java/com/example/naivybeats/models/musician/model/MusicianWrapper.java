@@ -1,4 +1,4 @@
-package com.example.naivybeats.models.musician;
+package com.example.naivybeats.models.musician.model;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -9,9 +9,12 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-//import androidx.fragment.app.commit
-//import androidx.fragment.app.replace
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.example.naivybeats.R
+import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.restaurant.model.Restaurant
+import com.example.naivybeats.models.user.model.Users
 
 
 class MainMenuActivity: AppCompatActivity() {
@@ -22,14 +25,26 @@ class MainMenuActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main_menu)
-        val type = intent.getStringExtra(constantsProject.TYPE)
+        val user = intent.getSerializableExtra("USER") as Users
+        var type = intent.getStringExtra(constantsProject.TYPE)
+
+        when (user){
+            is Musician -> {
+                type = "artist"
+            }
+
+            is Restaurant -> {
+                type = "space"
+            }
+        }
+
         if (type == "artist") {
             supportFragmentManager.commit {
                 replace<FragmentMenuArtist>(R.id.frameContainer)
                 setReorderingAllowed(true)
                 addToBackStack("replacement")
             }
-        }else{
+        } else{
             supportFragmentManager.commit {
                 replace<FragmentMenuSpace>(R.id.frameContainer)
                 setReorderingAllowed(true)

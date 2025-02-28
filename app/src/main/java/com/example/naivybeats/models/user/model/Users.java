@@ -1,8 +1,11 @@
 package com.example.naivybeats.models.user.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Users
+public class Users implements Serializable
 {
     int user_id;
     String name;

@@ -1,10 +1,9 @@
 package com.example.naivybeats.models.time.model;
 
-import com.example.naivybeats.models.musician.Musician;
-import com.example.naivybeats.models.musician.MusicianWrapper;
+import com.example.naivybeats.models.musician.model.Musician;
+import com.example.naivybeats.models.musician.model.MusicianWrapper;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Time {

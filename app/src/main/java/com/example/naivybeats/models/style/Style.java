@@ -1,13 +1,15 @@
 package com.example.naivybeats.models.style;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Style
 {
+    @SerializedName("style_id")
     int styleId;
+    @SerializedName("name")
     String name;
 
-    public Style()
-    {
-    }
+    public Style() {}
 
     public Style(String name, int styleId)
     {

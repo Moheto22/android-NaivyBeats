@@ -14,7 +14,6 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
     private var listOfButtons = listOf<Button>()
     object constantsProject {
         const val name = "NAME"
-        const val surname = "SURNAME"
         const val password = "PASSWORD"
         const val email = "EMAIL"
         const val number = "NUMBER"
@@ -27,7 +26,6 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_chose_style_artist)
         val name = intent.getStringExtra(constantsProject.name)
-        val surname = intent.getStringExtra(constantsProject.surname)
         val email = intent.getStringExtra(constantsProject.email)
         val number  = intent.getIntExtra(constantsProject.number, -1)
         val password = intent.getStringExtra(constantsProject.password)
