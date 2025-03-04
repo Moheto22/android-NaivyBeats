@@ -1,6 +1,8 @@
 package com.example.naivybeats.models.musician.controller
 
+import android.widget.Toast
 import com.example.naivybeats.RetrofitClient
+import com.example.naivybeats.activities.login.CreateDataNewUserArtistActivity
 import com.example.naivybeats.models.BaseController
 import com.example.naivybeats.models.musician.model.Musician
 import com.example.naivybeats.models.musician.service.MusicianService
@@ -15,12 +17,29 @@ class MusicianController {
     private val service = RetrofitClient.createService(MusicianService::class.java)
 
     suspend fun getMusicianById(id: Int): Musician? {
-        val response = service.getMusicianById(id)
-        return response.body()
+        return try {
+            val response = service.getMusicianById(id)
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            null
+        }
     }
 
     suspend fun addMusician(musician: Musician): Musician? {
-        val response = service.newMusician(musician)
-        return response.body()
+        return try {
+            val response = service.newMusician(musician)
+            if (response.isSuccessful) {
+                response.body()
+
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            null
+        }
     }
 }

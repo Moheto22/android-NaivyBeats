@@ -77,7 +77,7 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         button_continue.setOnClickListener(){
             val list_preferences_styles = getPreferencesStyles()
             val list_preferences_time = getPreferencesTime()
-            Tools.createActivityMenuMain(this,"artist")
+           // Tools.createActivityMenuMain(this,"artist")
         }
 
 

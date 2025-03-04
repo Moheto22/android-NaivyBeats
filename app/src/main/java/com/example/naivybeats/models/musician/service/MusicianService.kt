@@ -9,6 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface MusicianService {
+
     @GET("api/Musicians/{id}")
     suspend fun getMusicianById(@Path("id") musicianId: Int): Response<Musician>
 

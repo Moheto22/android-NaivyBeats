@@ -11,31 +11,35 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.naivybeats.R
+import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.restaurant.model.Restaurant
+import com.example.naivybeats.models.user.model.Users
 
 
 class MainMenuActivity: AppCompatActivity() {
     object constantsProject {
-        const val TYPE = "type"
+        const val USER ="user"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main_menu)
         var direction = 0
-        val type = intent.getStringExtra(constantsProject.TYPE)
-        if (type == "artist") {
-            supportFragmentManager.commit {
+        val user = intent.getSerializableExtra(constantsProject.USER)
+
+        when (user) {
+           is Musician ->  supportFragmentManager.commit {
                 replace<FragmentMenuArtist>(R.id.frameContainer)
                 setReorderingAllowed(true)
                 addToBackStack("replacement")
             }
-        }else{
-            supportFragmentManager.commit {
+            is Restaurant -> supportFragmentManager.commit {
                 replace<FragmentMenuSpace>(R.id.frameContainer)
                 setReorderingAllowed(true)
                 addToBackStack("replacement")
             }
         }
+
         var location = 0
         val listTextButtons = listOf<TextView>(findViewById(R.id.text_home), findViewById(R.id.text_search), findViewById(R.id.text_publicate), findViewById(R.id.text_chat), findViewById(R.id.text_edit))
         val home = findViewById<ImageView>(R.id.home)
@@ -43,12 +47,8 @@ class MainMenuActivity: AppCompatActivity() {
         val publication = findViewById<ImageView>(R.id.publicate)
         val chat = findViewById<ImageView>(R.id.chat)
         val edit = findViewById<ImageView>(R.id.edit)
+
         startAnimations(home,search,publication,chat,edit,listTextButtons)
-
-
-
-
-
 
         home.setOnClickListener(){
             if (location!=0){
@@ -56,9 +56,9 @@ class MainMenuActivity: AppCompatActivity() {
                 location = 0
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,home)
-                if (type == "artist") {
+                if (user is Musician) {
                     left_AnimationFragmentHomeArtist()
-                }else{
+                } else {
                     left_AnimationFragmentHomeSpace()
                 }
             }
@@ -71,13 +71,13 @@ class MainMenuActivity: AppCompatActivity() {
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,search)
                 if (direction > 0){
-                    if (type == "artist") {
+                    if (user is Musician) {
                         right_AnimationFragmentSearchArtist()
                     }else{
                         right_AnimationFragmentSearchSpace()
                     }
                 }else{
-                    if (type == "artist") {
+                    if (user is Musician) {
                         left_AnimationFragmentSearchArtist()
                     }else{
                         left_AnimationFragmentSearchSpace()
@@ -93,13 +93,13 @@ class MainMenuActivity: AppCompatActivity() {
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,publication)
                 if (direction > 0){
-                    if (type == "artist") {
+                    if (user is Musician) {
                         right_AnimationFragmentPublicateContent()
                     }else{
                         right_AnimationFragmentPublicateOfert()
                     }
                 }else{
-                    if (type == "artist") {
+                    if (user is Musician) {
                         left_AnimationFragmentPublicateContent()
                     }else{
                         left_AnimationFragmentPublicateOfert()

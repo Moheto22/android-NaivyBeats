@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
         var userController = UserController()
         var musicianController = MusicianController()
         var restaurantController = RestaurantController()
+        var timeController = TimeController()
     }
 
     @SuppressLint("MissingInflatedId")
@@ -41,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         var users: List<Users>
+        var times: List<Time>
 
         var editTextUser = findViewById<EditText>(R.id.userName)
         var editTextPassword = findViewById<EditText>(R.id.password)
@@ -58,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 try {
                     users = userController.getAllUsers()?: emptyList()
+                    times = timeController.getAllTimes()
                     checkIfUserExists(users, editTextUser, editTextPassword)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -138,4 +141,5 @@ class LoginActivity : AppCompatActivity() {
             userLog
         }
     }
+
 }

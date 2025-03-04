@@ -16,7 +16,6 @@ class GetDirectionActivity : AppCompatActivity(){
     object constantsProject {
         const val musician = "MUSICIAN"
         const val restaurant= "RESTAURANT"
-
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +45,7 @@ class GetDirectionActivity : AppCompatActivity(){
             var list = mutableListOf<Int>()
             var province = province.text.toString()
             if (province.isEmpty()){
+
                 list.add(0)
             }
             var municipality = municipality.text.toString()
@@ -87,4 +87,5 @@ class GetDirectionActivity : AppCompatActivity(){
         Tools.animationTurnUp(this,button)
         Tools.animationTurnUp(this,isUser)
     }
+
 }
