@@ -5,13 +5,21 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.LoginActivity
+import com.example.naivybeats.models.musician.controller.MusicianController
 import com.example.naivybeats.models.musician.model.Musician
+import kotlinx.coroutines.launch
+import java.security.MessageDigest
 
 class CreateDataNewUserArtistActivity : AppCompatActivity() {
+    companion object {
+       var musicianController = MusicianController()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -51,9 +59,11 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
             }
             if (!list.isEmpty()){
                 shakeEditTexts(list)
-            }else{
+            } else {
 
                 var musician = newMusician(editTextName, editTextEmail, editTextNumber, editTextPassword)
+
+                Toast.makeText(this, "✔ Usuario creado exitosamente", Toast.LENGTH_LONG).show()
                 Tools.createActivityGetAdressFromArtist(this, musician)
             }
         }
@@ -84,9 +94,25 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
         Tools.animationTurnUp(this,have_user)
     }
 
-    fun newMusician(editTextName: EditText, editTextEmail: EditText, editTextNumber: EditText, editTextPassword: EditText): Musician {
-       val musician = Musician()
+    fun newMusician(editTextName: EditText, editTextEmail: EditText, editTextPassword: EditText, editTextNumber: EditText): Musician {
+        val musician = Musician()
+        musician.name = editTextName.text.toString()
+        musician.email = editTextEmail.text.toString()
+        musician.password = getHashPassword(editTextPassword)
+        musician.phoneNumber = editTextNumber.text.toString().toIntOrNull() ?: 0
+
         return musician
+    }
+
+    fun getHashPassword(editTextPassword: EditText): String {
+        val password = editTextPassword.text.toString()
+        return sha256(password)
+    }
+
+    fun sha256(input: String): String {
+        val bytes = MessageDigest.getInstance("SHA-256").digest(input.toByteArray())
+
+        return bytes.joinToString("") { "%02x".format(it) }
     }
 
 }

@@ -38,9 +38,9 @@ class Tools {
             context.startActivity(intent)
         }
 
-        fun createActivityMenuMain(context: Context, type: String) {
+        fun createActivityMenuMain(context: Context, user: Users) {
             val intent = Intent(context, MainMenuActivity::class.java)
-            intent.putExtra(MainMenuActivity.constantsProject.TYPE, type)
+            intent.putExtra(MainMenuActivity.constantsProject.USER, user)
             context.startActivity(intent)
         }
 

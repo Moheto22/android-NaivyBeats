@@ -7,8 +7,12 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.LoginActivity
+import com.example.naivybeats.models.restaurant.model.Restaurant
+import kotlinx.coroutines.launch
+import java.security.MessageDigest
 
 class CreateDataNewUserSpaceActivity : AppCompatActivity() {
 
@@ -25,6 +29,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.buttonContinue)
         stratInitialAnimations(title,editTextName,editTextEmail,editTextNumber,editTextPassword,button,have_user)
 
+        var restaurant: Restaurant
         have_user.setOnClickListener(){
             Tools.createActivitySimple(this, LoginActivity::class.java)
         }
@@ -35,6 +40,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
             val name = editTextName.text.toString()
             if(name.isEmpty()){
                 list.add(0)
+
             }
             val email = editTextEmail.text.toString()
             if(email.isEmpty()){
@@ -52,7 +58,11 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
             if (!list.isEmpty()){
                 shakeEditTexts(list)
             }else{
-                Tools.createActivityGetAdressFromSpace(this, name, number, email, password)
+                restaurant = newRestaurant(editTextName, editTextEmail, editTextPassword, editTextNumber)
+                lifecycleScope.launch {
+                    //llamar al servicio para insertar el restaurante en la base de datos
+                }
+                Tools.createActivityGetAdressFromSpace(this, restaurant)
             }
         }
     }
@@ -81,6 +91,27 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         Tools.animationTurnUp(this, password)
         Tools.animationTurnUp(this, button)
         Tools.animationTurnUp(this, have_user)
+    }
+
+    fun newRestaurant(editTextName: EditText, editTextEmail: EditText, editTextPassword: EditText, editTextNumber: EditText): Restaurant{
+        var restaurant = Restaurant()
+        restaurant.name = editTextName.text.toString()
+        restaurant.email = editTextEmail.text.toString()
+        restaurant.password = getHashPassword(editTextPassword)
+        restaurant.phoneNumber = editTextNumber.text.toString().toIntOrNull() ?: 0
+
+        return restaurant
+    }
+
+    fun getHashPassword(editTextPassword: EditText): String {
+        val password = editTextPassword.text.toString()
+        return sha256(password)
+    }
+
+    fun sha256(input: String): String {
+        val bytes = MessageDigest.getInstance("SHA-256").digest(input.toByteArray())
+
+        return bytes.joinToString("") { "%02x".format(it) }
     }
 
 }
