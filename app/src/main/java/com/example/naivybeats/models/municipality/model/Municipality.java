@@ -1,36 +1,35 @@
 package com.example.naivybeats.models.municipality.model;
 
 import com.example.naivybeats.models.user.model.UserWrapper;
-import com.example.naivybeats.models.user.model.Users;
 
 import java.io.Serializable;
 
-public class Province implements Serializable
+public class Municipality implements Serializable
 {
-    int province_id;
+    int municipality_id;
     String name;
     int city_id;
     UserWrapper userWrapper;
 
-    public Province()
+    public Municipality()
     {
     }
 
-    public Province(int province_id, String name, int city_id)
+    public Municipality(int municipality_id, String name, int city_id)
     {
-        this.province_id = province_id;
+        this.municipality_id = municipality_id;
         this.name = name;
         this.city_id = city_id;
     }
 
     public int getMunicipalityId()
     {
-        return province_id;
+        return municipality_id;
     }
 
     public void setMunicipalityId(int municipalityId)
     {
-        this.province_id = municipalityId;
+        this.municipality_id = municipalityId;
     }
 
     public String getName()

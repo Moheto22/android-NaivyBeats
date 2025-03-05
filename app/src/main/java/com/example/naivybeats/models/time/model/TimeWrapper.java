@@ -10,6 +10,8 @@ public class TimeWrapper
     @SerializedName("$values")
     private List<Time> times = new ArrayList<>();
 
+    public TimeWrapper() {}
+
     public List<Time> getTimes() {
         return times;
     }

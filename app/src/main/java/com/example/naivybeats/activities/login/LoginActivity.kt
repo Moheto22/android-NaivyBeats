@@ -28,12 +28,6 @@ import java.security.NoSuchAlgorithmException
 
 
 class LoginActivity : AppCompatActivity() {
-    companion object{
-        var userController = UserController()
-        var musicianController = MusicianController()
-        var restaurantController = RestaurantController()
-        var timeController = TimeController()
-    }
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,10 +51,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
         button.setOnClickListener(){
+
             lifecycleScope.launch {
                 try {
-                    users = userController.getAllUsers()?: emptyList()
-                    times = timeController.getAllTimes()
+                    users = Tools.getAllUsers()
+                   // times = Tools.getAllTimes()
                     checkIfUserExists(users, editTextUser, editTextPassword)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -69,6 +64,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun stratInitialAnimations(
         editTextUser: EditText,
         editTextPassword: EditText,
@@ -81,8 +77,6 @@ class LoginActivity : AppCompatActivity() {
         Tools.animationTurnUp(this,button)
         Tools.animationTurnUp(this,textViewNotUser)
     }
-
-
 
     private fun checkIfUserExists(users: List<Users>, editTextUser: EditText, editTextPassword: EditText) {
         val username = editTextUser.text.toString().trim()
@@ -105,7 +99,7 @@ class LoginActivity : AppCompatActivity() {
                return Toast.makeText(this, "❌ Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show()
             }
         } else {
-            return Toast.makeText(this, "❌ Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show()
+            return Toast.makeText(this, "❌ Este usuario no existe", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -133,10 +127,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private suspend fun userOrRestaurant(user: Users): Users? {
-        val userLog = musicianController.getMusicianById(user.userId)
+        val userLog = Tools.getMusicianById(user)
 
         return if (userLog == null) {
-            restaurantController.getRestaurantById(user.userId)
+            Tools.getRestaurantById(user)
         } else {
             userLog
         }

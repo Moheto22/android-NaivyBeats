@@ -2,20 +2,19 @@ package com.example.naivybeats.models.municipality.controller
 
 import com.example.naivybeats.RetrofitClient
 import com.example.naivybeats.models.BaseController
-import com.example.naivybeats.models.municipality.model.Province
-import com.example.naivybeats.models.municipality.service.ProvinceService
-import com.example.naivybeats.models.time.service.TimeService
+import com.example.naivybeats.models.municipality.model.Municipality
+import com.example.naivybeats.models.municipality.service.MunicipalityService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ProvinceController: BaseController() {
-    private val service = RetrofitClient.createService(ProvinceService::class.java)
+class MunicipalityController: BaseController() {
+    private val service = RetrofitClient.createService(MunicipalityService::class.java)
 
-    suspend fun getAllProvinces(): List<Province> {
+    suspend fun getAllMunicipality(): List<Municipality> {
 
         return withContext(Dispatchers.IO) {
             try {
-                val response = service.getAllProvinces()
+                val response = service.getAllMunicipalitis()
 
                 if (response.isSuccessful) {
                     response.body()?.provinces ?: emptyList()

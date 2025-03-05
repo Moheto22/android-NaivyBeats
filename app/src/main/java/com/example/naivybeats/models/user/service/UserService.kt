@@ -8,5 +8,5 @@ import retrofit2.http.GET
 
 interface UserService {
     @GET("api/Users")
-    fun getAllUsers(): Call<UserWrapper>
+    fun getAllUsers(): Response<UserWrapper>
 }

@@ -17,7 +17,7 @@ class TimeController: BaseController() {
     suspend fun getAllTimes(): List<Time> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = service.getAllTimes().execute()
+                val response = service.getAllTimes()
                 if (response.isSuccessful) {
                     response.body()?.times ?: emptyList()
                 } else {

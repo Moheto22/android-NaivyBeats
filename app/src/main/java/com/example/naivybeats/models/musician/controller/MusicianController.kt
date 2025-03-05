@@ -19,6 +19,7 @@ class MusicianController {
     suspend fun getMusicianById(id: Int): Musician? {
         return try {
             val response = service.getMusicianById(id)
+
             if (response.isSuccessful) {
                 response.body()
             } else {

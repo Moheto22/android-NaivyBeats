@@ -1,17 +1,16 @@
 package com.example.naivybeats.models.municipality.model;
 
-import com.example.naivybeats.models.musician.model.Musician;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProvinceWrapper
+public class MunicipalityWrapper
 {
     @SerializedName("$values")
-    private List<Province> provinces = new ArrayList<>();
+    private List<Municipality> provinces = new ArrayList<>();
 
-    public List<Province> getProvinces() {
+    public List<Municipality> getProvinces() {
         return provinces;
     }
 }

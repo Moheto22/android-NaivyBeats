@@ -10,17 +10,20 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.LoginActivity
+import com.example.naivybeats.models.municipality.controller.MunicipalityController
 import com.example.naivybeats.models.musician.model.Musician
 
 class GetDirectionActivity : AppCompatActivity(){
     object constantsProject {
         const val musician = "MUSICIAN"
         const val restaurant= "RESTAURANT"
+        val municipalityController = MunicipalityController()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_get_direction_new_user)
+
         val intent = intent
         val musician = intent.getSerializableExtra(constantsProject.musician) as Musician
 
@@ -59,6 +62,7 @@ class GetDirectionActivity : AppCompatActivity(){
             if (!list.isEmpty()){
                 shakeEditTexts(list)
             }else{
+                setMusician(musician)
                 Tools.createActivitySimple(this, ChoseStyleArtistActivity::class.java)
                 Tools.createActivityGetStylesTime(this, musician)
             }
@@ -86,6 +90,14 @@ class GetDirectionActivity : AppCompatActivity(){
         Tools.animationTurnUp(this,adress)
         Tools.animationTurnUp(this,button)
         Tools.animationTurnUp(this,isUser)
+    }
+
+    private fun setMusician(musician: Musician){
+
+    }
+
+    private fun getMunicipalitis(){
+
     }
 
 }

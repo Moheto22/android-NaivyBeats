@@ -8,5 +8,5 @@ import retrofit2.http.GET
 interface TimeService
 {
     @GET("api/times")
-    suspend fun getAllTimes(): Call<TimeWrapper>
+    suspend fun getAllTimes(): Response<TimeWrapper>
 }

@@ -9,12 +9,27 @@ import com.example.naivybeats.R
 import com.example.naivybeats.activities.login.ChoseStyleArtistActivity
 import com.example.naivybeats.activities.login.GetDirectionActivity
 import com.example.naivybeats.activities.menu.MainMenuActivity
+import com.example.naivybeats.models.musician.controller.MusicianController
 import com.example.naivybeats.models.musician.model.Musician
 import com.example.naivybeats.models.restaurant.model.Restaurant
+import com.example.naivybeats.models.time.controller.TimeController
 import com.example.naivybeats.models.user.model.Users
+import kotlinx.coroutines.launch
+import androidx.lifecycle.lifecycleScope
+import com.example.naivybeats.models.restaurant.controller.RestaurantController
 
-class Tools {
+import com.example.naivybeats.models.time.model.Time
+import com.example.naivybeats.models.user.controller.UserController
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.withContext
+
+class Tools{
     companion object {
+        val timeController = TimeController()
+        val musicianController = MusicianController()
+        val userController = UserController()
+        val restaurantController = RestaurantController()
         /**
         fun createActivity(context: Context, activityClass: Class<*>, index: Int) {
         val intent = Intent(context, activityClass)
@@ -110,6 +125,42 @@ class Tools {
 
         fun right_left_AnimationFragment(context: Context, view: View) {
 
+        }
+
+        //-----------------------------------------------------------------------------------
+
+        //TIMES
+        suspend fun getAllTimes(): List<Time> {
+            return withContext(Dispatchers.IO) {
+                timeController.getAllTimes()
+            }
+        }
+
+
+        //MUNICIPIOS
+        fun getAllMunicipalitis(){
+
+        }
+
+        //USERS
+        suspend fun getAllUsers(): List<Users>{
+            return withContext(Dispatchers.IO) {
+                userController.getAllUsers()
+            }
+        }
+
+        //MUSICIAN
+        suspend fun getMusicianById(user: Users): Musician{
+            return withContext(Dispatchers.IO) {
+                musicianController.getMusicianById(user.userId)!!
+            }
+        }
+
+        //RESTAURANT
+        suspend fun getRestaurantById(user: Users): Restaurant{
+            return withContext(Dispatchers.IO) {
+                restaurantController.getRestaurantById(user.userId)!!
+            }
         }
     }
 }
