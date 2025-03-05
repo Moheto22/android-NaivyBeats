@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/element_bluesky"
+    android:padding="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@color/white">
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:text="Nombre ususario"
+            android:layout_gravity="center"
+            android:textColor="@color/bluemarin"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="El sol se oculta lentamente, tiñendo el cielo de naranja y rojo. La brisa fresca acaricia las hojas de los árboles, susurrando historias antiguas. En el horizonte, la luna comienza a asomar, iluminando la oscuridad con su luz suave."
+        android:textColor="@color/bluemarin"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="10dp"
+        android:text="fecha de envio y hora"
+        android:textColor="@color/bluemarin"
+        />
+
+</LinearLayout>
