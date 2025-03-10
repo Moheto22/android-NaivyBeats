@@ -6,15 +6,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "http://10.0.3.191/NaivyBeats/"
+    private const val BASE_URL = "http://10.0.1.153/NaivyBeats/"
 
     private val retrofit: Retrofit by lazy {
         val gson = GsonBuilder()
-            .create() // Usamos el GsonBuilder para una configuración más flexible si es necesario
+            .create()
 
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson)) // Usamos el converter
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 
