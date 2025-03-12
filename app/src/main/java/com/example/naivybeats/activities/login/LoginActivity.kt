@@ -52,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
         textViewNotUser.setOnClickListener(){
             Tools.createActivitySimple(this, TypeOfUserActivity::class.java)
         }
-
         button.setOnClickListener(){
 
             lifecycleScope.launch {
@@ -66,7 +65,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun stratInitialAnimations(
         editTextUser: EditText,
         editTextPassword: EditText,
