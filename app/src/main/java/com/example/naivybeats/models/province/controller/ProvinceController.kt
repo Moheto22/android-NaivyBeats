@@ -1,28 +1,26 @@
-package com.example.naivybeats.models.municipality.controller
+package com.example.naivybeats.models.province.controller
 
 import com.example.naivybeats.RetrofitClient
-import com.example.naivybeats.models.BaseController
-import com.example.naivybeats.models.municipality.model.Municipality
-import com.example.naivybeats.models.municipality.service.MunicipalityService
+import com.example.naivybeats.models.province.models.City
+import com.example.naivybeats.models.province.service.ProvinceService
+import com.example.naivybeats.models.time.model.Time
+import com.example.naivybeats.models.time.service.TimeService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class MunicipalityController: BaseController() {
-    private val service = RetrofitClient.createService(MunicipalityService::class.java)
+class ProvinceController {
+    private val service = RetrofitClient.createService(ProvinceService::class.java)
 
-    suspend fun getAllMunicipality(): List<Municipality> {
-
+    suspend fun getAllCities(): List<City> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = service.getAllMunicipalitis()
-
+                val response = service.getAllCities()
                 if (response.isSuccessful) {
-                    response.body()?.municipalities ?: emptyList()
+                    response.body()?.cities ?: emptyList()
                 } else {
                     println("❌ Error en la API: ${response.errorBody()?.string()}")
                     emptyList()
                 }
-
             } catch (e: Exception) {
                 e.printStackTrace()
                 println("❌ Error en la llamada a la API: ${e.message}")

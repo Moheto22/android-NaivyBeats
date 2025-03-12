@@ -13,6 +13,7 @@ import com.example.naivybeats.R
 import com.example.naivybeats.activities.LoginActivity
 import com.example.naivybeats.models.musician.controller.MusicianController
 import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.user.model.Users
 import kotlinx.coroutines.launch
 import java.security.MessageDigest
 
@@ -60,9 +61,9 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
             if (!list.isEmpty()){
                 shakeEditTexts(list)
             } else {
-                var musician = newMusician(editTextName, editTextEmail, editTextNumber, editTextPassword)
 
-                Toast.makeText(this, "✔ Usuario creado exitosamente", Toast.LENGTH_LONG).show()
+                var musician = newMusician(editTextName, editTextEmail, editTextNumber, editTextPassword)
+               // Toast.makeText(this, "✔ Usuario creado exitosamente", Toast.LENGTH_LONG).show()
                 Tools.createActivityGetAdressFromArtist(this, musician)
             }
         }
@@ -113,5 +114,4 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
 
         return bytes.joinToString("") { "%02x".format(it) }
     }
-
 }

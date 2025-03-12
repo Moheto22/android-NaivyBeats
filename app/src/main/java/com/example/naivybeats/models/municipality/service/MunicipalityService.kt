@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface MunicipalityService {
 
-    @GET("api/provinces")
+    @GET("api/Municipalities")
     suspend fun getAllMunicipalitis(): Response<MunicipalityWrapper>
 }

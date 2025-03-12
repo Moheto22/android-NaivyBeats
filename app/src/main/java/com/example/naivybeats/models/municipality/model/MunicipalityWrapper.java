@@ -8,9 +8,9 @@ import java.util.List;
 public class MunicipalityWrapper
 {
     @SerializedName("$values")
-    private List<Municipality> provinces = new ArrayList<>();
+    private List<Municipality> municipalities = new ArrayList<>();
 
-    public List<Municipality> getProvinces() {
-        return provinces;
+    public List<Municipality> getMunicipalities() {
+        return municipalities;
     }
 }

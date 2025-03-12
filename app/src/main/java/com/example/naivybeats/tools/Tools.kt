@@ -9,20 +9,22 @@ import com.example.naivybeats.R
 import com.example.naivybeats.activities.login.ChoseStyleArtistActivity
 import com.example.naivybeats.activities.login.GetDirectionActivity
 import com.example.naivybeats.activities.menu.MainMenuActivity
+import com.example.naivybeats.models.municipality.controller.MunicipalityController
+import com.example.naivybeats.models.municipality.model.Municipality
+import com.example.naivybeats.models.province.models.City
 import com.example.naivybeats.models.musician.controller.MusicianController
 import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.province.controller.ProvinceController
 import com.example.naivybeats.models.restaurant.model.Restaurant
 import com.example.naivybeats.models.time.controller.TimeController
 import com.example.naivybeats.models.user.model.Users
-import kotlinx.coroutines.launch
-import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.models.restaurant.controller.RestaurantController
 
 import com.example.naivybeats.models.time.model.Time
 import com.example.naivybeats.models.user.controller.UserController
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.withContext
+import java.io.Serializable
 
 class Tools{
     companion object {
@@ -30,6 +32,8 @@ class Tools{
         val musicianController = MusicianController()
         val userController = UserController()
         val restaurantController = RestaurantController()
+        val cityController = ProvinceController()
+        var municipalityController = MunicipalityController()
         /**
         fun createActivity(context: Context, activityClass: Class<*>, index: Int) {
         val intent = Intent(context, activityClass)
@@ -48,7 +52,7 @@ class Tools{
             musician: Musician
                                              ) {
             val intent = Intent(context, GetDirectionActivity::class.java)
-            intent.putExtra(GetDirectionActivity.constantsProject.musician, musician)
+            intent.putExtra(GetDirectionActivity.constantsProject.user, musician)
 
             context.startActivity(intent)
         }
@@ -64,14 +68,15 @@ class Tools{
             restaurant: Restaurant
                                             ) {
             val intent = Intent(context, GetDirectionActivity::class.java)
-            intent.putExtra(GetDirectionActivity.constantsProject.restaurant, restaurant)
+            intent.putExtra(GetDirectionActivity.constantsProject.user, restaurant)
 
             context.startActivity(intent)
         }
 
         fun createActivityGetStylesTime(
             context: Context,
-            musician: Musician? ) {
+            musician: Serializable?
+                                       ) {
             val intent = Intent(context, ChoseStyleArtistActivity::class.java)
             intent.putExtra(ChoseStyleArtistActivity.constantsProject.musician, musician)
 
@@ -87,6 +92,13 @@ class Tools{
             val intent = Intent(context, activityClass)
 
             intent.putExtra("USER", user)
+            context.startActivity(intent)
+        }
+
+        fun createActivityPutExtraMusician(context: Context, activityClass: Class<*>, musician: Musician) {
+            val intent = Intent(context, activityClass)
+
+            intent.putExtra("USER", musician)
             context.startActivity(intent)
         }
 
@@ -138,8 +150,10 @@ class Tools{
 
 
         //MUNICIPIOS
-        fun getAllMunicipalitis(){
-
+        suspend fun getAllMunicipalitis(): List<Municipality>{
+            return withContext(Dispatchers.IO){
+                municipalityController.getAllMunicipality()
+            }
         }
 
         //USERS
@@ -160,6 +174,13 @@ class Tools{
         suspend fun getRestaurantById(user: Users): Restaurant{
             return withContext(Dispatchers.IO) {
                 restaurantController.getRestaurantById(user.userId)!!
+            }
+        }
+
+        //PROVINCES
+        suspend fun getAllProvinces(): List<City> {
+            return withContext(Dispatchers.IO){
+                cityController.getAllCities()
             }
         }
     }

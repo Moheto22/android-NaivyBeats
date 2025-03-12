@@ -20,7 +20,7 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_chose_style_artist)
-        val name = intent.getStringExtra(constantsProject.musician)
+        val musician = intent.getSerializableExtra(constantsProject.musician)
 
         val title = findViewById<TextView>(R.id.title)
         val subtitle_time = findViewById<TextView>(R.id.subtitle_time)

@@ -36,7 +36,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         var users: List<Users>
-        var times: List<Time>
 
         var editTextUser = findViewById<EditText>(R.id.userName)
         var editTextPassword = findViewById<EditText>(R.id.password)
@@ -55,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 try {
                     users = Tools.getAllUsers()
-                 //   times = Tools.getAllTimes()
+
                     checkIfUserExists(users, editTextUser, editTextPassword)
                 } catch (e: Exception) {
                     e.printStackTrace()
