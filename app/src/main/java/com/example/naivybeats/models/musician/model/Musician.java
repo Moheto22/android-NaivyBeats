@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Musician extends Users implements Serializable
@@ -20,10 +21,10 @@ public class Musician extends Users implements Serializable
     @SerializedName("Publication")
     List<Post> posts;
 
-    public Musician(int userId, String name, String photo, Double longitud, Double latitud, int municipalityId, Date editionDate, Date creationDate, int phoneNumber, String password, String email, int user_id, List<Style> styles, List<Time> times, List<Post> posts)
+    public Musician(int user_id, String name, String photo, String email, String password, int phone_number, Date creation_date, Date edition_date, Date deleted_at, int province_id, Double latitud, Double longitud, int user_id1, List<Style> styles, List<Time> times, List<Post> posts)
     {
-        super(userId, name, photo, longitud, latitud, municipalityId, editionDate, creationDate, phoneNumber, password, email);
-        this.user_id = user_id;
+        super(user_id, name, photo, email, password, phone_number, creation_date, edition_date, deleted_at, province_id, latitud, longitud);
+        this.user_id = user_id1;
         this.styles = styles;
         this.times = times;
         this.posts = posts;

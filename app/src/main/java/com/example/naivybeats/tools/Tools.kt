@@ -169,7 +169,7 @@ class Tools{
         //MUSICIAN
         suspend fun getMusicianById(user: Users): Musician{
             return withContext(Dispatchers.IO) {
-                musicianController.getMusicianById(user.userId)!!
+                musicianController.getMusicianById(user.user_id)!!
             }
         }
 
@@ -182,7 +182,7 @@ class Tools{
         //RESTAURANT
         suspend fun getRestaurantById(user: Users): Restaurant{
             return withContext(Dispatchers.IO) {
-                restaurantController.getRestaurantById(user.userId)!!
+                restaurantController.getRestaurantById(user.user_id)!!
             }
         }
 

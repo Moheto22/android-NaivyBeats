@@ -4,6 +4,7 @@ import com.example.naivybeats.models.user.model.Users;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDateTime;
 
 public class Restaurant extends Users
 {
@@ -15,9 +16,9 @@ public class Restaurant extends Users
     {
     }
 
-    public Restaurant(int userId, String name, String photo, Double longitud, Double latitud, int municipalityId, Date editionDate, Date creationDate, int phoneNumber, String password, String email, String direction, Time openingTime, Time closingTime)
+    public Restaurant(int user_id, String name, String photo, String email, String password, int phone_number, Date creation_date, Date edition_date, Date deleted_at, int province_id, Double latitud, Double longitud, String direction, Time openingTime, Time closingTime)
     {
-        super(userId, name, photo, longitud, latitud, municipalityId, editionDate, creationDate, phoneNumber, password, email);
+        super(user_id, name, photo, email, password, phone_number, creation_date, edition_date, deleted_at, province_id, latitud, longitud);
         this.direction = direction;
         this.openingTime = openingTime;
         this.closingTime = closingTime;

@@ -57,7 +57,6 @@ class LoginActivity : AppCompatActivity() {
 
             lifecycleScope.launch {
                 try {
-                    styles = Tools.getAllStyles()
                     users = Tools.getAllUsers()
                     checkIfUserExists(users, editTextUser, editTextPassword)
                 } catch (e: Exception) {

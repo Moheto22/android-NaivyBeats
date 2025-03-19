@@ -18,10 +18,12 @@ import com.example.naivybeats.models.time.model.Time
 import com.example.naivybeats.models.user.model.Users
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.sql.Date
+import java.sql.Timestamp
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Date
 
 class ChoseStyleArtistActivity : AppCompatActivity() {
     private val buttonStates = HashMap<Button, Boolean>()
@@ -57,8 +59,8 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         val button_continue = findViewById<Button>(R.id.buttonContinue)
         val is_user = findViewById<TextView>(R.id.isUser)
 
-        var styles: List<Style> = emptyList()
-        var times: List<Time> = emptyList()
+        var styles: List<Style>
+        var times: List<Time>
         var musician = musicianC as Musician
 
 
@@ -104,7 +106,7 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
             val list_preferences_time = getPreferencesTime(times)
             musician.styles = list_preferences_styles
             musician.times = list_preferences_time
-            musician.creationDate = GETDATE()
+            musician.creation_date = GETDATE()
             var user = musician as Users
             var exit: Users
             runBlocking {
@@ -198,9 +200,7 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun GETDATE(): Date? {
-        val localDateTime = LocalDateTime.now()
-        val todayDate: java.util.Date? = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant())
-
-        return todayDate as Date?
+        val zonedDateTime = ZonedDateTime.now(ZoneId.systemDefault())
+        return Date.from(zonedDateTime.toInstant())
     }
 }

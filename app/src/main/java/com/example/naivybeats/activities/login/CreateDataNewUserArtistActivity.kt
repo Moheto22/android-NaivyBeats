@@ -99,7 +99,7 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
         musician.name = editTextName.text.toString()
         musician.email = editTextEmail.text.toString()
         musician.password = getHashPassword(editTextPassword)
-        musician.phoneNumber = editTextNumber.text.toString().toIntOrNull() ?: 0
+        musician.phone_number = editTextNumber.text.toString().toIntOrNull() ?: 0
 
         return musician
     }

@@ -17,14 +17,10 @@ class TimeController: BaseController() {
     suspend fun getAllTimes(): List<Time> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = service.getAllTimes()
 
-                if (response.isSuccessful) {
-                    response.body()?.times?: emptyList()
-                } else {
-                    println("❌ Error en la API: ${response.errorBody()?.string()}")
-                    emptyList()
-                }
+                val response = service.getAllTimes()
+                response.body()?: emptyList()
+
             } catch (e: Exception) {
                 e.printStackTrace()
                 println("❌ Error en la llamada a la API: ${e.message}")

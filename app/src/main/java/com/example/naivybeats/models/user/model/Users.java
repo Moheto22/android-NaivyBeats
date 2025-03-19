@@ -3,23 +3,24 @@ package com.example.naivybeats.models.user.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Users implements Serializable
 {
-    int user_id;
-    String name;
-    String photo;
-    String email;
-    String password;
-    int phone_number;
-    Date creation_date;
-    Date edition_date;
-    Date deleted_at;
+    private int user_id;
+    private String name;
+    private String photo;
+    private String email;
+    private String password;
+    private int phone_number;
+    private transient Date creation_date;
+    private transient Date edition_date;
+    private transient Date deleted_at;
     @SerializedName("municipality_id")
-    int province_id;
-    Double latitud;
-    Double longitud;
+    private int province_id;
+    private Double latitud;
+    private Double longitud;
 
     public Users()
     {
@@ -41,14 +42,14 @@ public class Users implements Serializable
         this.longitud = longitud;
     }
 
-    public int getUserId()
+    public int getUser_id()
     {
         return user_id;
     }
 
-    public void setUserId(int userId)
+    public void setUser_id(int user_id)
     {
-        this.user_id = userId;
+        this.user_id = user_id;
     }
 
     public String getName()
@@ -91,86 +92,6 @@ public class Users implements Serializable
         this.password = password;
     }
 
-    public int getPhoneNumber()
-    {
-        return phone_number;
-    }
-
-    public void setPhoneNumber(int phoneNumber)
-    {
-        this.phone_number = phoneNumber;
-    }
-
-    public Date getCreationDate()
-    {
-        return creation_date;
-    }
-
-    public void setCreationDate(Date creationDate)
-    {
-        this.creation_date = creationDate;
-    }
-
-    public Date getEditionDate()
-    {
-        return edition_date;
-    }
-
-    public void setEditionDate(Date editionDate)
-    {
-        this.edition_date = editionDate;
-    }
-
-    public int getMunicipalityId()
-    {
-        return province_id;
-    }
-
-    public void setMunicipalityId(int municipalityId)
-    {
-        this.province_id = municipalityId;
-    }
-
-    public Double getLatitud()
-    {
-        return latitud;
-    }
-
-    public void setLatitud(Double latitud)
-    {
-        this.latitud = latitud;
-    }
-
-    public Double getLongitud()
-    {
-        return longitud;
-    }
-
-    public void setLongitud(Double longitud)
-    {
-        this.longitud = longitud;
-    }
-
-    public Date getDeleted_at()
-    {
-        return deleted_at;
-    }
-
-    public void setDeleted_at(Date deleted_at)
-    {
-        this.deleted_at = deleted_at;
-    }
-
-    public int getUser_id()
-    {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id)
-    {
-        this.user_id = user_id;
-    }
-
     public int getPhone_number()
     {
         return phone_number;
@@ -201,6 +122,16 @@ public class Users implements Serializable
         this.edition_date = edition_date;
     }
 
+    public Date getDeleted_at()
+    {
+        return deleted_at;
+    }
+
+    public void setDeleted_at(Date deleted_at)
+    {
+        this.deleted_at = deleted_at;
+    }
+
     public int getProvince_id()
     {
         return province_id;
@@ -209,5 +140,25 @@ public class Users implements Serializable
     public void setProvince_id(int province_id)
     {
         this.province_id = province_id;
+    }
+
+    public Double getLatitud()
+    {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud)
+    {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud()
+    {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud)
+    {
+        this.longitud = longitud;
     }
 }

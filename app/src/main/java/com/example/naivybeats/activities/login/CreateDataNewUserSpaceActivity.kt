@@ -98,7 +98,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         restaurant.name = editTextName.text.toString()
         restaurant.email = editTextEmail.text.toString()
         restaurant.password = getHashPassword(editTextPassword)
-        restaurant.phoneNumber = editTextNumber.text.toString().toIntOrNull() ?: 0
+        restaurant.phone_number = editTextNumber.text.toString().toIntOrNull() ?: 0
 
         return restaurant
     }
