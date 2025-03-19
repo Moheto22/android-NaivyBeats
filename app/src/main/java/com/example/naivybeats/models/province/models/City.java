@@ -1,5 +1,6 @@
 package com.example.naivybeats.models.province.models;
 
+import com.example.naivybeats.models.municipality.model.Municipality;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -9,16 +10,28 @@ public class City
     @SerializedName("city_id")
     int cityId;
     String name;
-    CityWrapper citiWrapper;
+    @SerializedName("Municipality")
+    List<Municipality> municipalities;
 
     public City()
     {
     }
 
-    public City(int cityId, String name)
+    public City(int cityId, String name, List<Municipality> municipalities)
     {
         this.cityId = cityId;
         this.name = name;
+        this.municipalities = municipalities;
+    }
+
+    public List<Municipality> getMunicipalities()
+    {
+        return municipalities;
+    }
+
+    public void setMunicipalities(List<Municipality> municipalities)
+    {
+        this.municipalities = municipalities;
     }
 
     public int getCityId()
@@ -41,8 +54,4 @@ public class City
         this.name = name;
     }
 
-    public List<City> getCities()
-    {
-        return citiWrapper.getCities();
-    }
 }

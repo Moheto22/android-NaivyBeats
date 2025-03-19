@@ -18,8 +18,9 @@ class TimeController: BaseController() {
         return withContext(Dispatchers.IO) {
             try {
                 val response = service.getAllTimes()
+
                 if (response.isSuccessful) {
-                    response.body()?.times ?: emptyList()
+                    response.body()?.times?: emptyList()
                 } else {
                     println("❌ Error en la API: ${response.errorBody()?.string()}")
                     emptyList()

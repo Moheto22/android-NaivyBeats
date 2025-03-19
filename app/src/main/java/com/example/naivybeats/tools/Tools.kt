@@ -19,6 +19,8 @@ import com.example.naivybeats.models.restaurant.model.Restaurant
 import com.example.naivybeats.models.time.controller.TimeController
 import com.example.naivybeats.models.user.model.Users
 import com.example.naivybeats.models.restaurant.controller.RestaurantController
+import com.example.naivybeats.models.style.model.Style
+import com.example.naivybeats.models.style.controller.StyleController
 
 import com.example.naivybeats.models.time.model.Time
 import com.example.naivybeats.models.user.controller.UserController
@@ -34,6 +36,7 @@ class Tools{
         val restaurantController = RestaurantController()
         val cityController = ProvinceController()
         var municipalityController = MunicipalityController()
+        var styleController = StyleController()
         /**
         fun createActivity(context: Context, activityClass: Class<*>, index: Int) {
         val intent = Intent(context, activityClass)
@@ -75,10 +78,10 @@ class Tools{
 
         fun createActivityGetStylesTime(
             context: Context,
-            musician: Serializable?
+            musician: Musician
                                        ) {
             val intent = Intent(context, ChoseStyleArtistActivity::class.java)
-            intent.putExtra(ChoseStyleArtistActivity.constantsProject.musician, musician)
+            intent.putExtra(ChoseStyleArtistActivity.constantsProject.musicianC, musician)
 
             context.startActivity(intent)
         }
@@ -170,6 +173,12 @@ class Tools{
             }
         }
 
+        suspend fun insertMusician(user: Users): Users{
+            return withContext(Dispatchers.IO){
+                userController.insertMusician(user)
+            }
+        }
+
         //RESTAURANT
         suspend fun getRestaurantById(user: Users): Restaurant{
             return withContext(Dispatchers.IO) {
@@ -181,6 +190,13 @@ class Tools{
         suspend fun getAllProvinces(): List<City> {
             return withContext(Dispatchers.IO){
                 cityController.getAllCities()
+            }
+        }
+
+        //STYLES
+        suspend fun getAllStyles(): List<Style>{
+            return withContext(Dispatchers.IO){
+                styleController.getAllStyles()
             }
         }
     }

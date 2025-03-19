@@ -17,7 +17,7 @@ class MunicipalityController: BaseController() {
                 val response = service.getAllMunicipalitis()
 
                 if (response.isSuccessful) {
-                    response.body()?.municipalities ?: emptyList()
+                    response.body()?: emptyList()
                 } else {
                     println("❌ Error en la API: ${response.errorBody()?.string()}")
                     emptyList()

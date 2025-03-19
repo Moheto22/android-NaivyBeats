@@ -1,6 +1,8 @@
 package com.example.naivybeats.activities.login
+import MunicipalityAdapter
 import Tools
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -23,6 +25,9 @@ import java.io.Serializable
 import com.example.naivybeats.models.musician.model.Musician
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.json.JSONArray
+import java.net.HttpURLConnection
+import java.net.URL
 
 class GetDirectionActivity : AppCompatActivity(){
 
@@ -36,14 +41,14 @@ class GetDirectionActivity : AppCompatActivity(){
         setContentView(R.layout.activity_get_direction_new_user)
 
         var provinces: List<City> = emptyList()
-        var municipalitis: List<Municipality> = emptyList()
+        var municipalities: List<Municipality> = emptyList()
 
         val intent = intent
         val user = intent.getSerializableExtra(constantsProject.user)
 
         runBlocking {
             provinces = Tools.getAllProvinces()
-            municipalitis = Tools.getAllMunicipalitis()
+            municipalities = Tools.getAllMunicipalitis()
         }
 
         val title = findViewById<TextView>(R.id.title)
@@ -53,12 +58,21 @@ class GetDirectionActivity : AppCompatActivity(){
         val adress = findViewById<EditText>(R.id.adress)
         val button = findViewById<Button>(R.id.buttonContinue)
         val isUser = findViewById<TextView>(R.id.isUser)
+        var selectedMunicipality = Municipality()
 
         val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.municipality)
-
-        val adapterM = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, municipalitis)
+        val adapterM = MunicipalityAdapter(this, municipalities)
         autoCompleteTextView.setAdapter(adapterM)
         autoCompleteTextView.threshold = 1
+
+        autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
+            selectedMunicipality = adapterM.getItem(position)!!
+            val editableText = Editable.Factory.getInstance().newEditable(selectedMunicipality.name)
+            autoCompleteTextView.text = editableText
+        }
+
+
+
 
         stratInitialAnimations(title,province,municipality,adress,button,isUser)
 
@@ -106,10 +120,11 @@ class GetDirectionActivity : AppCompatActivity(){
             }
             if (!list.isEmpty()){
                 shakeEditTexts(list)
+                Toast.makeText(this, "⚠️ Por favor, completa todos los campos", Toast.LENGTH_LONG).show()
             }else {
                 if (musicianOrRestaurant(user) == 1){
                     var musician = user as Musician
-                    setMusician(musician, selectedProvince)
+                    setMusician(musician, selectedMunicipality,direction)
                     Tools.createActivityPutExtraMusician(this, ChoseStyleArtistActivity::class.java, musician)
                     Tools.createActivityGetStylesTime(this, musician)
 
@@ -146,12 +161,17 @@ class GetDirectionActivity : AppCompatActivity(){
         Tools.animationTurnUp(this,isUser)
     }
 
-    private fun setMusician(musician: Serializable?, province: City){
+    private fun setMusician(musician: Musician, municipality: Municipality, direction: String){
+        musician.municipalityId = municipality.municipalityId
+       // val (latitude, longitude) = getLatLongFromAddressOSM(direction)
+        musician.latitud = 1.0
+        musician.longitud = 1.0
+      /*  if (latitude != null && longitude != null){
 
-    }
-
-    private fun getMunicipalitis(){
-
+        } else {
+            musician.latitud = null
+            musician.longitud = null
+        }*/
     }
 
     fun musicianOrRestaurant(user: Serializable?): Int {
@@ -160,6 +180,39 @@ class GetDirectionActivity : AppCompatActivity(){
             is Restaurant -> return 0
            else -> return -1
        }
+    }
+
+    fun getLatLongFromAddressOSM(address: String): Pair<Double?, Double?> {
+        val encodedAddress = address.replace(" ", "+")
+        val urlString = "https://nominatim.openstreetmap.org/search?q=$encodedAddress&format=json"
+
+        return try {
+            val url = URL(urlString)
+            val connection = url.openConnection() as HttpURLConnection
+            connection.requestMethod = "GET"
+
+            if (connection.responseCode == HttpURLConnection.HTTP_OK) {
+                val inputStream = connection.inputStream
+                val response = inputStream.bufferedReader().use { it.readText() }
+                val jsonArray = JSONArray(response)
+
+                if (jsonArray.length() > 0) {
+                    val location = jsonArray.getJSONObject(0)
+                    val latitude = location.getDouble("lat")
+                    val longitude = location.getDouble("lon")
+
+                    Pair(latitude, longitude)
+                } else {
+                    Pair(null, null)
+                }
+            } else {
+                println("Error: ${connection.responseCode}")
+                Pair(null, null)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Pair(null, null)
+        }
     }
 
 }

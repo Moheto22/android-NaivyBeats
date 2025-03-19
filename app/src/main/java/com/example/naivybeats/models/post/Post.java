@@ -1,14 +1,21 @@
 package com.example.naivybeats.models.post;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 
 public class Post
 {
-    int postId;
-    int userId;
-    Date postDate;
-    String description;
-    String multimedia;
+    @SerializedName("publication_id")
+    private int postId;
+    @SerializedName("user_id")
+    private int userId;
+    @SerializedName("publication_date")
+    private Date postDate;
+    @SerializedName("description")
+    private String description;
+    @SerializedName("multimedia_content")
+    private String multimedia;
 
     public Post()
     {

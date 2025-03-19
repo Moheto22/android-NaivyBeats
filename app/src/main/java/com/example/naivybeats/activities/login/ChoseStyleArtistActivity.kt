@@ -1,26 +1,41 @@
 package com.example.naivybeats.activities.login
 
 import Tools
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
+import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.style.model.Style
+import com.example.naivybeats.models.time.model.Time
+import com.example.naivybeats.models.user.model.Users
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.sql.Date
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class ChoseStyleArtistActivity : AppCompatActivity() {
     private val buttonStates = HashMap<Button, Boolean>()
     private var listOfButtons = listOf<Button>()
 
     object constantsProject {
-        const val musician = "MUSICIAN"
+        const val musicianC = "MUSICIAN"
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_chose_style_artist)
-        val musician = intent.getSerializableExtra(constantsProject.musician)
+        val musicianC = intent.getSerializableExtra(constantsProject.musicianC)
 
         val title = findViewById<TextView>(R.id.title)
         val subtitle_time = findViewById<TextView>(R.id.subtitle_time)
@@ -41,9 +56,19 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         val tecno = findViewById<Button>(R.id.tecno)
         val button_continue = findViewById<Button>(R.id.buttonContinue)
         val is_user = findViewById<TextView>(R.id.isUser)
+
+        var styles: List<Style> = emptyList()
+        var times: List<Time> = emptyList()
+        var musician = musicianC as Musician
+
+
+        runBlocking {
+           styles = Tools.getAllStyles()
+           times = Tools.getAllTimes()
+        }
+
         listOfButtons = listOf<Button>(morning,afternoon,night,whenever,jazz,hiphop,rock,
                           pop,classic,trap,blues,reggueton,flamenco,tecno)
-
 
         startInitialAnimations(title,subtitle_time,subtitle_style,morning,afternoon,night,whenever,jazz,hiphop,rock,pop,classic,trap,blues,reggueton,flamenco,tecno,button_continue,is_user)
         val onClickButton = View.OnClickListener { view ->
@@ -63,7 +88,7 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
                             listOfButtons[3].setBackgroundResource(R.drawable.design_button_type_choose)
                             buttonStates[listOfButtons[3]] = true
                         }
-                    }else{
+                    }else {
                         view.setBackgroundResource(R.drawable.design_button_type_choose_not_pressed)
                         buttonStates[view] = false
                     }
@@ -75,35 +100,47 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
             button.setOnClickListener(onClickButton)
         }
         button_continue.setOnClickListener(){
-            val list_preferences_styles = getPreferencesStyles()
-            val list_preferences_time = getPreferencesTime()
-           // Tools.createActivityMenuMain(this,"artist")
+            val list_preferences_styles = getPreferencesStyles(styles)
+            val list_preferences_time = getPreferencesTime(times)
+            musician.styles = list_preferences_styles
+            musician.times = list_preferences_time
+            musician.creationDate = GETDATE()
+            var user = musician as Users
+            var exit: Users
+            runBlocking {
+               exit = Tools.insertMusician(user)
+            }
+
+            if (exit != null){
+                Toast.makeText(this, "✔️ Músico creado exitosamente", Toast.LENGTH_LONG).show()
+                Tools.createActivityMenuMain(this,musician)
+            } else {
+                Toast.makeText(this, "❌ Error al crear el usuario", Toast.LENGTH_LONG).show()
+            }
         }
-
-
     }
 
-    private fun getPreferencesTime(): List<String> {
-        val listResult = mutableListOf<String>()
-        val listOfValues = listOf("morning","afternoon","night")
+    private fun getPreferencesTime(times: List<Time>): List<Time> {
+        val listResult: MutableList<Time> = mutableListOf()
+
         if (buttonStates[listOfButtons[3]] == true){
-            listResult.add("whenever")
+            listResult.add(times[3])
         }else {
             for (i in 0..2){
                 if (buttonStates[listOfButtons[i]] == true){
-                    listResult.add(listOfValues[i])
+                    listResult.add(times[i])
                 }
             }
         }
         return listResult
     }
 
-    private fun getPreferencesStyles(): List<String> {
-        val listResult = mutableListOf<String>()
-        val listOfValues = listOf("Hip-hop","Pop","Tecno","Classic","Flamenco","Reggueton","Rock","Blues","Jazz","Trap")
+    private fun getPreferencesStyles(styles: List<Style>): List<Style> {
+        val listResult: MutableList<Style> = mutableListOf()
+
         for (i in 5..<listOfButtons.size-4){
             if (buttonStates[listOfButtons[i]] == true){
-                listResult.add(listOfValues[i])
+                listResult.add(styles[i])
             }
         }
         return listResult
@@ -157,6 +194,13 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         Tools.animationFocus(this,tecno)
         Tools.animationTurnUp(this,button_continue)
         Tools.animationTurnUp(this,is_user)
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun GETDATE(): Date? {
+        val localDateTime = LocalDateTime.now()
+        val todayDate: java.util.Date? = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant())
+
+        return todayDate as Date?
     }
 }

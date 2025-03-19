@@ -1,42 +1,44 @@
-package com.example.naivybeats.models.time.model;
+package com.example.naivybeats.models.style.model;
 
 import com.example.naivybeats.models.musician.model.Musician;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Time {
-    @SerializedName("id")
-    private int id;
-
-    @SerializedName("name")
+public class Style
+{
+    @SerializedName("style_id")
+    private int styleId;
     private String name;
-
     @SerializedName("Musician")
     private transient List<Musician> musicians;
 
-    public Time(int id, String name, List<Musician> musicians)
+    public Style() {}
+
+    public Style(int styleId, String name, List<Musician> musicians)
     {
-        this.id = id;
+        this.styleId = styleId;
         this.name = name;
         this.musicians = musicians;
     }
 
-    public Time() {}
-
-    public int getId() {
-        return id;
+    public int getStyleId()
+    {
+        return styleId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStyleId(int styleId)
+    {
+        this.styleId = styleId;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
@@ -44,6 +46,7 @@ public class Time {
     {
         return musicians;
     }
+
     public void setMusicians(List<Musician> musicians)
     {
         this.musicians = musicians;

@@ -15,12 +15,8 @@ class ProvinceController {
         return withContext(Dispatchers.IO) {
             try {
                 val response = service.getAllCities()
-                if (response.isSuccessful) {
-                    response.body()?.cities ?: emptyList()
-                } else {
-                    println("❌ Error en la API: ${response.errorBody()?.string()}")
-                    emptyList()
-                }
+                response.body()?: emptyList()
+
             } catch (e: Exception) {
                 e.printStackTrace()
                 println("❌ Error en la llamada a la API: ${e.message}")
