@@ -14,12 +14,9 @@ import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.login.TypeOfUserActivity
 import com.example.naivybeats.activities.menu.MainMenuActivity
-import com.example.naivybeats.models.municipality.model.Municipality
 import com.example.naivybeats.models.musician.controller.MusicianController
-import com.example.naivybeats.models.province.models.City
 import com.example.naivybeats.models.restaurant.controller.RestaurantController
 import com.example.naivybeats.models.restaurant.model.Restaurant
-import com.example.naivybeats.models.style.model.Style
 import com.example.naivybeats.models.time.controller.TimeController
 import com.example.naivybeats.models.time.model.Time
 import com.example.naivybeats.models.user.controller.UserController
@@ -39,7 +36,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         var users: List<Users>
-        var styles: List<Style>
 
         var editTextUser = findViewById<EditText>(R.id.userName)
         var editTextPassword = findViewById<EditText>(R.id.password)
@@ -57,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 try {
                     users = Tools.getAllUsers()
+
                     checkIfUserExists(users, editTextUser, editTextPassword)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -92,8 +89,8 @@ class LoginActivity : AppCompatActivity() {
             if (user.password == hashPassword(password)) {
                 lifecycleScope.launch {
                    user = userOrRestaurant(user!!)
-                   Tools.createActivityPutExtra(this@LoginActivity, MainMenuActivity::class.java, user!!)
                 }
+                Tools.createActivityPutExtra(this, MainMenuActivity::class.java, user!!)
 
             } else {
                return Toast.makeText(this, "❌ Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show()
