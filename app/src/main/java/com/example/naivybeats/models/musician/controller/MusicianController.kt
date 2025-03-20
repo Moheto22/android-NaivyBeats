@@ -35,14 +35,8 @@ class MusicianController {
         return withContext(Dispatchers.IO) {
             try {
                 val response = service.insertMusician(user)
+                response.body()
 
-                if (response.isSuccessful) {
-                    response.body()
-                } else {
-                    val statusCode = response.code()
-                    val errorBody = response.errorBody()?.string()
-                    null
-                }
             } catch (e: Exception) {
                 println("Excepción en insertMusician: ${e.message}")
                 e.printStackTrace()
