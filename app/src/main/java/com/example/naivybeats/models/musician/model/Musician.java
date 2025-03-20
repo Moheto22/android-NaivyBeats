@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Musician extends Users implements Serializable
 {
-    int user_id;
+    Integer user_id;
     @SerializedName("Style")
     List<Style> styles;
     @SerializedName("time")
@@ -24,7 +24,7 @@ public class Musician extends Users implements Serializable
     public Musician(int user_id, String name, String photo, String email, String password, int phone_number, Date creation_date, Date edition_date, Date deleted_at, int province_id, Double latitud, Double longitud, int user_id1, List<Style> styles, List<Time> times, List<Post> posts)
     {
         super(user_id, name, photo, email, password, phone_number, creation_date, edition_date, deleted_at, province_id, latitud, longitud);
-        this.user_id = user_id1;
+        this.user_id = null;
         this.styles = styles;
         this.times = times;
         this.posts = posts;

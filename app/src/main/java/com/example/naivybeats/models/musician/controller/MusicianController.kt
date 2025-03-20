@@ -39,8 +39,8 @@ class MusicianController {
                 if (response.isSuccessful) {
                     response.body()
                 } else {
+                    val statusCode = response.code()
                     val errorBody = response.errorBody()?.string()
-                    println("Error del servidor: $errorBody")
                     null
                 }
             } catch (e: Exception) {
