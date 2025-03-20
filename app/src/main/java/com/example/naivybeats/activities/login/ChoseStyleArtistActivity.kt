@@ -69,8 +69,8 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
            times = Tools.getAllTimes()
         }
 
-        listOfButtons = listOf<Button>(morning,afternoon,night,whenever,jazz,hiphop,rock,
-                          pop,classic,trap,blues,reggueton,flamenco,tecno)
+        listOfButtons = listOf<Button>(morning,afternoon,night,whenever,hiphop,pop,
+                          tecno,classic,flamenco,reggueton,rock,blues,jazz,trap)
 
         startInitialAnimations(title,subtitle_time,subtitle_style,morning,afternoon,night,whenever,jazz,hiphop,rock,pop,classic,trap,blues,reggueton,flamenco,tecno,button_continue,is_user)
         val onClickButton = View.OnClickListener { view ->
@@ -108,16 +108,17 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
             musician.times = list_preferences_time
             musician.creation_date = GETDATE()
             var user = musician as Users
-            var exit: Users
-            runBlocking {
-               exit = Tools.insertMusician(user)
-            }
 
-            if (exit != null){
-                Toast.makeText(this, "✔️ Músico creado exitosamente", Toast.LENGTH_LONG).show()
-                Tools.createActivityMenuMain(this,musician)
-            } else {
-                Toast.makeText(this, "❌ Error al crear el usuario", Toast.LENGTH_LONG).show()
+            lifecycleScope.launch {
+                try {
+                    val exit = Tools.insertMusician(user)
+                    if (exit != null) {
+                        Toast.makeText(this@ChoseStyleArtistActivity, "✔️ Músico creado exitosamente", Toast.LENGTH_LONG).show()
+                        Tools.createActivityMenuMain(this@ChoseStyleArtistActivity, musician)
+                    }
+                } catch (e: Exception) {
+                    Toast.makeText(this@ChoseStyleArtistActivity, "❌ Error inesperado: ${e.message}", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
@@ -140,9 +141,9 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
     private fun getPreferencesStyles(styles: List<Style>): List<Style> {
         val listResult: MutableList<Style> = mutableListOf()
 
-        for (i in 5..<listOfButtons.size-4){
+        for (i in 4..<listOfButtons.size){
             if (buttonStates[listOfButtons[i]] == true){
-                listResult.add(styles[i])
+                listResult.add(styles[i-4])
             }
         }
         return listResult

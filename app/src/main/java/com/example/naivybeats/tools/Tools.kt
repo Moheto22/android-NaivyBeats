@@ -175,7 +175,7 @@ class Tools{
 
         suspend fun insertMusician(user: Users): Users{
             return withContext(Dispatchers.IO){
-                userController.insertMusician(user)
+                musicianController.insertMusician(user)!!
             }
         }
 

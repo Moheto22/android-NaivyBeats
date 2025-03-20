@@ -94,8 +94,8 @@ class LoginActivity : AppCompatActivity() {
             if (user.password == hashPassword(password)) {
                 lifecycleScope.launch {
                    user = userOrRestaurant(user!!)
+                   Tools.createActivityPutExtra(this@LoginActivity, MainMenuActivity::class.java, user!!)
                 }
-                Tools.createActivityPutExtra(this, MainMenuActivity::class.java, user!!)
 
             } else {
                return Toast.makeText(this, "❌ Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show()

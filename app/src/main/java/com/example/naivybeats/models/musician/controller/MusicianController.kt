@@ -7,6 +7,7 @@ import com.example.naivybeats.models.BaseController
 import com.example.naivybeats.models.musician.model.Musician
 import com.example.naivybeats.models.musician.service.MusicianService
 import com.example.naivybeats.models.time.service.TimeService
+import com.example.naivybeats.models.user.model.Users
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -30,17 +31,23 @@ class MusicianController {
         }
     }
 
-    suspend fun addMusician(musician: Musician): Musician? {
-        return try {
-            val response = service.newMusician(musician)
-            if (response.isSuccessful) {
-                response.body()
+    suspend fun insertMusician(user: Users): Users? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = service.insertMusician(user)
 
-            } else {
+                if (response.isSuccessful) {
+                    response.body()
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    println("Error del servidor: $errorBody")
+                    null
+                }
+            } catch (e: Exception) {
+                println("Excepción en insertMusician: ${e.message}")
+                e.printStackTrace()
                 null
             }
-        } catch (e: Exception) {
-            null
         }
     }
 }

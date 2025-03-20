@@ -27,19 +27,4 @@ class UserController: BaseController() {
             }
         }
     }
-
-    suspend fun insertMusician(user: Users): Users {
-        return withContext(Dispatchers.IO) {
-            try {
-                val response = service.insertMusician(user)
-                if (response.isSuccessful) {
-                    response.body()
-                } else{
-                    null
-                }
-            } catch (e: Exception) {
-                null
-            }!!
-        }
-    }
  }
