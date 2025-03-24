@@ -1,7 +1,6 @@
 package com.example.naivybeats.models.municipality.model;
-
 import com.example.naivybeats.models.province.models.City;
-import com.example.naivybeats.models.user.model.UserWrapper;
+
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,8 +10,6 @@ public class Municipality implements Serializable
     int municipality_id;
     String name;
     int city_id;
-
-    MunicipalityWrapper municipalityWrapper;
 
     public Municipality()
     {
@@ -53,9 +50,5 @@ public class Municipality implements Serializable
     public void setCityId(int cityId)
     {
         this.city_id = cityId;
-    }
-    public List<Municipality> getMunicipalitis()
-    {
-        return municipalityWrapper.getMunicipalities();
     }
 }

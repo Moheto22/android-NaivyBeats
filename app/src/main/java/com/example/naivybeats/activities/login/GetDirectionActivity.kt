@@ -164,8 +164,8 @@ class GetDirectionActivity : AppCompatActivity(){
     private fun setMusician(musician: Musician, municipality: Municipality, direction: String){
         musician.province_id = municipality.municipalityId
        // val (latitude, longitude) = getLatLongFromAddressOSM(direction)
-        musician.latitud = 1.0
-        musician.longitud = 1.0
+        musician.latitud = null
+        musician.longitud = null
       /*  if (latitude != null && longitude != null){
 
         } else {
