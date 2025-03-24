@@ -15,5 +15,5 @@ interface MusicianService {
     suspend fun getMusicianById(@Path("id") musicianId: Int): Response<Musician>
 
     @POST("api/Musicians")
-    suspend fun insertMusician(@Body user: Users): Response<Users>
+    suspend fun insertMusician(@Body user: Users): Response<Boolean>
 }

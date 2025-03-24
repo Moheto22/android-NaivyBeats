@@ -173,7 +173,7 @@ class Tools{
             }
         }
 
-        suspend fun insertMusician(user: Users): Users{
+        suspend fun insertMusician(user: Users): Boolean{
             return withContext(Dispatchers.IO){
                 musicianController.insertMusician(user)!!
             }

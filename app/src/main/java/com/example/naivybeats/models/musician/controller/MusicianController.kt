@@ -31,16 +31,16 @@ class MusicianController {
         }
     }
 
-    suspend fun insertMusician(user: Users): Users? {
+    suspend fun insertMusician(user: Users): Boolean {
         return withContext(Dispatchers.IO) {
             try {
                 val response = service.insertMusician(user)
-                response.body()
+                response.body() ?: false
 
             } catch (e: Exception) {
                 println("Excepción en insertMusician: ${e.message}")
                 e.printStackTrace()
-                null
+                false
             }
         }
     }

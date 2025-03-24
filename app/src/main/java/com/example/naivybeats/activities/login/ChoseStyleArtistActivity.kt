@@ -107,13 +107,13 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
             musician.user_id = 10
             musician.styles = list_preferences_styles
             musician.times = list_preferences_time
-         //   musician.creation_date = GETDATE()
+
             var user = musician as Users
 
             lifecycleScope.launch {
                 try {
-                    val exit = Tools.insertMusician(user)
-                    if (exit != null) {
+                    val succes = Tools.insertMusician(user)
+                    if (succes) {
                         Toast.makeText(this@ChoseStyleArtistActivity, "✔️ Músico creado exitosamente", Toast.LENGTH_LONG).show()
                         Tools.createActivityMenuMain(this@ChoseStyleArtistActivity, musician)
                     }
@@ -177,8 +177,7 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         flamenco: Button,
         tecno: Button,
         button_continue: Button,
-        is_user: TextView
-                                      ) {
+        is_user: TextView ) {
         Tools.animationTurnUp(this,title)
         Tools.animationTurnUp(this,subtitle_time)
         Tools.animationTurnUp(this,subtitle_style)
@@ -198,11 +197,5 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         Tools.animationFocus(this,tecno)
         Tools.animationTurnUp(this,button_continue)
         Tools.animationTurnUp(this,is_user)
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun GETDATE(): Date? {
-        val zonedDateTime = ZonedDateTime.now(ZoneId.systemDefault())
-        return Date.from(zonedDateTime.toInstant())
     }
 }
