@@ -49,6 +49,15 @@
     <string name="following_eng">Following</string>
     <string name="send_oferr_eng">Send Offer</string>
     <string name="offer_sended_eng">Offer sended</string>
-
+    <string name="title_publicaction_content_eng">Publication</string>
+    <string name="publication_foto_video_eng">Photo|Video</string>
+    <string name="publication_title_eng">Title</string>
+    <string name="description_title_eng">Description</string>
+    <string name="publicate_button_eng">Publicate</string>
+    <string name="title_publicaction_offer_eng">New Offer</string>
+    <string name="salary_new_offer_eng">Salary</string>
+    <string name="date_new_offer_eng">Date</string>
+    <string name="schedule_new_offer_eng">Schedule</string>
+    <string name="styles_new_offer_eng">Styles</string>
 
 </resources>
