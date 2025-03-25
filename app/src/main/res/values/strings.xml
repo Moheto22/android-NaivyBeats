@@ -59,5 +59,9 @@
     <string name="date_new_offer_eng">Date</string>
     <string name="schedule_new_offer_eng">Schedule</string>
     <string name="styles_new_offer_eng">Styles</string>
+    <string name="followers_eng">Followers</string>
+    <string name="appreciation_eng">Appreciation</string>
+    <string name="address_eng">Address</string>
+    <string name="save_eng">Save</string>
 
 </resources>
