@@ -63,5 +63,16 @@
     <string name="appreciation_eng">Appreciation</string>
     <string name="address_eng">Address</string>
     <string name="save_eng">Save</string>
+    <string name="wellcome_eng">Welcome </string>
+    <string name="question_login_eng">What you want to do today?</string>
+    <string name="search_offers_eng">Search for offers</string>
+    <string name="filter_eng">Filter</string>
+    <string name="ubication_eng">Ubication</string>
+    <string name="max_salary_eng">Max salary</string>
+    <string name="minimum_salary_eng">Min salary</string>
+    <string name="minimum_appreciation_eng">Min appreciation</string>
+    <string name="minimum_hours_eng">Min hours</string>
+    <string name="max_hours_eng">Max hours</string>
+    <string name="out_eng">Out</string>
 
 </resources>

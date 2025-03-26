@@ -118,35 +118,38 @@
             android:layout_marginTop="10dp">
             <Button
                 android:id="@+id/hiphop"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="11dp"
+                android:textSize="11dp"
                 app:backgroundTint="@null"
                 android:background="@drawable/design_button_type_choose_not_pressed"
                 android:text="@string/button_hiphop_eng"
                 android:padding="0dp"
-                android:textColor="@color/bluesky"/>
+                android:textColor="@color/bluemarin"/>
             <Button
                 android:id="@+id/pop"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="11dp"
                 app:backgroundTint="@null"
+                android:textSize="11dp"
                 android:background="@drawable/design_button_type_choose_not_pressed"
                 android:text="@string/button_pop_eng"
                 android:padding="0dp"
-                android:textColor="@color/bluesky"/>
+                android:textColor="@color/bluemarin"/>
 
             <Button
                 android:id="@+id/tecno"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:textSize="11dp"
                 android:layout_marginHorizontal="11dp"
                 app:backgroundTint="@null"
                 android:background="@drawable/design_button_type_choose_not_pressed"
                 android:text="@string/button_tecno_eng"
                 android:padding="0dp"
-                android:textColor="@color/bluesky"/>
+                android:textColor="@color/bluemarin"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -155,45 +158,48 @@
             android:layout_gravity="center">
             <Button
                 android:id="@+id/classic"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:textSize="11dp"
+                android:layout_height="30dp"
                 android:layout_margin="8dp"
                 app:backgroundTint="@null"
                 android:background="@drawable/design_button_type_choose_not_pressed"
                 android:text="@string/button_clasic_eng"
                 android:padding="0dp"
-                android:textColor="@color/bluesky"/>
+                android:textColor="@color/bluemarin"/>
             <Button
                 android:id="@+id/flamenco"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:textSize="11dp"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
                 android:layout_margin="8dp"
                 app:backgroundTint="@null"
                 android:background="@drawable/design_button_type_choose_not_pressed"
                 android:text="@string/button_flamenco_eng"
                 android:padding="0dp"
-                android:textColor="@color/bluesky"/>
-
+                android:textColor="@color/bluemarin"/>
             <Button
                 android:id="@+id/reggueton"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:textSize="11dp"
                 android:layout_margin="8dp"
                 app:backgroundTint="@null"
                 android:background="@drawable/design_button_type_choose_not_pressed"
                 android:text="@string/button_reggueton_eng"
                 android:padding="0dp"
-                android:textColor="@color/bluesky"/>
+                android:textColor="@color/bluemarin"/>
             <Button
                 android:id="@+id/rock"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:textSize="11dp"
                 android:layout_margin="8dp"
                 app:backgroundTint="@null"
                 android:background="@drawable/design_button_type_choose_not_pressed"
                 android:text="@string/button_rock_eng"
                 android:padding="0dp"
-                android:textColor="@color/bluesky"/>
+                android:textColor="@color/bluemarin"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -202,35 +208,38 @@
             android:layout_gravity="center">
             <Button
                 android:id="@+id/blues"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:textSize="11dp"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="11dp"
                 app:backgroundTint="@null"
                 android:background="@drawable/design_button_type_choose_not_pressed"
                 android:text="@string/button_blues_eng"
                 android:padding="0dp"
-                android:textColor="@color/bluesky"/>
+                android:textColor="@color/bluemarin"/>
             <Button
                 android:id="@+id/jazz"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="11dp"
                 app:backgroundTint="@null"
+                android:textSize="11dp"
                 android:background="@drawable/design_button_type_choose_not_pressed"
                 android:text="@string/button_jazz_eng"
                 android:padding="0dp"
-                android:textColor="@color/bluesky"/>
+                android:textColor="@color/bluemarin"/>
 
             <Button
                 android:id="@+id/trap"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:textSize="11dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="11dp"
                 app:backgroundTint="@null"
                 android:background="@drawable/design_button_type_choose_not_pressed"
                 android:text="@string/button_trap_eng"
                 android:padding="0dp"
-                android:textColor="@color/bluesky"/>
+                android:textColor="@color/bluemarin"/>
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -238,6 +247,7 @@
             android:layout_marginLeft="55dp"
             android:text="@string/description_eng"
             android:textSize="25dp"
+            android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:textColor="@color/bluemarin"/>
         <EditText
