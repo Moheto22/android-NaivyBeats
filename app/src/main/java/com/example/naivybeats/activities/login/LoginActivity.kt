@@ -35,7 +35,10 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-        var users: List<Users>
+        var users: List<Users> = emptyList()
+        lifecycleScope.launch {
+            users = Tools.getAllUsers()
+        }
 
         var editTextUser = findViewById<EditText>(R.id.userName)
         var editTextPassword = findViewById<EditText>(R.id.password)
@@ -49,19 +52,9 @@ class LoginActivity : AppCompatActivity() {
             Tools.createActivitySimple(this, TypeOfUserActivity::class.java)
         }
         button.setOnClickListener(){
-
-            lifecycleScope.launch {
-                try {
-                    users = Tools.getAllUsers()
-
-                    checkIfUserExists(users, editTextUser, editTextPassword)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    println("Error al obtener datos: ${e.message}")
-                }
+            checkIfUserExists(users, editTextUser, editTextPassword)
             }
         }
-    }
     private fun stratInitialAnimations(
         editTextUser: EditText,
         editTextPassword: EditText,

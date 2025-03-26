@@ -8,6 +8,8 @@ import com.example.naivybeats.models.musician.model.Musician
 import com.example.naivybeats.models.musician.service.MusicianService
 import com.example.naivybeats.models.time.service.TimeService
 import com.example.naivybeats.models.user.model.Users
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -34,8 +36,10 @@ class MusicianController {
     suspend fun insertMusician(user: Users): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val response = service.insertMusician(user)
-                response.body() ?: false
+                val json = Gson().toJson(user)
+                println(json)
+                service.insertMusician(user)
+                true
 
             } catch (e: Exception) {
                 println("Excepción en insertMusician: ${e.message}")

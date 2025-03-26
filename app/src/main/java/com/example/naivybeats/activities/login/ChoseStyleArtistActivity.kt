@@ -104,9 +104,9 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         button_continue.setOnClickListener(){
             val list_preferences_styles = getPreferencesStyles(styles)
             val list_preferences_time = getPreferencesTime(times)
-            musician.user_id = 10
             musician.styles = list_preferences_styles
             musician.times = list_preferences_time
+            musician.photo = ""
 
             var user = musician as Users
 

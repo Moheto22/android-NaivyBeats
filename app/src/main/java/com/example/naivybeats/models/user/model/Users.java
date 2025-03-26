@@ -1,10 +1,13 @@
 package com.example.naivybeats.models.user.model;
 
+import com.example.naivybeats.models.style.model.Style;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 public class Users implements Serializable
 {
@@ -19,14 +22,14 @@ public class Users implements Serializable
     private transient Date deleted_at;
     @SerializedName("municipality_id")
     private int province_id;
-    private Double latitud;
-    private Double longitud;
+    private BigDecimal latitud;
+    private BigDecimal longitud;
 
     public Users()
     {
     }
 
-    public Users(int user_id, String name, String photo, String email, String password, int phone_number, Date creation_date, Date edition_date, Date deleted_at, int province_id, Double latitud, Double longitud)
+    public Users(int user_id, String name, String photo, String email, String password, int phone_number, Date creation_date, Date edition_date, Date deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud)
     {
         this.user_id = user_id;
         this.name = name;
@@ -142,22 +145,22 @@ public class Users implements Serializable
         this.province_id = province_id;
     }
 
-    public Double getLatitud()
+    public BigDecimal getLatitud()
     {
         return latitud;
     }
 
-    public void setLatitud(Double latitud)
+    public void setLatitud(BigDecimal latitud)
     {
         this.latitud = latitud;
     }
 
-    public Double getLongitud()
+    public BigDecimal getLongitud()
     {
         return longitud;
     }
 
-    public void setLongitud(Double longitud)
+    public void setLongitud(BigDecimal longitud)
     {
         this.longitud = longitud;
     }
