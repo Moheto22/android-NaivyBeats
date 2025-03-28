@@ -7,6 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -50,10 +51,63 @@
             android:layout_width="match_parent"
             android:layout_height="500dp">
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/recyclerViewChat"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="invisible"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:background="@color/bluemarin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@color/white"/>
+            <TextView
+                android:text="Usuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="530dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewMessages"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bluesky"
+            android:orientation="horizontal"
+            android:padding="10dp">
+            <EditText
+                android:layout_width="330dp"
+                android:layout_height="40dp"
+                android:background="@drawable/design_text_white"
+                android:paddingLeft="10dp">
+            </EditText>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="40dp"
+                android:background="@drawable/send_message_icon"/>
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>
