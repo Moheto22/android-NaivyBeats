@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bluesky_trans">#C086BBD8</color>
+    <color name="bluesky">#86bbd8</color>
+    <color name="beig">#e5b181</color>
+    <color name="beig_trans">#C0E5B181</color>
+    <color name="beig_trans_plus">#76E5B181</color>
+    <color name="bluemarin">#083d77</color>
+    <color name="bluemarin_trans">#98083D77</color>
+    <color name="black_trans">#63000000</color>
+</resources>
