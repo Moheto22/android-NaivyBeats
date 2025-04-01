@@ -76,5 +76,12 @@
     <string name="max_hours_eng">Max hours</string>
     <string name="out_eng">Out</string>
     <string name="experience_eng">Experience</string>
+    <string name="events_eng">Events</string>
+    <string name="new_offer_eng">New Offer</string>
+    <string name="houres_eng">Houres</string>
+    <string name="time_eng">Time</string>
+    <string name="accept_eng">Accept</string>
+    <string name="decline_eng">Decline</string>
+
 
 </resources>

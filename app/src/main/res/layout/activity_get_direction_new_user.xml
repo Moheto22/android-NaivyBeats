@@ -73,6 +73,12 @@
             android:imeOptions="actionDone"
             >
         </EditText>
+        <TimePicker
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            >
+        </TimePicker>
 
         <Button
             android:id="@+id/buttonContinue"
