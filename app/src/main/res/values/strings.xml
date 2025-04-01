@@ -66,6 +66,7 @@
     <string name="wellcome_eng">Welcome </string>
     <string name="question_login_eng">What you want to do today?</string>
     <string name="search_offers_eng">Search for offers</string>
+    <string name="search_artist_eng">Search for artist</string>
     <string name="filter_eng">Filter</string>
     <string name="ubication_eng">Ubication</string>
     <string name="max_salary_eng">Max salary</string>
@@ -74,5 +75,13 @@
     <string name="minimum_hours_eng">Min hours</string>
     <string name="max_hours_eng">Max hours</string>
     <string name="out_eng">Out</string>
+    <string name="experience_eng">Experience</string>
+    <string name="events_eng">Events</string>
+    <string name="new_offer_eng">New Offer</string>
+    <string name="houres_eng">Houres</string>
+    <string name="time_eng">Time</string>
+    <string name="accept_eng">Accept</string>
+    <string name="decline_eng">Decline</string>
+
 
 </resources>
