@@ -113,7 +113,8 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
                     val succes = Tools.insertMusician(musician)
                     if (succes) {
                         Toast.makeText(this@ChoseStyleArtistActivity, "✔️ Músico creado exitosamente", Toast.LENGTH_LONG).show()
-                        Tools.createActivityMenuMain(this@ChoseStyleArtistActivity, musician)
+                        var user = musician as Users
+                        Tools.createActivityMenuMain(this@ChoseStyleArtistActivity, user)
                     }
                 } catch (e: Exception) {
                     Toast.makeText(this@ChoseStyleArtistActivity, "❌ Error inesperado: ${e.message}", Toast.LENGTH_LONG).show()

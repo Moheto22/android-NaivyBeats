@@ -186,6 +186,12 @@ class Tools{
             }
         }
 
+        suspend fun newRestaurant(restaurant: Restaurant): Boolean {
+            return withContext(Dispatchers.IO) {
+                restaurantController.newRestaurant(restaurant)
+            }
+        }
+
         //PROVINCES
         suspend fun getAllProvinces(): List<City> {
             return withContext(Dispatchers.IO){

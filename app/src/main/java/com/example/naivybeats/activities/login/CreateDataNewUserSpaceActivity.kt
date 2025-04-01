@@ -59,9 +59,6 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
                 shakeEditTexts(list)
             }else{
                 restaurant = newRestaurant(editTextName, editTextEmail, editTextPassword, editTextNumber)
-                lifecycleScope.launch {
-                    //llamar al servicio para insertar el restaurante en la base de datos
-                }
                 Tools.createActivityGetAdressFromSpace(this, restaurant)
             }
         }
@@ -94,7 +91,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
     }
 
     fun newRestaurant(editTextName: EditText, editTextEmail: EditText, editTextPassword: EditText, editTextNumber: EditText): Restaurant{
-        var restaurant = Restaurant()
+        val restaurant = Restaurant()
         restaurant.name = editTextName.text.toString()
         restaurant.email = editTextEmail.text.toString()
         restaurant.password = getHashPassword(editTextPassword)

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Musician extends Users implements Serializable
 {
-    @SerializedName("Style")
+    @SerializedName("Styles")
     List<Style> styles;
     @SerializedName("time")
     List<Time> times;
