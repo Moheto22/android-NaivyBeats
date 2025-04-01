@@ -3,9 +3,10 @@ package com.example.naivybeats.models.style.model;
 import com.example.naivybeats.models.musician.model.Musician;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Style
+public class Style implements Serializable
 {
     @SerializedName("style_id")
     private int styleId;

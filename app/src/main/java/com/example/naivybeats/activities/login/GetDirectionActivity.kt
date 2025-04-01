@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.LoginActivity
@@ -28,6 +29,7 @@ import kotlinx.coroutines.runBlocking
 import org.json.JSONArray
 import java.net.HttpURLConnection
 import java.net.URL
+import java.sql.Time
 
 class GetDirectionActivity : AppCompatActivity(){
 
@@ -129,7 +131,11 @@ class GetDirectionActivity : AppCompatActivity(){
                     Tools.createActivityGetStylesTime(this, musician)
 
                 } else if (musicianOrRestaurant(user) == 0){
-                    //Crear la o las activitis correspondiente para restaurante
+                    var restaurant = user as Restaurant
+                    setRestaurant(restaurant, selectedMunicipality, direction)
+                    lifecycleScope.launch {
+
+                    }
 
                 } else {
                     Toast.makeText(this, "❌ Error al verificar si el usuario es restaurante o musico", Toast.LENGTH_LONG).show()
@@ -213,6 +219,21 @@ class GetDirectionActivity : AppCompatActivity(){
             e.printStackTrace()
             Pair(null, null)
         }
+    }
+
+    fun setRestaurant(restaurant: Restaurant, municipality: Municipality, direction: String) {
+        restaurant.province_id = municipality.municipalityId
+        // val (latitude, longitude) = getLatLongFromAddressOSM(direction)
+        restaurant.latitud = null
+        restaurant.longitud = null
+        restaurant.openingTime = Time(System.currentTimeMillis())
+        restaurant.closingTime = Time(System.currentTimeMillis())
+        /*  if (latitude != null && longitude != null){
+
+   } else {
+       musician.latitud = null
+       musician.longitud = null
+   }*/
     }
 
 }

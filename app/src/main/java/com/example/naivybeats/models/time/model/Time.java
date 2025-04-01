@@ -3,9 +3,11 @@ package com.example.naivybeats.models.time.model;
 import com.example.naivybeats.models.musician.model.Musician;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Time {
+public class Time implements Serializable
+{
     @SerializedName("id")
     private int id;
 

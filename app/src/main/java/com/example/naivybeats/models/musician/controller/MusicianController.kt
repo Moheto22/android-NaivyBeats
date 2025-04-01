@@ -33,12 +33,12 @@ class MusicianController {
         }
     }
 
-    suspend fun insertMusician(user: Users): Boolean {
+    suspend fun insertMusician(musician: Musician): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val json = Gson().toJson(user)
+                val json = Gson().toJson(musician)
                 println(json)
-                service.insertMusician(user)
+                service.insertMusician(musician)
                 true
 
             } catch (e: Exception) {

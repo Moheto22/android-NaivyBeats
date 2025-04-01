@@ -25,6 +25,7 @@ import kotlinx.coroutines.launch
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.UUID
 
 
 class LoginActivity : AppCompatActivity() {
@@ -69,8 +70,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkIfUserExists(users: List<Users>, editTextUser: EditText, editTextPassword: EditText) {
-        val username = editTextUser.text.toString().trim()
-        val password = editTextPassword.text.toString().trim()
+        val username = editTextUser.text.toString()
+        val password = editTextPassword.text.toString()
 
         if (username.isEmpty() || password.isEmpty()) {
            return Toast.makeText(this, "⚠️ Por favor, completa todos los campos", Toast.LENGTH_LONG).show()
@@ -78,8 +79,10 @@ class LoginActivity : AppCompatActivity() {
 
         var user = users.find { it.name == username }
 
+
         if (user != null) {
-            if (user.password == hashPassword(password)) {
+             val hashedPassword = getHashPassword(password)
+            if (user.password == hashedPassword) {
                 lifecycleScope.launch {
                    user = userOrRestaurant(user!!)
                 }
@@ -94,29 +97,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun hashPassword(password: String): String {
-        try {
-            val digest = MessageDigest.getInstance("SHA-256")
-            val encodedHash = digest.digest(password.toByteArray(StandardCharsets.UTF_8))
-            return bytesToHex(encodedHash)
-        } catch (e: NoSuchAlgorithmException) {
-            throw RuntimeException("Error al generar hash SHA-256", e)
-        }
+    fun getHashPassword(password: String): String {
+        return sha256(password)
     }
 
-    private fun bytesToHex(hash: ByteArray): String {
-        val hexString = StringBuilder()
-        for (b in hash) {
-            val hex = Integer.toHexString(0xff and b.toInt())
-            if (hex.length == 1) {
-                hexString.append('0')
-            }
-            hexString.append(hex)
-        }
-        return hexString.toString()
+    fun sha256(input: String): String {
+        val bytes = MessageDigest.getInstance("SHA-256").digest(input.toByteArray())
+        return bytes.joinToString("") { "%02x".format(it) }
     }
 
-    private suspend fun userOrRestaurant(user: Users): Users? {
+
+    private suspend fun userOrRestaurant(user: Users): Users {
         val userLog = Tools.getMusicianById(user)
 
         return if (userLog == null) {
@@ -125,5 +116,4 @@ class LoginActivity : AppCompatActivity() {
             userLog
         }
     }
-
 }

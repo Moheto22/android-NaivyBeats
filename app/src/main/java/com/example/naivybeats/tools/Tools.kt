@@ -173,9 +173,9 @@ class Tools{
             }
         }
 
-        suspend fun insertMusician(user: Users): Boolean{
+        suspend fun insertMusician(musician: Musician): Boolean{
             return withContext(Dispatchers.IO){
-                musicianController.insertMusician(user)!!
+                musicianController.insertMusician(musician)!!
             }
         }
 
@@ -183,6 +183,12 @@ class Tools{
         suspend fun getRestaurantById(user: Users): Restaurant{
             return withContext(Dispatchers.IO) {
                 restaurantController.getRestaurantById(user.user_id)!!
+            }
+        }
+
+        suspend fun newRestaurant(restaurant: Restaurant): Boolean {
+            return withContext(Dispatchers.IO) {
+                restaurantController.newRestaurant(restaurant)
             }
         }
 
