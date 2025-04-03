@@ -14,6 +14,7 @@ import com.example.naivybeats.R
 import com.example.naivybeats.models.musician.model.Musician
 import com.example.naivybeats.models.restaurant.model.Restaurant
 import com.example.naivybeats.models.user.model.Users
+import java.io.Serializable
 
 
 class MainMenuActivity: AppCompatActivity() {
@@ -25,10 +26,11 @@ class MainMenuActivity: AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main_menu)
         var direction = 0
-        val user = intent.getSerializableExtra(constantsProject.USER)
+        var user: Serializable? = intent.getSerializableExtra(constantsProject.USER)
 
         when (user) {
-           is Musician ->  supportFragmentManager.commit {
+           is Musician ->
+               supportFragmentManager.commit {
                 replace<FragmentMenuArtist>(R.id.frameContainer)
                 setReorderingAllowed(true)
                 addToBackStack("replacement")

@@ -115,6 +115,8 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
                         Toast.makeText(this@ChoseStyleArtistActivity, "✔️ Músico creado exitosamente", Toast.LENGTH_LONG).show()
                         var user = musician as Users
                         Tools.createActivityMenuMain(this@ChoseStyleArtistActivity, user)
+                    } else {
+                        Toast.makeText(this@ChoseStyleArtistActivity, "❌ Error al crear el musico", Toast.LENGTH_LONG).show()
                     }
                 } catch (e: Exception) {
                     Toast.makeText(this@ChoseStyleArtistActivity, "❌ Error inesperado: ${e.message}", Toast.LENGTH_LONG).show()

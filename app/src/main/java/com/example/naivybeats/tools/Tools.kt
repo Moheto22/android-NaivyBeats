@@ -1,9 +1,11 @@
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.login.ChoseStyleArtistActivity
@@ -145,6 +147,7 @@ class Tools{
         //-----------------------------------------------------------------------------------
 
         //TIMES
+        @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getAllTimes(): List<Time> {
             return withContext(Dispatchers.IO) {
                 timeController.getAllTimes()
@@ -153,6 +156,7 @@ class Tools{
 
 
         //MUNICIPIOS
+        @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getAllMunicipalitis(): List<Municipality>{
             return withContext(Dispatchers.IO){
                 municipalityController.getAllMunicipality()
@@ -167,12 +171,14 @@ class Tools{
         }
 
         //MUSICIAN
+        @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getMusicianById(user: Users): Musician{
             return withContext(Dispatchers.IO) {
                 musicianController.getMusicianById(user.user_id)!!
             }
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         suspend fun insertMusician(musician: Musician): Boolean{
             return withContext(Dispatchers.IO){
                 musicianController.insertMusician(musician)!!
@@ -180,12 +186,14 @@ class Tools{
         }
 
         //RESTAURANT
+        @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getRestaurantById(user: Users): Restaurant{
             return withContext(Dispatchers.IO) {
                 restaurantController.getRestaurantById(user.user_id)!!
             }
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         suspend fun newRestaurant(restaurant: Restaurant): Boolean {
             return withContext(Dispatchers.IO) {
                 restaurantController.newRestaurant(restaurant)
@@ -200,6 +208,7 @@ class Tools{
         }
 
         //STYLES
+        @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getAllStyles(): List<Style>{
             return withContext(Dispatchers.IO){
                 styleController.getAllStyles()

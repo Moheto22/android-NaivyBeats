@@ -1,6 +1,7 @@
 package com.example.naivybeats.activities.login
 import MunicipalityAdapter
 import Tools
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
@@ -13,6 +14,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
@@ -24,12 +26,14 @@ import com.example.naivybeats.models.province.models.City
 import com.example.naivybeats.models.restaurant.model.Restaurant
 import java.io.Serializable
 import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.user.model.Users
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.json.JSONArray
 import java.net.HttpURLConnection
 import java.net.URL
 import java.sql.Time
+import java.time.LocalTime
 
 class GetDirectionActivity : AppCompatActivity(){
 
@@ -37,6 +41,7 @@ class GetDirectionActivity : AppCompatActivity(){
         const val user = "USER"
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -134,9 +139,20 @@ class GetDirectionActivity : AppCompatActivity(){
                     var restaurant = user as Restaurant
                     setRestaurant(restaurant, selectedMunicipality, direction)
                     lifecycleScope.launch {
+                        try {
+                            var succes = Tools.newRestaurant(restaurant)
 
+                            if (succes) {
+                                Toast.makeText(this@GetDirectionActivity, "✔️ Restaurante creado exitosamente", Toast.LENGTH_LONG).show()
+                                var user = restaurant as Users
+                                Tools.createActivityMenuMain(this@GetDirectionActivity, user)
+                            } else {
+                                Toast.makeText(this@GetDirectionActivity, "❌ Error al crear el restaurante", Toast.LENGTH_LONG).show()
+                            }
+                        } catch (e: Exception) {
+                        Toast.makeText(this@GetDirectionActivity, "❌ Error inesperado: ${e.message}", Toast.LENGTH_LONG).show()
+                        }
                     }
-
                 } else {
                     Toast.makeText(this, "❌ Error al verificar si el usuario es restaurante o musico", Toast.LENGTH_LONG).show()
                 }
@@ -221,13 +237,17 @@ class GetDirectionActivity : AppCompatActivity(){
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun setRestaurant(restaurant: Restaurant, municipality: Municipality, direction: String) {
         restaurant.province_id = municipality.municipalityId
-        // val (latitude, longitude) = getLatLongFromAddressOSM(direction)
+        // val (latitude, longitude) = getLatLongFromAddressOSM(directi+on)
         restaurant.latitud = null
         restaurant.longitud = null
-        restaurant.openingTime = Time(System.currentTimeMillis())
-        restaurant.closingTime = Time(System.currentTimeMillis())
+        restaurant.openingTime = "test"
+        restaurant.closingTime = "test"
+        restaurant.creation_date = null
+        restaurant.edition_date = null
+        restaurant.photo = ""
         /*  if (latitude != null && longitude != null){
 
    } else {

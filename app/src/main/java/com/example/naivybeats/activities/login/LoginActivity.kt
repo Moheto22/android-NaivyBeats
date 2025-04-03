@@ -2,6 +2,7 @@ package com.example.naivybeats.activities
 
 import Tools
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
@@ -30,6 +32,7 @@ import java.util.UUID
 
 class LoginActivity : AppCompatActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,17 +72,18 @@ class LoginActivity : AppCompatActivity() {
         Tools.animationTurnUp(this,textViewNotUser)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun checkIfUserExists(users: List<Users>, editTextUser: EditText, editTextPassword: EditText) {
         val username = editTextUser.text.toString()
         val password = editTextPassword.text.toString()
 
         if (username.isEmpty() || password.isEmpty()) {
-            val user = Users(1,"wd", "wd","wd","wd",123456789,null,null,null,1,null,null)
-            Tools.createActivityPutExtra(this, MainMenuActivity::class.java, user!!)
+            //val user = Users(1,"wd", "wd","wd","wd",123456789,null,null,null,1,null,null)
+            //Tools.createActivityPutExtra(this, MainMenuActivity::class.java, user)
            return Toast.makeText(this, "⚠️ Por favor, completa todos los campos", Toast.LENGTH_LONG).show()
         }
 
-        var user = users.find { it.name == username }
+        var user: Users? = users.find { it.name == username }
 
 
         if (user != null) {
@@ -109,13 +113,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private suspend fun userOrRestaurant(user: Users): Users {
-        val userLog = Tools.getMusicianById(user)
+        val userLog: Users = Tools.getMusicianById(user)
 
-        return if (userLog == null) {
-            Tools.getRestaurantById(user)
+        if (userLog == null) {
+           return Tools.getRestaurantById(user)
         } else {
-            userLog
+            return userLog
         }
     }
 }

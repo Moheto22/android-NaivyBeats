@@ -62,7 +62,7 @@ class CreateDataNewUserArtistActivity : AppCompatActivity() {
                 shakeEditTexts(list)
             } else {
 
-                var musician = newMusician(editTextName, editTextEmail, editTextNumber, editTextPassword)
+                var musician = newMusician(editTextName, editTextEmail, editTextPassword, editTextNumber)
                // Toast.makeText(this, "✔ Usuario creado exitosamente", Toast.LENGTH_LONG).show()
                 Tools.createActivityGetAdressFromArtist(this, musician)
             }

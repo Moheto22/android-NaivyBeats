@@ -1,5 +1,7 @@
 package com.example.naivybeats.models.province.controller
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.example.naivybeats.RetrofitClient
 import com.example.naivybeats.models.province.models.City
 import com.example.naivybeats.models.province.service.ProvinceService
@@ -9,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ProvinceController {
+    @RequiresApi(Build.VERSION_CODES.O)
     private val service = RetrofitClient.createService(ProvinceService::class.java)
 
     suspend fun getAllCities(): List<City> {
