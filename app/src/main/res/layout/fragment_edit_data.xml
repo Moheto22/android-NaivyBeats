@@ -21,13 +21,15 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp">
                 <ImageView
+                    android:id="@+id/border_avatar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/beig"/>
                 <ImageView
+                    android:id="@+id/avatar"
                     android:layout_margin="15dp"
                     android:layout_width="130dp"
-                    android:background="@color/bluemarin"
+                    android:background="@drawable/perfil"
                     android:layout_height="130dp"/>
             </FrameLayout>
             <LinearLayout
@@ -44,6 +46,7 @@
                     android:textColor="@color/bluemarin"
                     android:text="@string/followers_eng"/>
                 <TextView
+                    android:id="@+id/count_followers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
@@ -58,6 +61,7 @@
                     android:textColor="@color/bluemarin"
                     android:text="@string/following_eng"/>
                 <TextView
+                    android:id="@+id/count_following"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
@@ -72,6 +76,7 @@
                     android:textColor="@color/bluemarin"
                     android:text="@string/appreciation_eng"/>
                 <TextView
+                    android:id="@+id/stars"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
@@ -110,7 +115,8 @@
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/edit_icon"/>
         </LinearLayout>
-        <TextView
+        <EditText
+            android:id="@+id/name_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
@@ -134,7 +140,8 @@
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/edit_icon"/>
         </LinearLayout>
-        <TextView
+        <EditText
+            android:id="@+id/address_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
@@ -441,4 +448,16 @@
                 android:layout_height="match_parent"/>
         </RelativeLayout>
     </LinearLayout>
+    <Button
+        android:elevation="5dp"
+        android:id="@+id/addPhoto"
+        android:layout_width="80dp"
+        android:layout_marginTop="255dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_marginLeft="290dp"
+        app:backgroundTint="@null"
+        android:enabled="true"
+        android:layout_height="40dp"
+        android:background="@drawable/button_add_publication"/>
 </FrameLayout>

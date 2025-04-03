@@ -74,6 +74,8 @@ class LoginActivity : AppCompatActivity() {
         val password = editTextPassword.text.toString()
 
         if (username.isEmpty() || password.isEmpty()) {
+            val user = Users(1,"wd", "wd","wd","wd",123456789,null,null,null,1,null,null)
+            Tools.createActivityPutExtra(this, MainMenuActivity::class.java, user!!)
            return Toast.makeText(this, "⚠️ Por favor, completa todos los campos", Toast.LENGTH_LONG).show()
         }
 

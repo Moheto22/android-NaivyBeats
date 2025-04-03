@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation("com.github.kevinsawicki:http-request:6.0")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
