@@ -19,7 +19,7 @@ import java.io.Serializable
 
 class MainMenuActivity: AppCompatActivity() {
     object constantsProject {
-        const val USER ="user"
+        const val USER ="USER"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

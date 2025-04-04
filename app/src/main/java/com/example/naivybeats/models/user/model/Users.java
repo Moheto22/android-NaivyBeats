@@ -17,9 +17,9 @@ public class Users implements Serializable
     private String email;
     private String password;
     private int phone_number;
-    private transient Date creation_date;
-    private transient Date edition_date;
-    private transient Date deleted_at;
+    private String creation_date;
+    private String edition_date;
+    private String deleted_at;
     @SerializedName("municipality_id")
     private int province_id;
     private BigDecimal latitud;
@@ -29,7 +29,7 @@ public class Users implements Serializable
     {
     }
 
-    public Users(int user_id, String name, String photo, String email, String password, int phone_number, Date creation_date, Date edition_date, Date deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud)
+    public Users(int user_id, String name, String photo, String email, String password, int phone_number, String creation_date, String edition_date, String deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud)
     {
         this.user_id = user_id;
         this.name = name;
@@ -105,32 +105,32 @@ public class Users implements Serializable
         this.phone_number = phone_number;
     }
 
-    public Date getCreation_date()
+    public String getCreation_date()
     {
         return creation_date;
     }
 
-    public void setCreation_date(Date creation_date)
+    public void setCreation_date(String creation_date)
     {
         this.creation_date = creation_date;
     }
 
-    public Date getEdition_date()
+    public String getEdition_date()
     {
         return edition_date;
     }
 
-    public void setEdition_date(Date edition_date)
+    public void setEdition_date(String edition_date)
     {
         this.edition_date = edition_date;
     }
 
-    public Date getDeleted_at()
+    public String getDeleted_at()
     {
         return deleted_at;
     }
 
-    public void setDeleted_at(Date deleted_at)
+    public void setDeleted_at(String deleted_at)
     {
         this.deleted_at = deleted_at;
     }
