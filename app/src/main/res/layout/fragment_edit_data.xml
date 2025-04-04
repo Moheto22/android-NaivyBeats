@@ -27,9 +27,9 @@
                     android:background="@color/beig"/>
                 <ImageView
                     android:id="@+id/avatar"
+                    android:background="@drawable/beig_panel"
                     android:layout_margin="15dp"
                     android:layout_width="130dp"
-                    android:background="@drawable/perfil"
                     android:layout_height="130dp"/>
             </FrameLayout>
             <LinearLayout
@@ -133,31 +133,6 @@
                 android:textSize="30dp"
                 android:textStyle="bold"
                 android:textColor="@color/bluemarin"
-                android:text="@string/address_eng"/>
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/edit_icon"/>
-        </LinearLayout>
-        <EditText
-            android:id="@+id/address_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textColor="@color/bluemarin"
-            android:text="Calle de la Empuria-12- 1r,3r"/>
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                android:textColor="@color/bluemarin"
                 android:text="@string/description_eng"/>
             <ImageView
                 android:layout_width="30dp"
@@ -166,6 +141,7 @@
                 android:background="@drawable/edit_icon"/>
         </LinearLayout>
         <EditText
+            android:id="@+id/description_data"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="120dp"

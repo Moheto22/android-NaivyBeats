@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.menu.FragmentPublicateOfert"
+    tools:context=".activities.menu.FragmentPublicate"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:id="@+id/create_offer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -270,6 +271,116 @@
             android:textStyle="bold"
             android:text="@string/publicate_button_eng"/>
 
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/create_publication"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/title_publicaction_content_eng"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:textColor="@color/bluemarin"/>
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="3dp"
+            android:layout_gravity="center"
+            android:background="@color/bluemarin"/>
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="3dp"
+            android:layout_gravity="center"
+            android:background="@color/bluemarin"/>
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/multimedia_element"/>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="55dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/publication_foto_video_eng"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="@color/bluemarin"/>
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="55dp"
+                android:background="@drawable/button_add_publication"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="55dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/publication_title_eng"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="@color/bluemarin"/>
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="230dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/design_textbox"
+                android:maxLines="1"
+                android:layout_marginLeft="11dp"
+                android:paddingLeft="20dp"
+                android:textColor="@color/bluemarin"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="55dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description_eng"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="@color/bluemarin"/>
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/design_big_textbox"
+                android:paddingLeft="20dp"
+                android:textColor="@color/bluemarin"
+                />
+        </LinearLayout>
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/design_button"
+            app:backgroundTint="@null"
+            android:textSize="25dp"
+            android:textColor="@color/bluemarin"
+            android:textStyle="bold"
+            android:text="@string/publicate_button_eng"/>
 
     </LinearLayout>
 
