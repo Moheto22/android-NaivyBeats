@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -16,13 +17,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.models.user.model.Users
+import kotlinx.coroutines.launch
 
-private const val USER: String = "ID"
+private const val USER: String = "USER_ID"
 private val PICK_IMAGE_REQUEST = 1
 
 /**
@@ -31,19 +35,23 @@ private val PICK_IMAGE_REQUEST = 1
  * create an instance of this fragment.
  */
 class FragmentEditData : Fragment() {
-    private var user: Users? = null
+    private var user_id: Int? = null
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
-            user = it.getSerializable(USER) as Users
+            user_id = it.getInt(USER)
         }
-        user = Users(1,"wd", "wd","wd","wd",123456789,null,null,null,1,null,null)
+        lifecycleScope.launch {
+            val user = Tools.userOrRestaurant(user_id!!)
+        }
+        val user = Users(1,"wd", "wd","wd","wd",123456789,null,null,null,1,null,null)
         setDataInFragment(user!!)
         generateCircularImages()
         val button_addPhoto = view.findViewById<Button>(R.id.addPhoto)

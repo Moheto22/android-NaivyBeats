@@ -11,25 +11,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.naivybeats.R
-import com.example.naivybeats.models.musician.model.Musician
-import com.example.naivybeats.models.restaurant.model.Restaurant
-import com.example.naivybeats.models.user.model.Users
 import java.io.Serializable
 
 
 class MainMenuActivity: AppCompatActivity() {
     object constantsProject {
-        const val USER ="USER"
+        const val USER_ID ="USER_ID"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main_menu)
         var direction = 0
-        var user: Serializable? = intent.getSerializableExtra(constantsProject.USER)
+        var user_id: Int = intent.getIntExtra(constantsProject.USER_ID, -1)
 
         supportFragmentManager.commit {
-            replace<FragmentMenu>(R.id.frameContainer)
+            replace(R.id.frameContainer,FragmentMenu.newInstance(user_id))
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
@@ -75,9 +72,9 @@ class MainMenuActivity: AppCompatActivity() {
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,publication)
                 if (direction > 0){
-                    right_AnimationFragmentPublicate()
+                    right_AnimationFragmentPublicate(user_id)
                 }else{
-                    left_AnimationFragmentPublicate()
+                    left_AnimationFragmentPublicate(user_id)
                 }
             }
         }
@@ -129,25 +126,25 @@ class MainMenuActivity: AppCompatActivity() {
         }
     }
 
-    private fun left_AnimationFragmentPublicate() {
+    private fun left_AnimationFragmentPublicate(user: Int?) {
         supportFragmentManager.commit {
             setCustomAnimations(
                 R.anim.animation_out_left,
                 R.anim.animation_in_right
                                )
-            replace<FragmentPublicate>(R.id.frameContainer)
+            replace(R.id.frameContainer,FragmentPublicate.newInstance(user))
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
     }
 
-    private fun right_AnimationFragmentPublicate() {
+    private fun right_AnimationFragmentPublicate(user: Int?) {
         supportFragmentManager.commit {
             setCustomAnimations(
                 R.anim.animation_out_right,
                 R.anim.animation_in_left
                                )
-            replace<FragmentPublicate>(R.id.frameContainer)
+            replace(R.id.frameContainer,FragmentPublicate.newInstance(user))
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }

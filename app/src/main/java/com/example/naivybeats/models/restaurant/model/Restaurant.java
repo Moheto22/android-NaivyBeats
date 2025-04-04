@@ -17,7 +17,7 @@ public class Restaurant extends Users
     {
     }
 
-    public Restaurant(int user_id, String name, String photo, String email, String password, int phone_number, Date creation_date, Date edition_date, Date deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud, String direction, String openingTime, String closingTime)
+    public Restaurant(int user_id, String name, String photo, String email, String password, int phone_number, String creation_date, String edition_date, String deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud, String direction, String openingTime, String closingTime)
     {
         super(user_id, name, photo, email, password, phone_number, creation_date, edition_date, deleted_at, province_id, latitud, longitud);
         this.openingTime = openingTime;

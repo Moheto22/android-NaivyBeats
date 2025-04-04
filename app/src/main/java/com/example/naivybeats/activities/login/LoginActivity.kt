@@ -90,9 +90,9 @@ class LoginActivity : AppCompatActivity() {
              val hashedPassword = getHashPassword(password)
             if (user.password == hashedPassword) {
                 lifecycleScope.launch {
-                   user = userOrRestaurant(user!!)
+                   user = userOrRestaurant(user!!.user_id)
                 }
-                Tools.createActivityPutExtra(this, MainMenuActivity::class.java, user!!)
+                Tools.createActivityPutExtra(this, MainMenuActivity::class.java,  user!!.user_id)
 
             } else {
                return Toast.makeText(this, "❌ Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show()
@@ -114,11 +114,11 @@ class LoginActivity : AppCompatActivity() {
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private suspend fun userOrRestaurant(user: Users): Users {
-        val userLog: Users = Tools.getMusicianById(user)
+    private suspend fun userOrRestaurant(user_id: Int): Users {
+        val userLog: Users = Tools.getMusicianById(user_id)
 
         if (userLog == null) {
-           return Tools.getRestaurantById(user)
+           return Tools.getRestaurantById(user_id)
         } else {
             return userLog
         }

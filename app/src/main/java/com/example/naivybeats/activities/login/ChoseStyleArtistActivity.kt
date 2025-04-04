@@ -114,7 +114,7 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
                     if (succes) {
                         Toast.makeText(this@ChoseStyleArtistActivity, "✔️ Músico creado exitosamente", Toast.LENGTH_LONG).show()
                         var user = musician as Users
-                        Tools.createActivityMenuMain(this@ChoseStyleArtistActivity, user)
+                        Tools.createActivityMenuMain(this@ChoseStyleArtistActivity, user.user_id)
                     } else {
                         Toast.makeText(this@ChoseStyleArtistActivity, "❌ Error al crear el musico", Toast.LENGTH_LONG).show()
                     }

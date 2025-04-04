@@ -24,12 +24,13 @@ public class Users implements Serializable
     private int province_id;
     private BigDecimal latitud;
     private BigDecimal longitud;
+    private String description;
 
     public Users()
     {
     }
 
-    public Users(int user_id, String name, String photo, String email, String password, int phone_number, String creation_date, String edition_date, String deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud)
+    public Users(int user_id, String name, String photo, String email, String password, int phone_number, String creation_date, String edition_date, String deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud,String description)
     {
         this.user_id = user_id;
         this.name = name;
@@ -43,11 +44,21 @@ public class Users implements Serializable
         this.province_id = province_id;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.description = description;
     }
 
     public int getUser_id()
     {
         return user_id;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 
     public void setUser_id(int user_id)

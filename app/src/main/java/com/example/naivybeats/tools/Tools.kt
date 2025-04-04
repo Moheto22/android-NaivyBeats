@@ -62,9 +62,9 @@ class Tools{
             context.startActivity(intent)
         }
 
-        fun createActivityMenuMain(context: Context, user: Users) {
+        fun createActivityMenuMain(context: Context, user_id: Int) {
             val intent = Intent(context, MainMenuActivity::class.java)
-            intent.putExtra(MainMenuActivity.constantsProject.USER, user)
+            intent.putExtra(MainMenuActivity.constantsProject.USER_ID, user_id)
             context.startActivity(intent)
         }
 
@@ -93,17 +93,17 @@ class Tools{
             context.startActivity(intent)
         }
 
-        fun createActivityPutExtra(context: Context, activityClass: Class<*>, user: Users) {
+        fun createActivityPutExtra(context: Context, activityClass: Class<*>, user_id: Int) {
             val intent = Intent(context, activityClass)
 
-            intent.putExtra("USER", user)
+            intent.putExtra("USER_ID", user_id)
             context.startActivity(intent)
         }
 
         fun createActivityPutExtraMusician(context: Context, activityClass: Class<*>, musician: Musician) {
             val intent = Intent(context, activityClass)
 
-            intent.putExtra("USER", musician)
+            intent.putExtra("USER_ID", musician)
             context.startActivity(intent)
         }
 
@@ -144,6 +144,7 @@ class Tools{
 
         }
 
+
         //-----------------------------------------------------------------------------------
 
         //TIMES
@@ -172,9 +173,9 @@ class Tools{
 
         //MUSICIAN
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun getMusicianById(user: Users): Musician{
+        suspend fun getMusicianById(user_id: Int): Musician{
             return withContext(Dispatchers.IO) {
-                musicianController.getMusicianById(user.user_id)!!
+                musicianController.getMusicianById(user_id)!!
             }
         }
 
@@ -187,9 +188,9 @@ class Tools{
 
         //RESTAURANT
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun getRestaurantById(user: Users): Restaurant{
+        suspend fun getRestaurantById(user_id: Int): Restaurant{
             return withContext(Dispatchers.IO) {
-                restaurantController.getRestaurantById(user.user_id)!!
+                restaurantController.getRestaurantById(user_id)!!
             }
         }
 
@@ -212,6 +213,18 @@ class Tools{
         suspend fun getAllStyles(): List<Style>{
             return withContext(Dispatchers.IO){
                 styleController.getAllStyles()
+            }
+        }
+
+        //FUNCTIONS
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun userOrRestaurant(user_id: Int): Users {
+            val userLog: Users = getMusicianById(user_id)
+
+            if (userLog == null) {
+                return getRestaurantById(user_id)
+            } else {
+                return userLog
             }
         }
     }

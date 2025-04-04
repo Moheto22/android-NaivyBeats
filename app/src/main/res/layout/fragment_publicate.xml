@@ -7,6 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:visibility="invisible"
         android:id="@+id/create_offer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -276,7 +277,7 @@
 
     <LinearLayout
         android:id="@+id/create_publication"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

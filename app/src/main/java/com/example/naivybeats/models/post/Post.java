@@ -14,6 +14,8 @@ public class Post
     private Date postDate;
     @SerializedName("description")
     private String description;
+    @SerializedName("title")
+    private String title;
     @SerializedName("multimedia_content")
     private String multimedia;
 
@@ -21,18 +23,24 @@ public class Post
     {
     }
 
-    public Post(int postId, int userId, Date postDate, String description, String multimedia)
+    public Post(int postId, int userId, Date postDate, String description, String multimedia, String title)
     {
         this.postId = postId;
         this.userId = userId;
         this.postDate = postDate;
         this.description = description;
         this.multimedia = multimedia;
+        this.title = title;
     }
 
     public int getPostId()
     {
         return postId;
+    }
+
+    public String getTitle()
+    {
+        return title;
     }
 
     public void setPostId(int postId)

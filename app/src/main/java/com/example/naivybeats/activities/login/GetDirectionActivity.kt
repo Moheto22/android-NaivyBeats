@@ -145,7 +145,7 @@ class GetDirectionActivity : AppCompatActivity(){
                             if (succes) {
                                 Toast.makeText(this@GetDirectionActivity, "✔️ Restaurante creado exitosamente", Toast.LENGTH_LONG).show()
                                 var user = restaurant as Users
-                                Tools.createActivityMenuMain(this@GetDirectionActivity, user)
+                                Tools.createActivityMenuMain(this@GetDirectionActivity, user.user_id)
                             } else {
                                 Toast.makeText(this@GetDirectionActivity, "❌ Error al crear el restaurante", Toast.LENGTH_LONG).show()
                             }
