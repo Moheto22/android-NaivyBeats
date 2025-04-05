@@ -51,8 +51,8 @@ class FragmentEditData : Fragment() {
         lifecycleScope.launch {
             val user = Tools.userOrRestaurant(user_id!!)
         }
-        val user = Users(1,"wd", "wd","wd","wd",123456789,null,null,null,1,null,null)
-        setDataInFragment(user!!)
+       // val user = Users(1,"wd", "wd","wd","wd",123456789,null,null,null,1,null,null)
+       //  setDataInFragment(user!!)
         generateCircularImages()
         val button_addPhoto = view.findViewById<Button>(R.id.addPhoto)
         button_addPhoto.setOnClickListener {

@@ -21,9 +21,8 @@ public class Musician extends Users implements Serializable
     @SerializedName("Publication")
     List<Post> posts;
 
-    public Musician(int user_id, String name, String photo, String email, String password, int phone_number, String creation_date, String edition_date, String deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud, int user_id1, List<Style> styles, List<Time> times, List<Post> posts)
-    {
-        super(user_id, name, photo, email, password, phone_number, creation_date, edition_date, deleted_at, province_id, latitud, longitud);
+    public Musician(int user_id, String name, String photo, String email, String password, int phone_number, String creation_date, String edition_date, String deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud, String description, List<Style> styles, List<Time> times, List<Post> posts) {
+        super(user_id, name, photo, email, password, phone_number, creation_date, edition_date, deleted_at, province_id, latitud, longitud, description);
         this.styles = styles;
         this.times = times;
         this.posts = posts;
