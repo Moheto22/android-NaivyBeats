@@ -76,7 +76,7 @@ class FragmentPublicate : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(user_id: Int?) = FragmentChat().apply {
+        fun newInstance(user_id: Int?) = FragmentPublicate().apply {
             arguments = Bundle().apply {
                 if (user_id != null) {
                     putInt(USER, user_id)

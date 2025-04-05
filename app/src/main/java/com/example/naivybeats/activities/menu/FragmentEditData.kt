@@ -36,6 +36,7 @@ private val PICK_IMAGE_REQUEST = 1
  */
 class FragmentEditData : Fragment() {
     private var user_id: Int? = null
+
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +49,14 @@ class FragmentEditData : Fragment() {
         arguments?.let {
             user_id = it.getInt(USER)
         }
+        var user: Users? = null
+
         lifecycleScope.launch {
-            val user = Tools.userOrRestaurant(user_id!!)
+            user = Tools.userOrRestaurant(user_id!!)
+            user?.let { setDataInFragment(it) }
         }
-       // val user = Users(1,"wd", "wd","wd","wd",123456789,null,null,null,1,null,null)
-       //  setDataInFragment(user!!)
         generateCircularImages()
+
         val button_addPhoto = view.findViewById<Button>(R.id.addPhoto)
         button_addPhoto.setOnClickListener {
             openGallery()
@@ -64,7 +67,7 @@ class FragmentEditData : Fragment() {
         val name = view?.findViewById<EditText>(R.id.name_data)
         val description = view?.findViewById<EditText>(R.id.description_data)
         name?.setText(user.name)
-        //description?.setText(user.description)
+        description?.setText(user.description)
     }
 
     @SuppressLint("ResourceAsColor")
@@ -127,7 +130,7 @@ class FragmentEditData : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(param1: Users) = FragmentChat().apply {
+        fun newInstance(param1: Int) = FragmentEditData().apply {
             arguments = Bundle().apply {
                 putSerializable(USER, param1)
             }

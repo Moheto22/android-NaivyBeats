@@ -60,7 +60,7 @@
         android:visibility="visible"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <LinearLayout
             android:padding="10dp"
             android:orientation="horizontal"
@@ -106,6 +106,7 @@
             android:layout_height="wrap_content"
             android:background="@color/bluesky"
             android:orientation="horizontal"
+            android:layout_gravity="bottom"
             android:padding="10dp">
             <EditText
                 android:layout_width="330dp"

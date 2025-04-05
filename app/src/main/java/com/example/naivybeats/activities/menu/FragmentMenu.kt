@@ -52,7 +52,7 @@ class FragmentMenu : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(user_id: Int?) = FragmentChat().apply {
+        fun newInstance(user_id: Int?) = FragmentMenu().apply {
             arguments = Bundle().apply {
                 if (user_id != null) {
                     putInt(USER, user_id)

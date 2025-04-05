@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.naivybeats.R
-import java.io.Serializable
 
 
 class MainMenuActivity: AppCompatActivity() {
@@ -98,7 +97,7 @@ class MainMenuActivity: AppCompatActivity() {
                 location = 4
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,edit)
-                right_AnimationFragmentEditData()
+                right_AnimationFragmentEditData(user_id)
             }
         }
     }
@@ -187,13 +186,13 @@ class MainMenuActivity: AppCompatActivity() {
         }
     }
 
-    private fun right_AnimationFragmentEditData() {
+    private fun right_AnimationFragmentEditData(user_id: Int) {
         supportFragmentManager.commit {
             setCustomAnimations(
                 R.anim.animation_out_right,
                 R.anim.animation_in_left
                                )
-            replace<FragmentEditData>(R.id.frameContainer)
+            replace(R.id.frameContainer, FragmentEditData.newInstance(user_id))
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
