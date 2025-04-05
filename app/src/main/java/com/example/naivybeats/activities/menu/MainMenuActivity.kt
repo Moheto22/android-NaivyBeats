@@ -46,7 +46,7 @@ class MainMenuActivity: AppCompatActivity() {
                 location = 0
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,home)
-                left_AnimationFragmentHome()
+                left_AnimationFragmentHome(user_id)
             }
         }
         search.setOnClickListener(){
@@ -57,9 +57,9 @@ class MainMenuActivity: AppCompatActivity() {
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,search)
                 if (direction > 0){
-                    right_AnimationFragmentSearch()
+                    right_AnimationFragmentSearch(user_id)
                 }else{
-                    left_AnimationFragmentSearch()
+                    left_AnimationFragmentSearch(user_id)
                 }
             }
         }
@@ -85,9 +85,9 @@ class MainMenuActivity: AppCompatActivity() {
                 listTextButtons[location].setTypeface(null, Typeface.BOLD)
                 Tools.animationPop(this,chat)
                 if (direction > 0){
-                    right_AnimationFragmentChat()
+                    right_AnimationFragmentChat(user_id)
                 }else{
-                    left_AnimationFragmentChat()
+                    left_AnimationFragmentChat(user_id)
                 }
             }
         }
@@ -101,86 +101,86 @@ class MainMenuActivity: AppCompatActivity() {
             }
         }
     }
-    private fun right_AnimationFragmentSearch() {
+    private fun right_AnimationFragmentSearch(user_id: Int) {
         supportFragmentManager.commit {
             setCustomAnimations(
                 R.anim.animation_out_right,
                 R.anim.animation_in_left
                                )
-            replace<FragmentSearch>(R.id.frameContainer)
+            replace(R.id.frameContainer,FragmentSearch.newInstance(user_id))
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
     }
 
-    private fun left_AnimationFragmentSearch() {
+    private fun left_AnimationFragmentSearch(user_id: Int) {
         supportFragmentManager.commit {
             setCustomAnimations(
                 R.anim.animation_out_left,
                 R.anim.animation_in_right
                                )
-            replace<FragmentSearch>(R.id.frameContainer)
+            replace(R.id.frameContainer,FragmentSearch.newInstance(user_id))
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
     }
 
-    private fun left_AnimationFragmentPublicate(user: Int?) {
+    private fun left_AnimationFragmentPublicate(user_id: Int?) {
         supportFragmentManager.commit {
             setCustomAnimations(
                 R.anim.animation_out_left,
                 R.anim.animation_in_right
                                )
-            replace(R.id.frameContainer,FragmentPublicate.newInstance(user))
+            replace(R.id.frameContainer,FragmentPublicate.newInstance(user_id))
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
     }
 
-    private fun right_AnimationFragmentPublicate(user: Int?) {
+    private fun right_AnimationFragmentPublicate(user_id: Int?) {
         supportFragmentManager.commit {
             setCustomAnimations(
                 R.anim.animation_out_right,
                 R.anim.animation_in_left
                                )
-            replace(R.id.frameContainer,FragmentPublicate.newInstance(user))
+            replace(R.id.frameContainer,FragmentPublicate.newInstance(user_id))
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
     }
 
 
-    private fun right_AnimationFragmentChat() {
+    private fun right_AnimationFragmentChat(user_id: Int) {
         supportFragmentManager.commit {
             setCustomAnimations(
                 R.anim.animation_out_right,
                 R.anim.animation_in_left
                                )
-            replace<FragmentChat>(R.id.frameContainer)
+            replace(R.id.frameContainer,FragmentChat.newInstance(user_id))
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
     }
 
-    private fun left_AnimationFragmentChat() {
+    private fun left_AnimationFragmentChat(user_id: Int) {
         supportFragmentManager.commit {
             setCustomAnimations(
                 R.anim.animation_out_left,
                 R.anim.animation_in_right
                                )
-            replace<FragmentChat>(R.id.frameContainer)
+            replace(R.id.frameContainer,FragmentChat.newInstance(user_id))
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
     }
 
-    private fun left_AnimationFragmentHome() {
+    private fun left_AnimationFragmentHome(user_id: Int) {
         supportFragmentManager.commit {
             setCustomAnimations(
                 R.anim.animation_out_left,
                 R.anim.animation_in_right
                                )
-            replace<FragmentMenu>(R.id.frameContainer)
+            replace(R.id.frameContainer,FragmentMenu.newInstance(user_id))
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
