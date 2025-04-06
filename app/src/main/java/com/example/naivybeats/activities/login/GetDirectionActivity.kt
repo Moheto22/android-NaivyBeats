@@ -1,12 +1,15 @@
 package com.example.naivybeats.activities.login
 import MunicipalityAdapter
 import Tools
+import android.app.TimePickerDialog
+import android.content.Context
+import android.icu.util.Calendar
+import android.location.Geocoder
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
@@ -16,7 +19,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.LoginActivity
@@ -27,13 +29,14 @@ import com.example.naivybeats.models.restaurant.model.Restaurant
 import java.io.Serializable
 import com.example.naivybeats.models.musician.model.Musician
 import com.example.naivybeats.models.user.model.Users
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.json.JSONArray
+import java.math.BigDecimal
 import java.net.HttpURLConnection
 import java.net.URL
-import java.sql.Time
-import java.time.LocalTime
+import java.util.Locale
 
 class GetDirectionActivity : AppCompatActivity(){
 
@@ -60,11 +63,14 @@ class GetDirectionActivity : AppCompatActivity(){
 
         val title = findViewById<TextView>(R.id.title)
         val province = findViewById<Spinner>(R.id.province)
+        var latitude:Double = 0.0
+        var longitud:Double = 0.0
         var selectedProvince = City()
         val municipality = findViewById<AutoCompleteTextView>(R.id.municipality)
         val adress = findViewById<EditText>(R.id.adress)
         val button = findViewById<Button>(R.id.buttonContinue)
         val isUser = findViewById<TextView>(R.id.isUser)
+        val buttonScheldule = findViewById<Button>(R.id.scheldule)
         var selectedMunicipality = Municipality()
 
         val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.municipality)
@@ -79,9 +85,40 @@ class GetDirectionActivity : AppCompatActivity(){
         }
 
 
+        if (musicianOrRestaurant(user) == 1){
+            stratInitialAnimations(title,province,municipality,adress,button,isUser)
+        }else{
+            buttonScheldule.visibility = View.VISIBLE
 
+            stratInitialAnimations(title,province,municipality,adress,button,isUser,buttonScheldule)
 
-        stratInitialAnimations(title,province,municipality,adress,button,isUser)
+            buttonScheldule.setOnClickListener {
+                // Paso 1: Elegir hora de inicio
+                val calendar = Calendar.getInstance()
+                val hour = calendar.get(Calendar.HOUR_OF_DAY)
+                val minute = calendar.get(Calendar.MINUTE)
+
+                val timePickerStart = TimePickerDialog(this, { _, startHour, startMinute ->
+
+                    // Paso 2: Elegir hora de fin (después de seleccionar inicio)
+                    val timePickerEnd = TimePickerDialog(this, { _, endHour, endMinute ->
+
+                        // Formateamos el texto y lo mostramos en el botón
+                        val startTime = String.format("%02d:%02d", startHour, startMinute)
+                        val endTime = String.format("%02d:%02d", endHour, endMinute)
+                        buttonScheldule.text = "$startTime - $endTime"
+
+                    }, hour, minute, true)
+
+                    timePickerEnd.setTitle("Selecciona hora de fin")
+                    timePickerEnd.show()
+
+                }, hour, minute, true)
+
+                timePickerStart.setTitle("Selecciona hora de inicio")
+                timePickerStart.show()
+            }
+        }
 
         val adapter = ProvinceAdapter(this, android.R.layout.simple_spinner_item, provinces)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -122,26 +159,56 @@ class GetDirectionActivity : AppCompatActivity(){
                 list.add(1)
             }
             var direction = adress.text.toString()
-            if (direction.isEmpty()){
+            if (direction.isEmpty()) {
                 list.add(2)
+            }
+            var scheldule = buttonScheldule.text.toString()
+            if (scheldule.isEmpty() && musicianOrRestaurant(user)==2){
+                list.add(3)
             }
             if (!list.isEmpty()){
                 shakeEditTexts(list)
-                Toast.makeText(this, "⚠️ Por favor, completa todos los campos", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.data_publication_eng), Toast.LENGTH_LONG).show()
             }else {
                 if (musicianOrRestaurant(user) == 1){
-                    var musician = user as Musician
-                    setMusician(musician, selectedMunicipality,direction)
-                    Tools.createActivityPutExtraMusician(this, ChoseStyleArtistActivity::class.java, musician)
-                    Tools.createActivityGetStylesTime(this, musician)
+                    val context = this
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        var ubicacion = obtenerLatLngDesdeDireccion(context,municipality+", "+direction)
+                        if (ubicacion == null){
+                            ubicacion = obtenerLatLngDesdeDireccion(context,municipality)
+                            if (ubicacion != null) {
+                                latitude = ubicacion.first
+                                longitud = ubicacion.second
+                            }
+                        }else{
+                            latitude = ubicacion.first
+                            longitud = ubicacion.second
+                        }
+                        var musician = user as Musician
 
+                        setMusician(musician, selectedMunicipality,direction,latitude,longitud)
+                        Tools.createActivityPutExtraMusician(context, ChoseStyleArtistActivity::class.java, musician)
+                        Tools.createActivityGetStylesTime(context, musician)
+                    }
                 } else if (musicianOrRestaurant(user) == 0){
-                    var restaurant = user as Restaurant
-                    setRestaurant(restaurant, selectedMunicipality, direction)
+                    val context = this
                     lifecycleScope.launch {
+                        var ubicacion = obtenerLatLngDesdeDireccion(context,municipality+", "+direction)
+                        if (ubicacion == null){
+                            ubicacion = obtenerLatLngDesdeDireccion(context,municipality)
+                            if (ubicacion != null) {
+                                latitude = ubicacion!!.first
+                                longitud = ubicacion!!.second
+                            }
+                        }else{
+                            latitude = ubicacion!!.first
+                            longitud = ubicacion!!.second
+                        }
+                        var restaurant = user as Restaurant
+                        val partes = scheldule.split(" - ")
+                        setRestaurant(restaurant, selectedMunicipality, direction,partes[0],partes[1],latitude,longitud)
                         try {
                             var succes = Tools.newRestaurant(restaurant)
-
                             if (succes) {
                                 Toast.makeText(this@GetDirectionActivity, "✔️ Restaurante creado exitosamente", Toast.LENGTH_LONG).show()
                                 var user = restaurant as Users
@@ -161,9 +228,20 @@ class GetDirectionActivity : AppCompatActivity(){
     }
 
     private fun shakeEditTexts(list: MutableList<Int>) {
-        val listEditText = listOf<EditText>(findViewById(R.id.province),findViewById(R.id.municipality),findViewById(R.id.adress))
+        val listEditText = listOf<View>(findViewById(R.id.province),findViewById(R.id.municipality),findViewById(R.id.adress),findViewById(R.id.scheldule))
         list.forEach { index ->
             Tools.animationHorizontalShake(this, listEditText[index])
+        }
+    }
+    fun obtenerLatLngDesdeDireccion(context: Context, direccion: String): Pair<Double, Double>? {
+        val geocoder = Geocoder(context, Locale.getDefault())
+        val direcciones = geocoder.getFromLocationName(direccion, 1)
+
+        return if (!direcciones.isNullOrEmpty()) {
+            val location = direcciones[0]
+            Pair(location.latitude, location.longitude)
+        } else {
+            null // Dirección no encontrada
         }
     }
 
@@ -173,8 +251,25 @@ class GetDirectionActivity : AppCompatActivity(){
         municipality: AutoCompleteTextView,
         adress: EditText,
         button: Button,
+        isUser: TextView,
+        buttonScheldule: Button
+    ) {
+        Tools.animationTurnUp(this,title)
+        Tools.animationTurnUp(this,province)
+        Tools.animationTurnUp(this,municipality)
+        Tools.animationTurnUp(this,adress)
+        Tools.animationTurnUp(this,button)
+        Tools.animationTurnUp(this,buttonScheldule)
+        Tools.animationTurnUp(this,isUser)
+    }
+    private fun stratInitialAnimations(
+        title: TextView,
+        province: Spinner,
+        municipality: AutoCompleteTextView,
+        adress: EditText,
+        button: Button,
         isUser: TextView
-                                      ) {
+    ) {
         Tools.animationTurnUp(this,title)
         Tools.animationTurnUp(this,province)
         Tools.animationTurnUp(this,municipality)
@@ -183,11 +278,17 @@ class GetDirectionActivity : AppCompatActivity(){
         Tools.animationTurnUp(this,isUser)
     }
 
-    private fun setMusician(musician: Musician, municipality: Municipality, direction: String){
+    private fun setMusician(
+        musician: Musician,
+        municipality: Municipality,
+        direction: String,
+        latitude: Double,
+        longitud: Double
+    ){
         musician.province_id = municipality.municipalityId
        // val (latitude, longitude) = getLatLongFromAddressOSM(direction)
-        musician.latitud = null
-        musician.longitud = null
+        musician.latitud = BigDecimal(latitude)
+        musician.longitud = BigDecimal(longitud)
       /*  if (latitude != null && longitude != null){
 
         } else {
@@ -238,13 +339,21 @@ class GetDirectionActivity : AppCompatActivity(){
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun setRestaurant(restaurant: Restaurant, municipality: Municipality, direction: String) {
+    fun setRestaurant(
+        restaurant: Restaurant,
+        municipality: Municipality,
+        direction: String,
+        start: String,
+        end: String,
+        latitude: Double,
+        longitud: Double
+    ) {
         restaurant.province_id = municipality.municipalityId
-        // val (latitude, longitude) = getLatLongFromAddressOSM(directi+on)
-        restaurant.latitud = null
-        restaurant.longitud = null
-        restaurant.openingTime = "test"
-        restaurant.closingTime = "test"
+        //val (latitude, longitude) = getLatLongFromAddressOSM(direction)
+        restaurant.latitud = BigDecimal(latitude)
+        restaurant.longitud = BigDecimal(longitud)
+        restaurant.openingTime = start
+        restaurant.closingTime = end
         restaurant.creation_date = null
         restaurant.edition_date = null
         restaurant.photo = ""

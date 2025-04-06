@@ -1,6 +1,9 @@
 package com.example.naivybeats.activities.login
 
 import Tools
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -18,6 +21,8 @@ import com.example.naivybeats.models.time.model.Time
 import com.example.naivybeats.models.user.model.Users
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.io.File
+import java.io.FileOutputStream
 import java.sql.Timestamp
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -107,11 +112,11 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
             musician.styles = list_preferences_styles
             musician.times = list_preferences_time
             musician.photo = ""
-
+            val context = this
             lifecycleScope.launch {
                 try {
 
-                    val succes = Tools.insertMusician(musician)
+                    val succes = Tools.insertMusician(musician,drawableToFile(context,R.drawable.perfil,"img.png"))
                     if (succes) {
                         Toast.makeText(this@ChoseStyleArtistActivity, "✔️ Músico creado exitosamente", Toast.LENGTH_LONG).show()
                         var user = musician as Users
@@ -125,7 +130,22 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
             }
         }
     }
+    fun drawableToFile(context: Context, drawableId: Int, fileName: String): File {
+        // 1. Obtener el drawable como bitmap
+        val bitmap = BitmapFactory.decodeResource(context.resources, drawableId)
 
+        // 2. Crear un archivo temporal
+        val file = File(context.cacheDir, fileName) // o context.filesDir si lo quieres permanente
+        file.createNewFile()
+
+        // 3. Guardar el bitmap en el archivo como PNG (puedes cambiar a JPEG)
+        val outputStream = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        outputStream.flush()
+        outputStream.close()
+
+        return file
+    }
     private fun getPreferencesTime(times: List<Time>): List<Time> {
         val listResult: MutableList<Time> = mutableListOf()
 
