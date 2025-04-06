@@ -1,6 +1,6 @@
 package com.example.naivybeats.models.musician.model;
 
-import com.example.naivybeats.models.post.Post;
+import com.example.naivybeats.models.post.model.Post;
 import com.example.naivybeats.models.style.model.Style;
 import com.example.naivybeats.models.user.model.Users;
 import com.example.naivybeats.models.time.model.Time;
@@ -8,8 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Musician extends Users implements Serializable
