@@ -34,21 +34,21 @@ class RestaurantController {
                               password: String,
                               phone_number: String,
                               province_id: Int,
-                              latitud: BigDecimal,
-                              longitud: BigDecimal,
+                              latitud: String,
+                              longitud: String,
                               opening_time: String,
                               closing_time: String): Boolean {
         return withContext(Dispatchers.IO) {
             try {
                 val userIdPart = RequestBody.create("text/plain".toMediaTypeOrNull(), user_id.toString())
                 val namePart = RequestBody.create("text/plain".toMediaTypeOrNull(), name)
-                val photoPart = MultipartBody.Part.createFormData("multimedia_content", photo.name, photo.asRequestBody("image/png".toMediaTypeOrNull()))
+                val photoPart = MultipartBody.Part.createFormData("photo", photo.name, photo.asRequestBody("image/png".toMediaTypeOrNull()))
                 val emailPart = RequestBody.create("text/plain".toMediaTypeOrNull(), email)
                 val passwordPart = RequestBody.create("text/plain".toMediaTypeOrNull(), password)
                 val phonePart = RequestBody.create("text/plain".toMediaTypeOrNull(), phone_number)
                 val provinceIdPart = RequestBody.create("text/plain".toMediaTypeOrNull(), province_id.toString())
-                val latitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), latitud.toString())
-                val longitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), longitud.toString())
+                val latitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), latitud)
+                val longitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), longitud)
                 val opening_time = RequestBody.create("text/plain".toMediaTypeOrNull(), opening_time)
                 val closing_time = RequestBody.create("text/plain".toMediaTypeOrNull(), closing_time)
                 service.newRestaurant(userIdPart, namePart, photoPart, emailPart, passwordPart,

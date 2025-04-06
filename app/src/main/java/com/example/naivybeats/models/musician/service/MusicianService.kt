@@ -29,7 +29,6 @@ interface MusicianService {
                                @Part("province_id") municipality_id: RequestBody,
                                @Part("latitud") latitud: RequestBody,
                                @Part("longitud") longitud: RequestBody,
-                               @Part("description") description: RequestBody,
                                @Part("styles") styles: RequestBody,
                                @Part("times") times: RequestBody
                               ): Response<Boolean>

@@ -29,6 +29,7 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Date
+import kotlin.concurrent.thread
 
 class ChoseStyleArtistActivity : AppCompatActivity() {
     private val buttonStates = HashMap<Button, Boolean>()
@@ -117,10 +118,11 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
                 try {
 
                     val succes = Tools.insertMusician(musician,drawableToFile(context,R.drawable.perfil,"img.png"))
+                    Thread.sleep(1000)
+                    var user_id = Tools.getUserIdByName(musician.name)
                     if (succes) {
                         Toast.makeText(this@ChoseStyleArtistActivity, "✔️ Músico creado exitosamente", Toast.LENGTH_LONG).show()
-                        var user = musician as Users
-                        Tools.createActivityMenuMain(this@ChoseStyleArtistActivity, user.user_id)
+                        Tools.createActivityMenuMain(this@ChoseStyleArtistActivity, user_id)
                     } else {
                         Toast.makeText(this@ChoseStyleArtistActivity, "❌ Error al crear el musico", Toast.LENGTH_LONG).show()
                     }
@@ -180,6 +182,7 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun startInitialAnimations(
         title: TextView,
         subtitle_time: TextView,

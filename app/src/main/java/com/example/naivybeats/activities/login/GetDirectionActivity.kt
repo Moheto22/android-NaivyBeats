@@ -40,6 +40,7 @@ import java.io.FileOutputStream
 import java.math.BigDecimal
 import java.net.HttpURLConnection
 import java.net.URL
+import java.text.DecimalFormat
 import java.util.Locale
 
 class GetDirectionActivity : AppCompatActivity(){
@@ -183,14 +184,16 @@ class GetDirectionActivity : AppCompatActivity(){
                             if (ubicacion != null) {
                                 latitude = ubicacion.first
                                 longitud = ubicacion.second
+
                             }
                         }else{
                             latitude = ubicacion.first
                             longitud = ubicacion.second
+
                         }
                         var musician = user as Musician
 
-                        setMusician(musician, selectedMunicipality,direction,latitude,longitud)
+                        setMusician(musician, selectedMunicipality,latitude.toString(),longitud.toString())
                         Tools.createActivityPutExtraMusician(context, ChoseStyleArtistActivity::class.java, musician)
                         Tools.createActivityGetStylesTime(context, musician)
                     }
@@ -207,16 +210,19 @@ class GetDirectionActivity : AppCompatActivity(){
                         }else{
                             latitude = ubicacion!!.first
                             longitud = ubicacion!!.second
+
+
                         }
                         var restaurant = user as Restaurant
                         val partes = scheldule.split(" - ")
-                        setRestaurant(restaurant, selectedMunicipality, direction,partes[0],partes[1],latitude,longitud)
+                        setRestaurant(restaurant, selectedMunicipality, partes[0],partes[1],latitude.toString(),longitud.toString())
                         try {
                             var succes = Tools.newRestaurant(restaurant, drawableToFile(context,R.drawable.perfil,"img.png"))
+                            Thread.sleep(1000)
+                            var user_id = Tools.getUserIdByName(restaurant.name)
                             if (succes) {
                                 Toast.makeText(this@GetDirectionActivity, "✔️ Restaurante creado exitosamente", Toast.LENGTH_LONG).show()
-                                var user = restaurant as Users
-                                Tools.createActivityMenuMain(this@GetDirectionActivity, user.user_id)
+                                Tools.createActivityMenuMain(this@GetDirectionActivity, user_id)
                             } else {
                                 Toast.makeText(this@GetDirectionActivity, "❌ Error al crear el restaurante", Toast.LENGTH_LONG).show()
                             }
@@ -231,6 +237,7 @@ class GetDirectionActivity : AppCompatActivity(){
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun shakeEditTexts(list: MutableList<Int>) {
         val listEditText = listOf<View>(findViewById(R.id.province),findViewById(R.id.municipality),findViewById(R.id.adress),findViewById(R.id.scheldule))
         list.forEach { index ->
@@ -249,6 +256,7 @@ class GetDirectionActivity : AppCompatActivity(){
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun stratInitialAnimations(
         title: TextView,
         province: Spinner,
@@ -266,6 +274,7 @@ class GetDirectionActivity : AppCompatActivity(){
         Tools.animationTurnUp(this,buttonScheldule)
         Tools.animationTurnUp(this,isUser)
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun stratInitialAnimations(
         title: TextView,
         province: Spinner,
@@ -285,20 +294,12 @@ class GetDirectionActivity : AppCompatActivity(){
     private fun setMusician(
         musician: Musician,
         municipality: Municipality,
-        direction: String,
-        latitude: Double,
-        longitud: Double
+        latitude: String,
+        longitud: String
     ){
         musician.province_id = municipality.municipalityId
-       // val (latitude, longitude) = getLatLongFromAddressOSM(direction)
-        musician.latitud = BigDecimal(latitude)
-        musician.longitud = BigDecimal(longitud)
-      /*  if (latitude != null && longitude != null){
-
-        } else {
-            musician.latitud = null
-            musician.longitud = null
-        }*/
+        musician.latitud =latitude
+        musician.longitud = longitud
     }
 
     fun musicianOrRestaurant(user: Serializable?): Int {
@@ -346,16 +347,15 @@ class GetDirectionActivity : AppCompatActivity(){
     fun setRestaurant(
         restaurant: Restaurant,
         municipality: Municipality,
-        direction: String,
         start: String,
         end: String,
-        latitude: Double,
-        longitud: Double
+        latitude: String,
+        longitud: String
     ) {
         restaurant.province_id = municipality.municipalityId
         //val (latitude, longitude) = getLatLongFromAddressOSM(direction)
-        restaurant.latitud = BigDecimal(latitude)
-        restaurant.longitud = BigDecimal(longitud)
+        restaurant.latitud = latitude
+        restaurant.longitud = longitud
         restaurant.openingTime = start
         restaurant.closingTime = end
         restaurant.creation_date = null

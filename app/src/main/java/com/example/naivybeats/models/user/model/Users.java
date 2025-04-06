@@ -22,15 +22,15 @@ public class Users implements Serializable
     private String deleted_at;
     @SerializedName("municipality_id")
     private int province_id;
-    private BigDecimal latitud;
-    private BigDecimal longitud;
+    private String latitud;
+    private String longitud;
     private String description;
 
     public Users()
     {
     }
 
-    public Users(int user_id, String name, String photo, String email, String password, String phone_number, String creation_date, String edition_date, String deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud,String description)
+    public Users(int user_id, String name, String photo, String email, String password, String phone_number, String creation_date, String edition_date, String deleted_at, int province_id, String latitud, String longitud,String description)
     {
         this.user_id = user_id;
         this.name = name;
@@ -156,22 +156,22 @@ public class Users implements Serializable
         this.province_id = province_id;
     }
 
-    public BigDecimal getLatitud()
+    public String getLatitud()
     {
         return latitud;
     }
 
-    public void setLatitud(BigDecimal latitud)
+    public void setLatitud(String latitud)
     {
         this.latitud = latitud;
     }
 
-    public BigDecimal getLongitud()
+    public String getLongitud()
     {
         return longitud;
     }
 
-    public void setLongitud(BigDecimal longitud)
+    public void setLongitud(String longitud)
     {
         this.longitud = longitud;
     }

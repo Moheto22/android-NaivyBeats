@@ -33,6 +33,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.Serializable
 
+@RequiresApi(Build.VERSION_CODES.O)
 class Tools{
     companion object {
         val timeController = TimeController()
@@ -43,13 +44,6 @@ class Tools{
         var municipalityController = MunicipalityController()
         var styleController = StyleController()
         var postController = PostController()
-        /**
-        fun createActivity(context: Context, activityClass: Class<*>, index: Int) {
-        val intent = Intent(context, activityClass)
-        intent.putParcelableArrayListExtra(LoginActivity.constantsProject.playersList, ArrayList(playersList))
-        intent.putExtra(LoginActivity.constantsProject.index, index)
-        context.startActivity(intent)
-        }**/
 
         fun createActivityNewDataUser(context: Context, activityClass: Class<*>, userType: String) {
             val intent = Intent(context, activityClass)
@@ -169,14 +163,21 @@ class Tools{
         }
 
         //USERS
+        @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getAllUsers(): List<Users>{
             return withContext(Dispatchers.IO) {
                 userController.getAllUsers()
             }
         }
 
-        //MUSICIAN
         @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun getUserIdByName(name: String): Int {
+            return withContext(Dispatchers.IO) {
+                userController.getUserIdByName(name)!!
+            }
+        }
+
+        //MUSICIAN
         suspend fun getMusicianById(user_id: Int): Musician?{
             return withContext(Dispatchers.IO) {
                 musicianController.getMusicianById(user_id)
@@ -186,9 +187,10 @@ class Tools{
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun insertMusician(musician: Musician, avatar: File): Boolean{
             return withContext(Dispatchers.IO){
-                musicianController.insertMusician(musician.user_id, musician.name, avatar, musician.email, musician.password, musician.phone_number, musician.province_id, musician.latitud, musician.longitud, musician.description, musician.styles, musician.times)
+                musicianController.insertMusician(musician.user_id, musician.name, avatar, musician.email, musician.password, musician.phone_number, musician.province_id, musician.latitud, musician.longitud, musician.styles, musician.times)
             }
         }
+
 
         //RESTAURANT
         @RequiresApi(Build.VERSION_CODES.O)
@@ -202,8 +204,8 @@ class Tools{
         suspend fun newRestaurant(restaurant: Restaurant, avatar: File): Boolean {
             return withContext(Dispatchers.IO) {
                 restaurantController.newRestaurant(restaurant.user_id, restaurant.name, avatar, restaurant.email, restaurant.password,
-                                    restaurant.phone_number, restaurant.province_id, restaurant.latitud,
-                                    restaurant.longitud,restaurant.openingTime, restaurant.closingTime)
+                    restaurant.phone_number, restaurant.province_id, restaurant.latitud,
+                    restaurant.longitud,restaurant.openingTime, restaurant.closingTime)
             }
         }
 
@@ -246,5 +248,5 @@ class Tools{
             }
         }
 
+        }
     }
-}

@@ -54,9 +54,8 @@ class MusicianController {
         password: String,
         phone_number: String,
         province_id: Int,
-        latitud: BigDecimal,
-        longitud: BigDecimal,
-        description: String,
+        latitud: String,
+        longitud: String,
         styles: List<Style>,
         times: List<Time>
     ): Boolean {
@@ -68,19 +67,18 @@ class MusicianController {
 
                 val userIdPart = RequestBody.create("text/plain".toMediaTypeOrNull(), user_id.toString())
                 val namePart = RequestBody.create("text/plain".toMediaTypeOrNull(), name)
-                val photoPart = MultipartBody.Part.createFormData("multimedia_content", photo.name, photo.asRequestBody("image/png".toMediaTypeOrNull()))
+                val photoPart = MultipartBody.Part.createFormData("photo", photo.name, photo.asRequestBody("image/png".toMediaTypeOrNull()))
                 val emailPart = RequestBody.create("text/plain".toMediaTypeOrNull(), email)
                 val passwordPart = RequestBody.create("text/plain".toMediaTypeOrNull(), password)
                 val phonePart = RequestBody.create("text/plain".toMediaTypeOrNull(), phone_number)
                 val provinceIdPart = RequestBody.create("text/plain".toMediaTypeOrNull(), province_id.toString())
-                val latitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), latitud.toString())
-                val longitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), longitud.toString())
-                val descriptionPart = RequestBody.create("text/plain".toMediaTypeOrNull(), description)
+                val latitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), latitud)
+                val longitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), longitud)
                 val stylesPart = RequestBody.create("application/json".toMediaTypeOrNull(), stylesJson)
                 val timesPart = RequestBody.create("application/json".toMediaTypeOrNull(), timesJson)
                 service.insertMusician(userIdPart, namePart, photoPart, emailPart,
                                         passwordPart, phonePart, provinceIdPart, latitudPart, longitudPart,
-                                        descriptionPart, stylesPart, timesPart)
+                                        stylesPart, timesPart)
                 true
             } catch (e: Exception) {
                 println("Excepción en insertMusician: ${e.message}")
