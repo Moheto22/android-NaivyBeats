@@ -22,6 +22,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.post.model.PostDTO
 import com.example.naivybeats.models.restaurant.model.Restaurant
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -86,6 +87,7 @@ class FragmentPublicate : Fragment() {
         val buttonDate = view?.findViewById<Button>(R.id.btnDate)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setMusicianContent(
         create_publication: LinearLayout,
         create_offer: LinearLayout,
@@ -96,6 +98,7 @@ class FragmentPublicate : Fragment() {
         startMenuMusician(user)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun startMenuMusician(user: Musician) {
         val panel_image = view?.findViewById<ImageView>(R.id.image_panel)
         val title = view?.findViewById<EditText>(R.id.title)
@@ -118,10 +121,20 @@ class FragmentPublicate : Fragment() {
             }
             if (error) {
                 Toast.makeText(requireContext(), getString(R.string.data_publication_eng), Toast.LENGTH_SHORT).show()
-            } else{
+            } else {
+
                 val bitmap = (panel_image?.drawable as BitmapDrawable).bitmap
                 val file = bitmapToFile(requireContext(), bitmap, "img.png")
-                
+
+                var postDto = PostDTO()
+                postDto.title = title
+                postDto.userId = user_id!!
+                postDto.description = description
+                postDto.multimedia = file
+
+                lifecycleScope.launch {
+                    Tools.insertPost(postDto)
+                }
             }
         }
         buttonAddPhoto?.setOnClickListener(){

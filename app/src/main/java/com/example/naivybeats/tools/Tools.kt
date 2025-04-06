@@ -16,6 +16,8 @@ import com.example.naivybeats.models.municipality.model.Municipality
 import com.example.naivybeats.models.province.models.City
 import com.example.naivybeats.models.musician.controller.MusicianController
 import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.post.controller.PostController
+import com.example.naivybeats.models.post.model.PostDTO
 import com.example.naivybeats.models.province.controller.ProvinceController
 import com.example.naivybeats.models.restaurant.model.Restaurant
 import com.example.naivybeats.models.time.controller.TimeController
@@ -39,6 +41,7 @@ class Tools{
         val cityController = ProvinceController()
         var municipalityController = MunicipalityController()
         var styleController = StyleController()
+        var postController = PostController()
         /**
         fun createActivity(context: Context, activityClass: Class<*>, index: Int) {
         val intent = Intent(context, activityClass)
@@ -216,6 +219,14 @@ class Tools{
             }
         }
 
+        //POST
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun insertPost(postDTO: PostDTO): Boolean {
+            return withContext(Dispatchers.IO) {
+                postController.insertPost(postDTO)
+            }
+        }
+
         //FUNCTIONS
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun userOrRestaurant(user_id: Int): Users {
@@ -227,5 +238,6 @@ class Tools{
                 return userLog
             }
         }
+
     }
 }

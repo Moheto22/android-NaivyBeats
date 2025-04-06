@@ -12,7 +12,7 @@ public class PostDTO
     @SerializedName("user_id")
     private int userId;
     @SerializedName("publication_date")
-    private Date postDate;
+    private String postDate;
     @SerializedName("description")
     private String description;
     @SerializedName("title")
@@ -42,6 +42,10 @@ public class PostDTO
     public String getTitle()
     {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setPostId(int postId)
