@@ -26,7 +26,7 @@ interface MusicianService {
                                @Part("email") email: RequestBody,
                                @Part("password") password: RequestBody,
                                @Part("phone_number") phone_number: RequestBody,
-                               @Part("province_id") province_id: RequestBody,
+                               @Part("province_id") municipality_id: RequestBody,
                                @Part("latitud") latitud: RequestBody,
                                @Part("longitud") longitud: RequestBody,
                                @Part("description") description: RequestBody,

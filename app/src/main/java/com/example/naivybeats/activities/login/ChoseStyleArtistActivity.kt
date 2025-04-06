@@ -110,6 +110,7 @@ class ChoseStyleArtistActivity : AppCompatActivity() {
 
             lifecycleScope.launch {
                 try {
+
                     val succes = Tools.insertMusician(musician)
                     if (succes) {
                         Toast.makeText(this@ChoseStyleArtistActivity, "✔️ Músico creado exitosamente", Toast.LENGTH_LONG).show()
