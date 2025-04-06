@@ -8,10 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.naivybeats.R
-import com.example.naivybeats.models.user.model.Users
+import com.example.naivybeats.activities.adapter.PostAdapter
+import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.post.model.Post
+import com.example.naivybeats.models.restaurant.model.Restaurant
 import kotlinx.coroutines.launch
-import java.io.Serializable
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,7 +42,29 @@ class FragmentMenu : Fragment() {
         }
         lifecycleScope.launch {
             val user = Tools.userOrRestaurant(user_id!!)
+            when(user){
+                is Musician -> setMusicianContent(user)
+                is Restaurant -> setRestaurantContent(user)
+            }
         }
+
+    }
+
+    private fun setRestaurantContent(user: Restaurant) {
+        val listaDePublicaciones = listOf(
+            Post(1, 1,  "2025-04-06",  "Explorando nuevas formas de innovación en IA. #TechLife",  "",  "Innovación y futuro"
+            ), Post(2, 1, "2025-04-05", "Las mejores vistas desde lo alto de la ciudad.", "", "Amanecer urbano"
+            ), Post(3,  2, "2025-04-04",  "Nueva colección de primavera. ¡Descúbrela ahora!",  "", "Moda Primavera 2025"
+            ), Post( 4,  3,  "2025-04-03",  "Un café y un buen libro. La combinación perfecta.",  "", "Momento de paz"
+            ), Post( 5,  3,  "2025-04-02",  "Compartiendo ideas sobre sostenibilidad y tecnología.",  "",  "Charlas verdes")
+        )
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView?.layoutManager = LinearLayoutManager(context)
+        val adapter = PostAdapter(listaDePublicaciones,lifecycleScope)
+        recyclerView?.adapter = adapter
+    }
+
+    private fun setMusicianContent(user: Musician) {
 
     }
 
@@ -61,3 +87,4 @@ class FragmentMenu : Fragment() {
         }
     }
 }
+

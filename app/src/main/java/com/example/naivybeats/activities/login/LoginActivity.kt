@@ -108,16 +108,4 @@ class LoginActivity : AppCompatActivity() {
         val bytes = MessageDigest.getInstance("SHA-256").digest(input.toByteArray())
         return bytes.joinToString("") { "%02x".format(it) }
     }
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private suspend fun userOrRestaurant(user_id: Int): Users {
-        val userLog: Users? = Tools.getMusicianById(user_id)
-
-        if (userLog == null) {
-           return Tools.getRestaurantById(user_id)
-        } else {
-            return userLog
-        }
-    }
 }
