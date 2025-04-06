@@ -30,6 +30,7 @@ import com.example.naivybeats.models.time.model.Time
 import com.example.naivybeats.models.user.controller.UserController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.File
 import java.io.Serializable
 
 class Tools{
@@ -183,9 +184,9 @@ class Tools{
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun insertMusician(musician: Musician): Boolean{
+        suspend fun insertMusician(musician: Musician, avatar: File): Boolean{
             return withContext(Dispatchers.IO){
-                musicianController.insertMusician(musician)!!
+                musicianController.insertMusician(musician.user_id, musician.name, avatar, musician.email, musician.password, musician.phone_number, musician.province_id, musician.latitud, musician.longitud, musician.description, musician.styles, musician.times)
             }
         }
 
@@ -221,9 +222,13 @@ class Tools{
 
         //POST
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun insertPost(postDTO: PostDTO): Boolean {
+        suspend fun insertPost(title: String,
+                               userId: Int,
+                               description: String,
+                               file: File
+        ): Boolean {
             return withContext(Dispatchers.IO) {
-                postController.insertPost(postDTO)
+                postController.insertPost(title, userId, description, file)
             }
         }
 

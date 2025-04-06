@@ -27,6 +27,8 @@ import com.example.naivybeats.models.restaurant.model.Restaurant
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URI
@@ -109,6 +111,7 @@ class FragmentPublicate : Fragment() {
         buttonPublication?.setOnClickListener(){
             var error = false
             val title = title?.text.toString()
+
             if (title.isEmpty()){
                 error = true
             }
@@ -122,18 +125,14 @@ class FragmentPublicate : Fragment() {
             if (error) {
                 Toast.makeText(requireContext(), getString(R.string.data_publication_eng), Toast.LENGTH_SHORT).show()
             } else {
-
                 val bitmap = (panel_image?.drawable as BitmapDrawable).bitmap
                 val file = bitmapToFile(requireContext(), bitmap, "img.png")
 
-                var postDto = PostDTO()
-                postDto.title = title
-                postDto.userId = user_id!!
-                postDto.description = description
-                postDto.multimedia = file
-
                 lifecycleScope.launch {
-                    Tools.insertPost(postDto)
+                    Tools.insertPost(title, user_id!!, description, file)
+                    Toast.makeText(requireContext(), "✔️ Publicación creada exitosamente", Toast.LENGTH_LONG).show()
+
+
                 }
             }
         }
@@ -142,16 +141,12 @@ class FragmentPublicate : Fragment() {
         }
     }
 
-    private fun bitmapToFile(requireContext: Context, bitmap: Bitmap?, fileName: String): File {
-
-        val file = File(context?.cacheDir, fileName)
+    private fun bitmapToFile(context: Context, bitmap: Bitmap?, fileName: String): File {
+        val file = File(context.cacheDir, fileName)
         file.createNewFile()
 
-        // Escribir el bitmap al archivo
         val outputStream = FileOutputStream(file)
-        if (bitmap != null) {
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-        }
+        bitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
         outputStream.flush()
         outputStream.close()
 

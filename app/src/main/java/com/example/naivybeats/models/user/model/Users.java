@@ -16,7 +16,7 @@ public class Users implements Serializable
     private String photo;
     private String email;
     private String password;
-    private int phone_number;
+    private String phone_number;
     private String creation_date;
     private String edition_date;
     private String deleted_at;
@@ -30,7 +30,7 @@ public class Users implements Serializable
     {
     }
 
-    public Users(int user_id, String name, String photo, String email, String password, int phone_number, String creation_date, String edition_date, String deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud,String description)
+    public Users(int user_id, String name, String photo, String email, String password, String phone_number, String creation_date, String edition_date, String deleted_at, int province_id, BigDecimal latitud, BigDecimal longitud,String description)
     {
         this.user_id = user_id;
         this.name = name;
@@ -106,12 +106,12 @@ public class Users implements Serializable
         this.password = password;
     }
 
-    public int getPhone_number()
+    public String getPhone_number()
     {
         return phone_number;
     }
 
-    public void setPhone_number(int phone_number)
+    public void setPhone_number(String phone_number)
     {
         this.phone_number = phone_number;
     }

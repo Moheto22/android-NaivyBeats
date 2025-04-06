@@ -12,7 +12,7 @@ public class Post
     @SerializedName("user_id")
     private int userId;
     @SerializedName("publication_date")
-    private Date postDate;
+    private String postDate;
     @SerializedName("description")
     private String description;
     @SerializedName("title")
@@ -24,7 +24,7 @@ public class Post
     {
     }
 
-    public Post(int postId, int userId, Date postDate, String description, String multimedia, String title)
+    public Post(int postId, int userId, String postDate, String description, String multimedia, String title)
     {
         this.postId = postId;
         this.userId = userId;
@@ -49,12 +49,12 @@ public class Post
         this.postId = postId;
     }
 
-    public Date getPostDate()
+    public String getPostDate()
     {
         return postDate;
     }
 
-    public void setPostDate(Date postDate)
+    public void setPostDate(String postDate)
     {
         this.postDate = postDate;
     }
