@@ -177,9 +177,9 @@ class Tools{
 
         //MUSICIAN
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun getMusicianById(user_id: Int): Musician{
+        suspend fun getMusicianById(user_id: Int): Musician?{
             return withContext(Dispatchers.IO) {
-                musicianController.getMusicianById(user_id)!!
+                musicianController.getMusicianById(user_id)
             }
         }
 
@@ -236,8 +236,8 @@ class Tools{
 
         //FUNCTIONS
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun userOrRestaurant(user_id: Int): Users {
-            val userLog: Users = getMusicianById(user_id)
+        suspend fun userOrRestaurant(user_id: Int): Users? {
+            val userLog: Users? = getMusicianById(user_id)
 
             if (userLog == null) {
                 return getRestaurantById(user_id)
