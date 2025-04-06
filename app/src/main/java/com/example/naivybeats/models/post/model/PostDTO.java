@@ -24,7 +24,7 @@ public class PostDTO
     {
     }
 
-    public PostDTO(int postId, int userId, Date postDate, String description, File multimedia, String title)
+    public PostDTO(int postId, int userId, String postDate, String description, File multimedia, String title)
     {
         this.postId = postId;
         this.userId = userId;
@@ -53,12 +53,12 @@ public class PostDTO
         this.postId = postId;
     }
 
-    public Date getPostDate()
+    public String getPostDate()
     {
         return postDate;
     }
 
-    public void setPostDate(Date postDate)
+    public void setPostDate(String postDate)
     {
         this.postDate = postDate;
     }
