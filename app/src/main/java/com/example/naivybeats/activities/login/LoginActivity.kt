@@ -89,9 +89,6 @@ class LoginActivity : AppCompatActivity() {
         if (user != null) {
              val hashedPassword = getHashPassword(password)
             if (user.password == hashedPassword) {
-                lifecycleScope.launch {
-                   user = userOrRestaurant(user!!.user_id)
-                }
                 Tools.createActivityPutExtra(this, MainMenuActivity::class.java,  user!!.user_id)
 
             } else {

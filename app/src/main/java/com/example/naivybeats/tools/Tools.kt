@@ -100,7 +100,7 @@ class Tools{
         fun createActivityPutExtra(context: Context, activityClass: Class<*>, user_id: Int) {
             val intent = Intent(context, activityClass)
 
-            intent.putExtra("USER_ID", user_id)
+            intent.putExtra(MainMenuActivity.constantsProject.USER_ID, user_id)
             context.startActivity(intent)
         }
 
@@ -177,9 +177,9 @@ class Tools{
 
         //MUSICIAN
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun getMusicianById(user_id: Int): Musician?{
+        suspend fun getMusicianById(user_id: Int): Musician{
             return withContext(Dispatchers.IO) {
-                musicianController.getMusicianById(user_id)
+                musicianController.getMusicianById(user_id)!!
             }
         }
 
@@ -199,12 +199,9 @@ class Tools{
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun newRestaurant(restaurant: Restaurant, avatar: File): Boolean {
+        suspend fun newRestaurant(restaurant: Restaurant): Boolean {
             return withContext(Dispatchers.IO) {
-                restaurantController.newRestaurant(restaurant.user_id, restaurant.name, avatar, restaurant.email,
-                                restaurant.password, restaurant.phone_number, restaurant.province_id,
-                                restaurant.latitud, restaurant.longitud, restaurant.description,
-                                restaurant.openingTime, restaurant.closingTime)
+                restaurantController.newRestaurant(restaurant)
             }
         }
 
@@ -238,7 +235,7 @@ class Tools{
         //FUNCTIONS
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun userOrRestaurant(user_id: Int): Users {
-            val userLog: Users? = getMusicianById(user_id)
+            val userLog: Users = getMusicianById(user_id)
 
             if (userLog == null) {
                 return getRestaurantById(user_id)
