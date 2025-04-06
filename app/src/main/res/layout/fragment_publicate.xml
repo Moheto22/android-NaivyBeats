@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:visibility="invisible"
+        android:visibility="visible"
         android:id="@+id/create_offer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -80,16 +80,20 @@
                     android:paddingLeft="20dp"
                     android:textColor="@color/bluemarin"
                     />
-                <EditText
-                    android:layout_marginTop="7dp"
+                <Button
+                    android:id="@+id/btnDate"
                     android:layout_width="190dp"
                     android:layout_height="35dp"
+                    app:backgroundTint="@null"
                     android:background="@drawable/design_textbox"
-                    android:maxLines="1"
+                    android:textColor="@color/bluemarin"
+                    android:textSize="14sp"
+                    android:layout_marginTop="7dp"
                     android:layout_marginLeft="11dp"
                     android:paddingLeft="20dp"
-                    android:textColor="@color/bluemarin"
-                    />
+                    android:focusable="false"
+                    android:clickable="true"
+                />
                 <EditText
                     android:layout_width="190dp"
                     android:layout_height="35dp"
@@ -277,7 +281,7 @@
 
     <LinearLayout
         android:id="@+id/create_publication"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -302,6 +306,8 @@
             android:layout_gravity="center"
             android:background="@color/bluemarin"/>
         <ImageView
+            android:id="@+id/image_panel"
+            android:scaleType="centerCrop"
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
@@ -319,7 +325,9 @@
                 android:textSize="30dp"
                 android:textStyle="bold"
                 android:textColor="@color/bluemarin"/>
-            <ImageView
+            <Button
+                android:id="@+id/button_addPhoto"
+                app:backgroundTint="@null"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="55dp"
@@ -338,7 +346,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/bluemarin"/>
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/title"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
@@ -363,6 +371,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/bluemarin"/>
             <EditText
+                android:id="@+id/description"
                 android:layout_width="300dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center_horizontal"
@@ -372,6 +381,7 @@
                 />
         </LinearLayout>
         <Button
+            android:id="@+id/button_publication"
             android:layout_width="160dp"
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
@@ -382,7 +392,6 @@
             android:textColor="@color/bluemarin"
             android:textStyle="bold"
             android:text="@string/publicate_button_eng"/>
-
     </LinearLayout>
 
 </FrameLayout>

@@ -119,6 +119,7 @@ class FragmentEditData : Fragment() {
                 imageView?.setImageURI(uri)
             }
         }
+
     }
 
     override fun onCreateView(

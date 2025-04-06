@@ -122,9 +122,9 @@ class Tools{
             view.startAnimation(animation)
         }
 
-        fun animationHorizontalShake(context: Context, view: View) {
+        fun animationHorizontalShake(context: Context, view: View?) {
             val animation = AnimationUtils.loadAnimation(context, R.anim.animation_horizontal_shake)
-            view.startAnimation(animation)
+            view?.startAnimation(animation)
         }
 
         fun showError(context: Context, messaje: String) {
