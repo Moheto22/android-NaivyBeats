@@ -89,9 +89,6 @@ class LoginActivity : AppCompatActivity() {
         if (user != null) {
              val hashedPassword = getHashPassword(password)
             if (user.password == hashedPassword) {
-                lifecycleScope.launch {
-                   user = userOrRestaurant(user!!.user_id)
-                }
                 Tools.createActivityPutExtra(this, MainMenuActivity::class.java,  user!!.user_id)
 
             } else {
@@ -110,17 +107,5 @@ class LoginActivity : AppCompatActivity() {
     fun sha256(input: String): String {
         val bytes = MessageDigest.getInstance("SHA-256").digest(input.toByteArray())
         return bytes.joinToString("") { "%02x".format(it) }
-    }
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private suspend fun userOrRestaurant(user_id: Int): Users {
-        val userLog: Users = Tools.getMusicianById(user_id)
-
-        if (userLog == null) {
-           return Tools.getRestaurantById(user_id)
-        } else {
-            return userLog
-        }
     }
 }
