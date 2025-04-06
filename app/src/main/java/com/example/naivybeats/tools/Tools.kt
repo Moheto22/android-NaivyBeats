@@ -177,9 +177,9 @@ class Tools{
 
         //MUSICIAN
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun getMusicianById(user_id: Int): Musician{
+        suspend fun getMusicianById(user_id: Int): Musician?{
             return withContext(Dispatchers.IO) {
-                musicianController.getMusicianById(user_id)!!
+                musicianController.getMusicianById(user_id)
             }
         }
 
@@ -199,9 +199,12 @@ class Tools{
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun newRestaurant(restaurant: Restaurant): Boolean {
+        suspend fun newRestaurant(restaurant: Restaurant, avatar: File): Boolean {
             return withContext(Dispatchers.IO) {
-                restaurantController.newRestaurant(restaurant)
+                restaurantController.newRestaurant(restaurant.user_id, restaurant.name, avatar, restaurant.email,
+                                restaurant.password, restaurant.phone_number, restaurant.province_id,
+                                restaurant.latitud, restaurant.longitud, restaurant.description,
+                                restaurant.openingTime, restaurant.closingTime)
             }
         }
 
@@ -235,7 +238,7 @@ class Tools{
         //FUNCTIONS
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun userOrRestaurant(user_id: Int): Users {
-            val userLog: Users = getMusicianById(user_id)
+            val userLog: Users? = getMusicianById(user_id)
 
             if (userLog == null) {
                 return getRestaurantById(user_id)

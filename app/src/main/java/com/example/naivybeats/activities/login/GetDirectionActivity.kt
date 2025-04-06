@@ -3,6 +3,8 @@ import MunicipalityAdapter
 import Tools
 import android.app.TimePickerDialog
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.icu.util.Calendar
 import android.location.Geocoder
 import android.os.Build
@@ -33,6 +35,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.json.JSONArray
+import java.io.File
+import java.io.FileOutputStream
 import java.math.BigDecimal
 import java.net.HttpURLConnection
 import java.net.URL
@@ -208,7 +212,7 @@ class GetDirectionActivity : AppCompatActivity(){
                         val partes = scheldule.split(" - ")
                         setRestaurant(restaurant, selectedMunicipality, direction,partes[0],partes[1],latitude,longitud)
                         try {
-                            var succes = Tools.newRestaurant(restaurant)
+                            var succes = Tools.newRestaurant(restaurant, drawableToFile(context,R.drawable.perfil,"img.png"))
                             if (succes) {
                                 Toast.makeText(this@GetDirectionActivity, "✔️ Restaurante creado exitosamente", Toast.LENGTH_LONG).show()
                                 var user = restaurant as Users
@@ -363,6 +367,23 @@ class GetDirectionActivity : AppCompatActivity(){
        musician.latitud = null
        musician.longitud = null
    }*/
+    }
+
+    fun drawableToFile(context: Context, drawableId: Int, fileName: String): File {
+        // 1. Obtener el drawable como bitmap
+        val bitmap = BitmapFactory.decodeResource(context.resources, drawableId)
+
+        // 2. Crear un archivo temporal
+        val file = File(context.cacheDir, fileName) // o context.filesDir si lo quieres permanente
+        file.createNewFile()
+
+        // 3. Guardar el bitmap en el archivo como PNG (puedes cambiar a JPEG)
+        val outputStream = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        outputStream.flush()
+        outputStream.close()
+
+        return file
     }
 
 }

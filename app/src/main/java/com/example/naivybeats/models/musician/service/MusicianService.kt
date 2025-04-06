@@ -16,7 +16,7 @@ import retrofit2.http.Path
 interface MusicianService {
 
     @GET("api/Musicians/{id}")
-    suspend fun getMusicianById(@Path("id") musicianId: Int): Response<Musician>
+    suspend fun getMusicianById(@Path("id") musicianId: Int): Response<Musician?>
 
     @Multipart
     @POST("api/Musicians")

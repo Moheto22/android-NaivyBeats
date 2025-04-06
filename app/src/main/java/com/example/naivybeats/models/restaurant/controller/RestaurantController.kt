@@ -9,6 +9,12 @@ import com.example.naivybeats.models.restaurant.service.RestaurantService
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.math.BigDecimal
 
 class RestaurantController {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -21,12 +27,35 @@ class RestaurantController {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun newRestaurant(restaurant: Restaurant): Boolean {
+    suspend fun newRestaurant(user_id: Int,
+                              name: String,
+                              photo: File,
+                              email: String,
+                              password: String,
+                              phone_number: String,
+                              province_id: Int,
+                              latitud: BigDecimal,
+                              longitud: BigDecimal,
+                              description: String,
+                              opening_time: String,
+                              closing_time: String): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val json = Gson().toJson(restaurant)
-                println(json)
-                service.newRestaurant(restaurant)
+                val userIdPart = RequestBody.create("text/plain".toMediaTypeOrNull(), user_id.toString())
+                val namePart = RequestBody.create("text/plain".toMediaTypeOrNull(), name)
+                val photoPart = MultipartBody.Part.createFormData("multimedia_content", photo.name, photo.asRequestBody("image/png".toMediaTypeOrNull()))
+                val emailPart = RequestBody.create("text/plain".toMediaTypeOrNull(), email)
+                val passwordPart = RequestBody.create("text/plain".toMediaTypeOrNull(), password)
+                val phonePart = RequestBody.create("text/plain".toMediaTypeOrNull(), phone_number)
+                val provinceIdPart = RequestBody.create("text/plain".toMediaTypeOrNull(), province_id.toString())
+                val latitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), latitud.toString())
+                val longitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), longitud.toString())
+                val descriptionPart = RequestBody.create("text/plain".toMediaTypeOrNull(), description)
+                val opening_time = RequestBody.create("text/plain".toMediaTypeOrNull(), opening_time)
+                val closing_time = RequestBody.create("text/plain".toMediaTypeOrNull(), closing_time)
+                service.newRestaurant(userIdPart, namePart, photoPart, emailPart, passwordPart,
+                                    phonePart, provinceIdPart, latitudPart, longitudPart, descriptionPart,
+                                    opening_time, closing_time)
                 true
 
             } catch (e: Exception) {

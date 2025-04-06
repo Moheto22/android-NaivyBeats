@@ -115,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private suspend fun userOrRestaurant(user_id: Int): Users {
-        val userLog: Users = Tools.getMusicianById(user_id)
+        val userLog: Users? = Tools.getMusicianById(user_id)
 
         if (userLog == null) {
            return Tools.getRestaurantById(user_id)
