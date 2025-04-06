@@ -203,7 +203,7 @@ class Tools{
             return withContext(Dispatchers.IO) {
                 restaurantController.newRestaurant(restaurant.user_id, restaurant.name, avatar, restaurant.email, restaurant.password,
                                     restaurant.phone_number, restaurant.province_id, restaurant.latitud,
-                                    restaurant.longitud, restaurant.description, restaurant.openingTime, restaurant.closingTime)
+                                    restaurant.longitud,restaurant.openingTime, restaurant.closingTime)
             }
         }
 

@@ -36,7 +36,6 @@ class RestaurantController {
                               province_id: Int,
                               latitud: BigDecimal,
                               longitud: BigDecimal,
-                              description: String,
                               opening_time: String,
                               closing_time: String): Boolean {
         return withContext(Dispatchers.IO) {
@@ -50,11 +49,10 @@ class RestaurantController {
                 val provinceIdPart = RequestBody.create("text/plain".toMediaTypeOrNull(), province_id.toString())
                 val latitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), latitud.toString())
                 val longitudPart = RequestBody.create("text/plain".toMediaTypeOrNull(), longitud.toString())
-                val descriptionPart = RequestBody.create("text/plain".toMediaTypeOrNull(), description)
                 val opening_time = RequestBody.create("text/plain".toMediaTypeOrNull(), opening_time)
                 val closing_time = RequestBody.create("text/plain".toMediaTypeOrNull(), closing_time)
                 service.newRestaurant(userIdPart, namePart, photoPart, emailPart, passwordPart,
-                                    phonePart, provinceIdPart, latitudPart, longitudPart, descriptionPart,
+                                    phonePart, provinceIdPart, latitudPart, longitudPart,
                                     opening_time, closing_time)
                 true
 
