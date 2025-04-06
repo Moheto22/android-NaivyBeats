@@ -1,21 +1,22 @@
 package com.example.naivybeats.activities.login
 
 import Tools
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.LoginActivity
 import com.example.naivybeats.models.restaurant.model.Restaurant
-import kotlinx.coroutines.launch
 import java.security.MessageDigest
 
 class CreateDataNewUserSpaceActivity : AppCompatActivity() {
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,7 +28,10 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         val editTextNumber = findViewById<EditText>(R.id.number)
         val have_user = findViewById<TextView>(R.id.isUser)
         val button = findViewById<Button>(R.id.buttonContinue)
-        stratInitialAnimations(title,editTextName,editTextEmail,editTextNumber,editTextPassword,button,have_user)
+        val buttonScheldule = findViewById<Button>(R.id.scheldule)
+        buttonScheldule.visibility = View.VISIBLE
+
+        stratInitialAnimations(title,editTextName,editTextEmail,editTextNumber,editTextPassword,button,have_user,buttonScheldule)
 
         var restaurant: Restaurant
         have_user.setOnClickListener(){
@@ -79,8 +83,9 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         number: EditText,
         password: EditText,
         button: Button,
-        have_user: TextView
-                                      ) {
+        have_user: TextView,
+        buttonScheldule: Button
+    ) {
         Tools.animationFocus(this, title)
         Tools.animationTurnUp(this, name)
         Tools.animationTurnUp(this, email)
@@ -88,6 +93,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         Tools.animationTurnUp(this, password)
         Tools.animationTurnUp(this, button)
         Tools.animationTurnUp(this, have_user)
+        Tools.animationTurnUp(this, buttonScheldule)
     }
 
     fun newRestaurant(editTextName: EditText, editTextEmail: EditText, editTextPassword: EditText, editTextNumber: EditText): Restaurant{

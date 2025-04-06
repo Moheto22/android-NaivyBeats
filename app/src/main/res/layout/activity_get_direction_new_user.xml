@@ -73,13 +73,24 @@
             android:imeOptions="actionDone"
             >
         </EditText>
-        <TimePicker
+        <Button
+            android:id="@+id/scheldule"
             android:layout_width="270dp"
-            android:layout_height="90dp"
-            android:padding="0dp"
+            android:layout_height="60dp"
+            android:textSize="25dp"
             android:layout_gravity="center_horizontal"
+            android:background="@drawable/design_textbox"
+            android:visibility="gone"
+            android:maxLines="1"
+            android:layout_margin="5dp"
+            app:backgroundTint="@null"
+            android:textAlignment="center"
+            android:textColor="@color/bluemarin"
+            android:hint="@string/schedule_new_offer_eng"
+            android:textColorHint="@color/bluemarin_trans"
+            android:imeOptions="actionDone"
             >
-        </TimePicker>
+        </Button>
 
         <Button
             android:id="@+id/buttonContinue"

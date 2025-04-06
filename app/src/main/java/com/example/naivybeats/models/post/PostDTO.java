@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.File;
 import java.sql.Date;
 
-public class Post
+public class PostDTO
 {
     @SerializedName("publication_id")
     private int postId;
@@ -18,13 +18,13 @@ public class Post
     @SerializedName("title")
     private String title;
     @SerializedName("multimedia_content")
-    private String multimedia;
+    private File multimedia;
 
-    public Post()
+    public PostDTO()
     {
     }
 
-    public Post(int postId, int userId, Date postDate, String description, String multimedia, String title)
+    public PostDTO(int postId, int userId, Date postDate, String description, File multimedia, String title)
     {
         this.postId = postId;
         this.userId = userId;
@@ -79,13 +79,14 @@ public class Post
         this.description = description;
     }
 
-    public String getMultimedia()
+    public File getMultimedia()
     {
         return multimedia;
     }
 
-    public void setMultimedia(String multimedia)
+    public void setMultimedia(File multimedia)
     {
         this.multimedia = multimedia;
     }
 }
+
