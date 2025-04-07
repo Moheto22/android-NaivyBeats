@@ -16,6 +16,8 @@ import com.example.naivybeats.models.municipality.model.Municipality
 import com.example.naivybeats.models.province.models.City
 import com.example.naivybeats.models.musician.controller.MusicianController
 import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.offer.controller.OfferInController
+import com.example.naivybeats.models.offer.models.OfferIn
 import com.example.naivybeats.models.post.controller.PostController
 import com.example.naivybeats.models.post.model.PostDTO
 import com.example.naivybeats.models.province.controller.ProvinceController
@@ -44,6 +46,7 @@ class Tools{
         var municipalityController = MunicipalityController()
         var styleController = StyleController()
         var postController = PostController()
+        var offerInController = OfferInController()
 
         fun createActivityNewDataUser(context: Context, activityClass: Class<*>, userType: String) {
             val intent = Intent(context, activityClass)
@@ -233,6 +236,20 @@ class Tools{
         ): Boolean {
             return withContext(Dispatchers.IO) {
                 postController.insertPost(title, userId, description, file)
+            }
+        }
+
+        //OFFERS IN
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun getOffersIn(): List<OfferIn> {
+            return withContext(Dispatchers.IO) {
+                offerInController.getOffersIn()
+            }
+        }
+
+        suspend fun newOffer(offerIn: OfferIn): Boolean {
+            return withContext(Dispatchers.IO) {
+                offerInController.newOffer(offerIn)
             }
         }
 

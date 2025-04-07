@@ -14,6 +14,9 @@ interface UserService {
     @GET("api/Users/{name}")
     suspend fun getUserIdByName(@Path("name") name: String): Response<Int>
 
+   /* @GET("api/Image/{path}")
+    suspend fun getImage(@Path("path") path: String): Response<HttpResponseMessage>*/
+
 
 
 }
