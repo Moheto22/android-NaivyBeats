@@ -66,19 +66,17 @@ class FragmentMenu : Fragment() {
         recyclerView?.adapter = adapter
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setMusicianContent(user: Musician) {
 
-        val listaDeOfertas = listOf(
-            OfferIn(1,  "2025-04-06",100,  "2025-04-10",  null,1,  "Innovación y futuro",false),
-            OfferIn(1,  "2025-04-06",100,  "2025-04-10",  null,1,  "Innovación y futuro",false),
-            OfferIn(1,  "2025-04-06",100,  "2025-04-10",  null,1,  "Innovación y futuro",false),
-            OfferIn(1,  "2025-04-06",100,  "2025-04-10",  null,1,  "Innovación y futuro",false),
-            OfferIn(1,  "2025-04-06",100,  "2025-04-10",  null,1,  "Innovación y futuro",false)
-        )
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView?.layoutManager = LinearLayoutManager(context)
-        val adapter = OfferInAdapter(listaDeOfertas,lifecycleScope)
-        recyclerView?.adapter = adapter
+        lifecycleScope.launch {
+            val listaDeOfertas = Tools.getOffersIn()
+            val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
+            recyclerView?.layoutManager = LinearLayoutManager(context)
+            val adapter = OfferInAdapter(listaDeOfertas,lifecycleScope)
+            recyclerView?.adapter = adapter
+        }
+
     }
 
     override fun onCreateView(
