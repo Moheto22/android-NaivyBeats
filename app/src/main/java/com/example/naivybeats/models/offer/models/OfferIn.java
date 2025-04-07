@@ -11,7 +11,7 @@ public class OfferIn {
     private String publish_date;
     private int salary;
     private String event_date;
-    private int music_id_final;
+    private Integer music_id_final;
     private int restaurant_id;
     private String description;
     private Boolean done;
@@ -20,7 +20,7 @@ public class OfferIn {
     public OfferIn() {
     }
 
-    public OfferIn(int offer_in_id, String publish_date, int salary, String event_date, int music_id_final, int restaurant_id, String description, Boolean done, List<Integer> styles_ids) {
+    public OfferIn(int offer_in_id, String publish_date, int salary, String event_date, Integer music_id_final, int restaurant_id, String description, Boolean done, List<Integer> styles_ids) {
         this.offer_in_id = offer_in_id;
         this.publish_date = publish_date;
         this.salary = salary;
@@ -64,11 +64,11 @@ public class OfferIn {
         this.event_date = event_date;
     }
 
-    public int getMusic_id_final() {
+    public Integer getMusic_id_final() {
         return music_id_final;
     }
 
-    public void setMusic_id_final(int music_id_final) {
+    public void setMusic_id_final(Integer music_id_final) {
         this.music_id_final = music_id_final;
     }
 
