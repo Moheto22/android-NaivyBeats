@@ -14,13 +14,13 @@ public class OfferIn {
     private Integer music_id_final;
     private int restaurant_id;
     private String description;
-    private Boolean done;
+    private Integer done;
     private List<Integer> styles_ids;
 
     public OfferIn() {
     }
 
-    public OfferIn(int offer_in_id, String publish_date, int salary, String event_date, Integer music_id_final, int restaurant_id, String description, Boolean done, List<Integer> styles_ids) {
+    public OfferIn(int offer_in_id, String publish_date, int salary, String event_date, Integer music_id_final, int restaurant_id, String description, Integer done, List<Integer> styles_ids) {
         this.offer_in_id = offer_in_id;
         this.publish_date = publish_date;
         this.salary = salary;
@@ -88,11 +88,11 @@ public class OfferIn {
         this.description = description;
     }
 
-    public Boolean getDone() {
+    public Integer getDone() {
         return done;
     }
 
-    public void setDone(Boolean done) {
+    public void setDone(Integer done) {
         this.done = done;
     }
 
