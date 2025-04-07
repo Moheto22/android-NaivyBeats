@@ -13,10 +13,12 @@
         android:background="@drawable/element_bluesky"
         android:padding="15dp"
         android:orientation="horizontal">
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/avatar"
             android:layout_width="70dp"
+            app:shapeAppearanceOverlay="@style/CircularImage"
             android:layout_height="70dp"
+            android:scaleType="centerCrop"
             android:background="@color/white"/>
         <LinearLayout
             android:layout_width="195dp"

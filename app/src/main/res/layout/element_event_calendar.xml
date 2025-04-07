@@ -9,15 +9,19 @@
     android:orientation="horizontal"
     android:background="@drawable/design_big_textbox"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/white"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/CircularImage"
         android:layout_gravity="center"/>
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:layout_marginLeft="10dp"
         android:layout_width="60dp"
+        android:scaleType="centerCrop"
         android:layout_height="60dp"
+        app:shapeAppearanceOverlay="@style/CircularImage"
         android:background="@color/white"
         android:layout_gravity="center"/>
     <LinearLayout

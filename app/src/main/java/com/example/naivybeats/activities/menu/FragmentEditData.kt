@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.naivybeats.R
 import com.example.naivybeats.models.user.model.Users
 import kotlinx.coroutines.launch
@@ -55,7 +56,6 @@ class FragmentEditData : Fragment() {
             user = Tools.userOrRestaurant(user_id!!)
             user?.let { setDataInFragment(it) }
         }
-        generateCircularImages()
 
         val button_addPhoto = view.findViewById<Button>(R.id.addPhoto)
         button_addPhoto.setOnClickListener {
@@ -68,38 +68,6 @@ class FragmentEditData : Fragment() {
         val description = view?.findViewById<EditText>(R.id.description_data)
         name?.setText(user.name)
         description?.setText(user.description)
-    }
-
-    @SuppressLint("ResourceAsColor")
-    private fun generateCircularImages() {
-
-        val avatar = view?.findViewById<ImageView>(R.id.avatar)
-
-        // Verificar que el ImageView no sea nulo y que tenga un drawable
-        if (avatar != null && avatar.drawable is BitmapDrawable) {
-            val bitmapDrawable = avatar.drawable as BitmapDrawable
-            val bitmap = bitmapDrawable.bitmap
-
-            val size = minOf(bitmap.width, bitmap.height)
-            val croppedBitmap = Bitmap.createBitmap(bitmap, 0, 0, size, size)
-            val scaledBitmap = Bitmap.createScaledBitmap(croppedBitmap, 250, 250, true)
-
-            val roundedBitmapDrawable: RoundedBitmapDrawable = RoundedBitmapDrawableFactory.create(resources, scaledBitmap)
-            roundedBitmapDrawable.isCircular = true
-
-            avatar.setImageDrawable(roundedBitmapDrawable)
-        } else {
-            // Opcional: Manejar el caso en que avatar no tenga una imagen
-            Log.e("FragmentEditData", "El ImageView es nulo o no tiene un BitmapDrawable")
-        }
-
-        val border_avatar = view?.findViewById<ImageView>(R.id.border_avatar)
-        val circularDrawable = GradientDrawable().apply {
-            shape = GradientDrawable.OVAL
-            setColor(ContextCompat.getColor(requireContext(), R.color.beig))
-            setSize(100, 100)
-        }
-        border_avatar?.background = circularDrawable
     }
 
     fun openGallery() {

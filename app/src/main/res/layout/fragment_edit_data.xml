@@ -20,18 +20,20 @@
             <FrameLayout
                 android:layout_width="160dp"
                 android:layout_height="160dp">
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/border_avatar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    app:shapeAppearanceOverlay="@style/CircularImage"
                     android:background="@color/beig"/>
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/avatar"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
                     android:scaleType="centerCrop"
                     android:background="@drawable/beig_panel"
-                    android:layout_margin="15dp"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"/>
+                    app:shapeAppearanceOverlay="@style/CircularImage"
+                    android:layout_gravity="center" />
             </FrameLayout>
             <LinearLayout
                 android:layout_marginLeft="10dp"
