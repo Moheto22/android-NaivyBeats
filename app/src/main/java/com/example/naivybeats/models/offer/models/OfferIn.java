@@ -5,7 +5,7 @@ public class OfferIn {
     private String publish_date;
     private int salary;
     private String event_date;
-    private int music_id_final;
+    private Integer music_id_final;
     private int restaurant_id;
     private String description;
     private Boolean done;
@@ -13,7 +13,7 @@ public class OfferIn {
     public OfferIn() {
     }
 
-    public OfferIn(int offer_in_id, String publish_date, int salary, String event_date, int music_id_final, int restaurant_id, String description, Boolean done) {
+    public OfferIn(int offer_in_id, String publish_date, int salary, String event_date, Integer music_id_final, int restaurant_id, String description, Boolean done) {
         this.offer_in_id = offer_in_id;
         this.publish_date = publish_date;
         this.salary = salary;

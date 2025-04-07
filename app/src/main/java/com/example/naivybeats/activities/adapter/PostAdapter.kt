@@ -48,7 +48,6 @@ class PostAdapter(
         coroutineScope.launch {
             val user = Tools.userOrRestaurant(publication.userId)
             holder.nameUser.text = user?.name
-
         }
     }
 

@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:background="@drawable/element_bluesky"
+    android:layout_marginBottom="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="wrap_content"
@@ -29,6 +30,7 @@
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/name_restaurant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Titulo del empleo ofertado"
@@ -36,13 +38,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/bluemarin"/>
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Local que oferta "
-                    android:textSize="15dp"
-                    android:textColor="@color/bluemarin"
-                    android:layout_marginTop="4dp"/>
-                <TextView
+                    android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cuanto tiempo lleva publicada"
@@ -78,6 +74,7 @@
                 android:layout_marginLeft="15dp">
             </TextView>
             <TextView
+                android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
@@ -95,6 +92,7 @@
                 android:layout_marginLeft="15dp">
             </TextView>
             <TextView
+                android:id="@+id/prefered_styles"
                 android:layout_width="370dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -112,9 +110,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="195dp"
                     android:layout_height="wrap_content"
-                    android:text="20 euros/h"
+                    android:text="20 euros"
                     android:textSize="40dp"
                     android:textStyle="bold"
                     android:textColor="@color/bluemarin"
@@ -130,6 +128,7 @@
                         android:background="@drawable/calendar_icon">
                     </ImageView>
                     <TextView
+                        android:id="@+id/date_offer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"

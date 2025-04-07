@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.adapter.PostAdapter
+import com.example.naivybeats.adapters.OfferInAdapter
 import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.offer.models.OfferIn
 import com.example.naivybeats.models.post.model.Post
 import com.example.naivybeats.models.restaurant.model.Restaurant
 import kotlinx.coroutines.launch
@@ -66,6 +68,17 @@ class FragmentMenu : Fragment() {
 
     private fun setMusicianContent(user: Musician) {
 
+        val listaDeOfertas = listOf(
+            OfferIn(1,  "2025-04-06",100,  "2025-04-10",  null,1,  "Innovación y futuro",false),
+            OfferIn(1,  "2025-04-06",100,  "2025-04-10",  null,1,  "Innovación y futuro",false),
+            OfferIn(1,  "2025-04-06",100,  "2025-04-10",  null,1,  "Innovación y futuro",false),
+            OfferIn(1,  "2025-04-06",100,  "2025-04-10",  null,1,  "Innovación y futuro",false),
+            OfferIn(1,  "2025-04-06",100,  "2025-04-10",  null,1,  "Innovación y futuro",false)
+        )
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView?.layoutManager = LinearLayoutManager(context)
+        val adapter = OfferInAdapter(listaDeOfertas,lifecycleScope)
+        recyclerView?.adapter = adapter
     }
 
     override fun onCreateView(

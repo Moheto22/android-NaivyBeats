@@ -164,7 +164,6 @@ class FragmentPublicate : Fragment() {
             val listStylesSelected : List<Int>
             var salaryEditText = view?.findViewById<EditText>(R.id.salary)
             var dateButton = view?.findViewById<Button>(R.id.btnDate)
-            var houresEditText = view?.findViewById<EditText>(R.id.houres)
             var descriptionEditText = view?.findViewById<EditText>(R.id.description_text)
 
             val salary = salaryEditText?.text.toString()
@@ -178,10 +177,6 @@ class FragmentPublicate : Fragment() {
             val description = descriptionEditText?.text.toString()
             if (description.isEmpty()){
                 error = true
-            }
-            val houres = houresEditText?.text.toString()
-            if (houres.isEmpty()){
-                error =true
             }
             if(!buttonStates.any { it.value }){
                 error = true
