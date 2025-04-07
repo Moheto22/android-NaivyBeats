@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     tools:context=".activities.menu.FragmentMenu">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,8 +80,7 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
+                android:layout_alignParentBottom="false"
                 android:layout_marginBottom="85dp"
                 android:clipToPadding="false" />
         </RelativeLayout>
