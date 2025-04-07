@@ -59,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
             checkIfUserExists(users, editTextUser, editTextPassword)
             }
         }
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun stratInitialAnimations(
         editTextUser: EditText,
         editTextPassword: EditText,

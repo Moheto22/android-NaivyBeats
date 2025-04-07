@@ -26,6 +26,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.offer.models.OfferIn
 import com.example.naivybeats.models.post.model.PostDTO
 import com.example.naivybeats.models.restaurant.model.Restaurant
 import com.example.naivybeats.models.style.model.Style
@@ -83,6 +84,7 @@ class FragmentPublicate : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setRestaurantContent(
         createPublication: LinearLayout,
         createOffer: LinearLayout,
@@ -93,6 +95,7 @@ class FragmentPublicate : Fragment() {
         startMenuRestaurant(user)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun startMenuRestaurant(user: Restaurant) {
         val buttonDate = view?.findViewById<Button>(R.id.btnDate)
         val jazz = view?.findViewById<Button>(R.id.jazz)
@@ -161,16 +164,16 @@ class FragmentPublicate : Fragment() {
         }
         publicate?.setOnClickListener(){
             var error = false
-            val listStylesSelected : List<Int>
+            var listStylesSelected : List<Int> = emptyList()
             var salaryEditText = view?.findViewById<EditText>(R.id.salary)
             var dateButton = view?.findViewById<Button>(R.id.btnDate)
-            var houresEditText = view?.findViewById<EditText>(R.id.houres)
             var descriptionEditText = view?.findViewById<EditText>(R.id.description_text)
 
-            val salary = salaryEditText?.text.toString()
-            if (salary.isEmpty()){
+            val salaryText = salaryEditText?.text.toString()
+            if (salaryText.isEmpty()){
                 error = true
             }
+            val salary = salaryText.toInt()
             val date = dateButton?.text.toString()
             if(date.isEmpty()){
                 error = true
@@ -178,10 +181,6 @@ class FragmentPublicate : Fragment() {
             val description = descriptionEditText?.text.toString()
             if (description.isEmpty()){
                 error = true
-            }
-            val houres = houresEditText?.text.toString()
-            if (houres.isEmpty()){
-                error =true
             }
             if(!buttonStates.any { it.value }){
                 error = true
@@ -191,7 +190,21 @@ class FragmentPublicate : Fragment() {
             if (error){
                 Toast.makeText(requireContext(), getString(R.string.data_publication_eng), Toast.LENGTH_SHORT).show()
             }else{
+                lifecycleScope.launch {
+                    var offerIn: OfferIn = OfferIn()
+                    offerIn.restaurant_id = user_id!!
+                    offerIn.salary = salary
+                    offerIn.event_date = date
+                    offerIn.description = description
+                    offerIn.styles_ids = listStylesSelected
 
+                    val succes =Tools.newOffer(offerIn)
+                    if (succes) {
+                        Toast.makeText(requireContext(), "✔️ Oferta creada correctamente", Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(requireContext(), "❌ Error al crear la oferta", Toast.LENGTH_LONG).show()
+                    }
+                }
             }
         }
 

@@ -1,5 +1,11 @@
 package com.example.naivybeats.models.offer.models;
 
+import android.hardware.camera2.params.LensIntrinsicsSample;
+
+import com.example.naivybeats.models.style.model.Style;
+
+import java.util.List;
+
 public class OfferIn {
     private int offer_in_id;
     private String publish_date;
@@ -9,11 +15,12 @@ public class OfferIn {
     private int restaurant_id;
     private String description;
     private Boolean done;
+    private List<Integer> styles_ids;
 
     public OfferIn() {
     }
 
-    public OfferIn(int offer_in_id, String publish_date, int salary, String event_date, int music_id_final, int restaurant_id, String description, Boolean done) {
+    public OfferIn(int offer_in_id, String publish_date, int salary, String event_date, int music_id_final, int restaurant_id, String description, Boolean done, List<Integer> styles_ids) {
         this.offer_in_id = offer_in_id;
         this.publish_date = publish_date;
         this.salary = salary;
@@ -22,6 +29,7 @@ public class OfferIn {
         this.restaurant_id = restaurant_id;
         this.description = description;
         this.done = done;
+        this.styles_ids = styles_ids;
     }
 
     public int getOffer_in_id() {
@@ -86,5 +94,13 @@ public class OfferIn {
 
     public void setDone(Boolean done) {
         this.done = done;
+    }
+
+    public List<Integer> getStyles_ids() {
+        return styles_ids;
+    }
+
+    public void setStyles_ids(List<Integer> styles_ids) {
+        this.styles_ids = styles_ids;
     }
 }
