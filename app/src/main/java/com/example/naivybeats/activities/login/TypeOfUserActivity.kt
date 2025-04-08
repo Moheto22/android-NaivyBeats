@@ -1,16 +1,19 @@
 package com.example.naivybeats.activities.login
 
 import Tools
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.naivybeats.R
 import com.example.naivybeats.activities.LoginActivity
 
 class TypeOfUserActivity : AppCompatActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -38,6 +41,7 @@ class TypeOfUserActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun stratInitialAnimations(
         filter: ImageView,
         leftBlock: ImageView,

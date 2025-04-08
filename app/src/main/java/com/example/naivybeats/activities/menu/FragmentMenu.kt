@@ -15,8 +15,6 @@ import com.example.naivybeats.R
 import com.example.naivybeats.activities.adapter.PostAdapter
 import com.example.naivybeats.adapters.OfferInAdapter
 import com.example.naivybeats.models.musician.model.Musician
-import com.example.naivybeats.models.offer.models.OfferIn
-import com.example.naivybeats.models.post.model.Post
 import com.example.naivybeats.models.restaurant.model.Restaurant
 import kotlinx.coroutines.launch
 
@@ -70,7 +68,7 @@ class FragmentMenu : Fragment() {
             val listaDeOfertas = Tools.getOffersIn()
             val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
             recyclerView?.layoutManager = LinearLayoutManager(context)
-            val adapter = OfferInAdapter(listaDeOfertas,lifecycleScope)
+            val adapter = OfferInAdapter(listaDeOfertas,lifecycleScope,requireContext())
             recyclerView?.adapter = adapter
         }
 

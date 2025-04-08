@@ -4,12 +4,14 @@ import Tools
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.naivybeats.R
@@ -19,6 +21,7 @@ import java.security.MessageDigest
 
 class CreateDataNewUserSpaceActivity : AppCompatActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +74,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun shakeEditTexts(list: MutableList<Int>) {
         val listEditText = listOf<EditText>(findViewById(R.id.name_space), findViewById(R.id.name), findViewById(
             R.id.email), findViewById(R.id.number),findViewById(R.id.password))
@@ -79,6 +83,7 @@ class CreateDataNewUserSpaceActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun stratInitialAnimations(
         title: TextView,
         name: EditText,

@@ -44,6 +44,7 @@
     <string name="description_eng">Description</string>
     <string name="prefered_styles_eng">Prefered styles</string>
     <string name="read_more_eng">Read more</string>
+    <string name="read_less_eng">Read less</string>
     <string name="postulate_eng">Postulate</string>
     <string name="follow_eng">Follow</string>
     <string name="following_eng">Following</string>
@@ -83,4 +84,5 @@
     <string name="accept_eng">Accept</string>
     <string name="decline_eng">Decline</string>
     <string name="data_publication_eng">Fill in all the necessary information</string>
+    <string name="no_style_eng">This offer not have any style</string>
 </resources>
