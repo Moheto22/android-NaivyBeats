@@ -18,7 +18,9 @@ import com.example.naivybeats.models.musician.controller.MusicianController
 import com.example.naivybeats.models.musician.model.Musician
 import com.example.naivybeats.models.offer.controller.OfferInController
 import com.example.naivybeats.models.offer.models.OfferIn
+import com.example.naivybeats.models.offerInStyles.controller.OfferInStylesController
 import com.example.naivybeats.models.post.controller.PostController
+import com.example.naivybeats.models.post.model.Post
 import com.example.naivybeats.models.post.model.PostDTO
 import com.example.naivybeats.models.province.controller.ProvinceController
 import com.example.naivybeats.models.restaurant.model.Restaurant
@@ -47,6 +49,7 @@ class Tools{
         var styleController = StyleController()
         var postController = PostController()
         var offerInController = OfferInController()
+        var offerInStylesController = OfferInStylesController()
 
         fun createActivityNewDataUser(context: Context, activityClass: Class<*>, userType: String) {
             val intent = Intent(context, activityClass)
@@ -239,6 +242,12 @@ class Tools{
             }
         }
 
+        suspend fun getALlPosts(): List<Post> {
+            return withContext(Dispatchers.IO) {
+                postController.getAllPosts()
+            }
+        }
+
         //OFFERS IN
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getOffersIn(): List<OfferIn> {
@@ -250,6 +259,12 @@ class Tools{
         suspend fun newOffer(offerIn: OfferIn): Boolean {
             return withContext(Dispatchers.IO) {
                 offerInController.newOffer(offerIn)
+            }
+        }
+
+        suspend fun getStylesByOfferInId(id: Int) {
+            return withContext(Dispatchers.IO) {
+                offerInStylesController.getStylesByOfferInId(id)
             }
         }
 

@@ -1,5 +1,6 @@
 package com.example.naivybeats.activities.menu
 
+import Tools
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -52,23 +53,19 @@ class FragmentMenu : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setRestaurantContent(user: Restaurant) {
-        val listaDePublicaciones = listOf(
-            Post(1, 1,  "2025-04-06",  "Explorando nuevas formas de innovación en IA. #TechLife",  "",  "Innovación y futuro"
-            ), Post(2, 1, "2025-04-05", "Las mejores vistas desde lo alto de la ciudad.", "", "Amanecer urbano"
-            ), Post(3,  2, "2025-04-04",  "Nueva colección de primavera. ¡Descúbrela ahora!",  "", "Moda Primavera 2025"
-            ), Post( 4,  3,  "2025-04-03",  "Un café y un buen libro. La combinación perfecta.",  "", "Momento de paz"
-            ), Post( 5,  3,  "2025-04-02",  "Compartiendo ideas sobre sostenibilidad y tecnología.",  "",  "Charlas verdes")
-        )
+        lifecycleScope.launch {
+        val listaDePublicaciones = Tools.getALlPosts()
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView?.layoutManager = LinearLayoutManager(context)
         val adapter = PostAdapter(listaDePublicaciones,lifecycleScope)
         recyclerView?.adapter = adapter
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setMusicianContent(user: Musician) {
-
         lifecycleScope.launch {
             val listaDeOfertas = Tools.getOffersIn()
             val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)

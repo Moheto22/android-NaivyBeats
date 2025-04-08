@@ -4,8 +4,10 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naivybeats.R
 import kotlinx.coroutines.launch
@@ -21,6 +23,7 @@ class OfferInAdapter(private val offerList: List<OfferIn>,private val coroutineS
         val description: TextView = itemView.findViewById(R.id.description)
         val styles: TextView = itemView.findViewById(R.id.prefered_styles)
         val eventDate: TextView = itemView.findViewById(R.id.date_offer)
+        var salaryText: TextView = itemView.findViewById(R.id.salary)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfferViewHolder {
@@ -30,18 +33,19 @@ class OfferInAdapter(private val offerList: List<OfferIn>,private val coroutineS
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
-        val offer = offerList[position]
-        val listStyles = listOf("Hip-hop", "Pop", "Tecno", "Classic", "Flamenco", "Reggaeton", "Rock", "Blues", "Jazz", "Trap")
-        holder.publishDate.text = offer.publish_date
-        holder.description.text = offer.description
-        holder.styles.text = "generateStringStyles(offer.styles, listStyles)"
-        holder.eventDate.text = offer.event_date
-
-        coroutineScope.launch {
-            val user = Tools.userOrRestaurant(offer.restaurant_id)
-            holder.restaurantName.text = user?.name
+            coroutineScope.launch {
+                val offer = offerList[position]
+                val listStyles = Tools.getStylesByOfferInId(offer.offer_in_id)
+                val styles =  listStyles.toString().replace("[", "").replace("]", "")
+                holder.publishDate.text = offer.publish_date
+                holder.description.text = offer.description
+                holder.styles.text = styles
+                holder.eventDate.text = offer.event_date
+                holder.salaryText.text = offer.salary.toString() + " Euros"
+                val user = Tools.userOrRestaurant(offer.restaurant_id)
+                holder.restaurantName.text = user?.name
+            }
         }
-    }
 
     override fun getItemCount(): Int = offerList.size
 }

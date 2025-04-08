@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.naivybeats.RetrofitClient
 import com.example.naivybeats.models.musician.service.MusicianService
+import com.example.naivybeats.models.post.model.Post
 import com.example.naivybeats.models.post.model.PostDTO
 import com.example.naivybeats.models.post.service.PostService
 import com.google.gson.Gson
@@ -48,6 +49,18 @@ class PostController {
                 println("Excepción en insertPost: ${e.message}")
                 e.printStackTrace()
                 false
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getAllPosts(): List<Post> {
+        return withContext(Dispatchers.IO) {
+            val response = service.getAllPosts()
+            if (response.isSuccessful) {
+                response.body() ?: emptyList()
+            } else {
+                emptyList()
             }
         }
     }

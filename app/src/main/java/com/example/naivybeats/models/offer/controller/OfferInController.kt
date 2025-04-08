@@ -7,6 +7,7 @@ import com.example.naivybeats.models.BaseController
 import com.example.naivybeats.models.municipality.service.MunicipalityService
 import com.example.naivybeats.models.offer.models.OfferIn
 import com.example.naivybeats.models.offer.service.OfferInService
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -39,6 +40,8 @@ class OfferInController: BaseController() {
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun newOffer(offerIn: OfferIn): Boolean {
         return withContext(Dispatchers.IO) {
+            var json = Gson().toJson(offerIn)
+            println(json)
             val response = service.newOffer(offerIn)
             if (response.body() == true) {
                 true

@@ -15,7 +15,7 @@ public class Post
     private String postDate;
     @SerializedName("description")
     private String description;
-    @SerializedName("title")
+    @SerializedName("titulo")
     private String title;
     @SerializedName("multimedia_content")
     private String multimedia;

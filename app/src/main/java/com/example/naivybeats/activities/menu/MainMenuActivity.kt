@@ -3,10 +3,12 @@ package com.example.naivybeats.activities.menu
 
 import Tools
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -17,6 +19,7 @@ class MainMenuActivity: AppCompatActivity() {
     object constantsProject {
         const val USER_ID ="USER_ID"
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -198,6 +201,7 @@ class MainMenuActivity: AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun startAnimations(
         home: ImageView,
         search: ImageView,
