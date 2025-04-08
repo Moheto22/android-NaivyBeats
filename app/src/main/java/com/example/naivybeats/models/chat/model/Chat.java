@@ -6,7 +6,9 @@ import java.sql.Date;
 
 public class Chat
 {
+    @SerializedName("chat_id")
     Integer chatId;
+    @SerializedName("creation_date")
     String creationDate;
     @SerializedName("restaurant_id")
     int restaurantId;
