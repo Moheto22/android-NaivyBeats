@@ -22,7 +22,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.example.naivybeats.R
 import com.example.naivybeats.models.user.model.Users
 import kotlinx.coroutines.launch

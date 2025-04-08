@@ -35,17 +35,30 @@ class OfferInAdapter(private val offerList: List<OfferIn>,private val coroutineS
     override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
             coroutineScope.launch {
                 val offer = offerList[position]
-                val listStyles = Tools.getStylesByOfferInId(offer.offer_in_id)
-                val styles =  listStyles.toString().replace("[", "").replace("]", "")
+                val listStyles = listOf("Hip-hop","Pop","Tecno","Classic","Flamenco","Reggueton","Rock","Blues","Jazz","Trap")
+                val styles = generateStringStyles(listStyles,offer.styles_ids)
                 holder.publishDate.text = offer.publish_date
                 holder.description.text = offer.description
                 holder.styles.text = styles
                 holder.eventDate.text = offer.event_date
-                holder.salaryText.text = offer.salary.toString() + " Euros"
+                holder.salaryText.text = offer.salary.toString() + " €"
                 val user = Tools.userOrRestaurant(offer.restaurant_id)
                 holder.restaurantName.text = user?.name
             }
         }
+
+    private fun generateStringStyles(listStyles: List<String>, stylesIds: List<Int>): String {
+        var string = "( "
+        for (i in 0..stylesIds.size) {
+            if (i == stylesIds.size-1){
+                string = string + listStyles[i] + " - "
+            }else{
+                string = string + listStyles[i]
+            }
+            string = " )"
+        }
+        return string
+    }
 
     override fun getItemCount(): Int = offerList.size
 }
