@@ -1,17 +1,22 @@
 package com.example.naivybeats.adapters
 
+import Tools
 import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naivybeats.R
+import com.example.naivybeats.models.chat.model.Chat
+import com.example.naivybeats.models.message.model.Message
 import kotlinx.coroutines.launch
 import com.example.naivybeats.models.offer.models.OfferIn
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +24,8 @@ import kotlinx.coroutines.CoroutineScope
 class OfferInAdapter(
     private val offerList: List<OfferIn>,
     private val coroutineScope: CoroutineScope,
-    private val requireContext: Context
+    private val requireContext: Context,
+    private val user_id: Int
 ) :
     RecyclerView.Adapter<OfferInAdapter.OfferViewHolder>() {
 
@@ -34,6 +40,9 @@ class OfferInAdapter(
         val buttonFollow:Button = itemView.findViewById(R.id.follow_button)
         val buttonPostulate : Button = itemView.findViewById(R.id.postulate)
         val information : LinearLayout = itemView.findViewById(R.id.more_info)
+        val sendFirstMessageMusician : LinearLayout = itemView.findViewById(R.id.send_first_message)
+        val buttonSendFirstMessageMusician : Button = itemView.findViewById(R.id.button_send_first)
+        val editTextSendFirstMessageMusician : EditText = itemView.findViewById(R.id.text_first_message)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfferViewHolder {
@@ -63,6 +72,24 @@ class OfferInAdapter(
                     }else{
                         holder.information.visibility = View.GONE
                         holder.buttonReadMore.text = getString(requireContext,R.string.read_more_eng)
+                    }
+                }
+                holder.buttonPostulate.setOnClickListener(){
+                    holder.sendFirstMessageMusician.visibility = View.VISIBLE
+                }
+                holder.buttonSendFirstMessageMusician.setOnClickListener(){
+                    val text = holder.editTextSendFirstMessageMusician.text.toString()
+                    if (!text.isEmpty()) {
+                        val chat = Chat(null, null, offer.restaurant_id, user_id)
+                        coroutineScope.launch {
+                            Tools.newChat(chat)
+                            val message =Message(null,null,1,user_id,null,text)
+                            Tools.newMessage(message)
+                            holder.sendFirstMessageMusician.visibility = View.INVISIBLE
+                        }
+                    }else{
+                        Toast.makeText(requireContext, getString(requireContext,R.string.doesnt_exist_text_eng),Toast.LENGTH_LONG)
+                        holder.sendFirstMessageMusician.visibility = View.INVISIBLE
                     }
                 }
             }

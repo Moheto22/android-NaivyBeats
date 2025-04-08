@@ -6,7 +6,7 @@ import java.sql.Date;
 
 public class Message
 {
-    int messageId;
+    Integer messageId;
     String text;
     @SerializedName("publish_date")
     String publishDate;
@@ -21,7 +21,7 @@ public class Message
     {
     }
 
-    public Message(int messageId, String readingDate, int chatId, int userId, String publishDate, String text)
+    public Message(Integer messageId, String readingDate, int chatId, int userId, String publishDate, String text)
     {
         this.messageId = messageId;
         this.readingDate = readingDate;

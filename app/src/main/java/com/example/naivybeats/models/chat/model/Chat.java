@@ -6,7 +6,7 @@ import java.sql.Date;
 
 public class Chat
 {
-    int chatId;
+    Integer chatId;
     String creationDate;
     @SerializedName("restaurant_id")
     int restaurantId;
@@ -15,7 +15,7 @@ public class Chat
 
     public Chat() {}
 
-    public Chat(int chatId, String creationDate, int restaurantId, int musicianId)
+    public Chat(Integer chatId, String creationDate, int restaurantId, int musicianId)
     {
         this.chatId = chatId;
         this.creationDate = creationDate;
