@@ -263,6 +263,12 @@ class Tools{
             }
         }
 
+        suspend fun getChatByMusicianAndRestaurantId(chat: Chat): Chat {
+            return withContext(Dispatchers.IO) {
+                chatController.getChatByMusicianAndRestaurantId(chat)!!
+            }
+        }
+
         //OFFERS IN
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getOffersIn(): List<OfferIn> {

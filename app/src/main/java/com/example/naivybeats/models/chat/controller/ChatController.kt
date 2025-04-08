@@ -25,4 +25,17 @@ class ChatController {
             }
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getChatByMusicianAndRestaurantId(chat: Chat): Chat? {
+        return withContext(Dispatchers.IO) {
+            val response = service.getChatByMusicianAndRestaurantId(chat)
+
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        }
+    }
 }

@@ -83,7 +83,9 @@ class OfferInAdapter(
                         val chat = Chat(null, null, offer.restaurant_id, user_id)
                         coroutineScope.launch {
                             Tools.newChat(chat)
-                            val message =Message(null,null,1,user_id,null,text)
+                            Thread.sleep(1000)
+                            var c = Tools.getChatByMusicianAndRestaurantId(chat)
+                            val message = Message(0,null,c.chatId,user_id,null,text)
                             Tools.newMessage(message)
                             holder.sendFirstMessageMusician.visibility = View.INVISIBLE
                         }
