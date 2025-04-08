@@ -166,4 +166,51 @@
                 android:textColor="@color/bluemarin"/>
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/send_first_message"
+        android:visibility="invisible"
+        android:layout_marginHorizontal="30dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="20dp"
+        android:background="@drawable/design_big_textbox">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/new_offer_eng"
+            android:textStyle="bold"
+            android:textColor="@color/bluemarin"
+            />
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/text_first_message"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:maxLines="4"
+                android:textColor="@color/bluemarin"
+                android:background="@drawable/design_text_white"
+                android:paddingLeft="10dp">
+            </EditText>
+        </LinearLayout>
+        <Button
+            android:id="@+id/button_send_first"
+            android:layout_marginTop="10dp"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/design_button"
+            app:backgroundTint="@null"
+            android:textSize="20dp"
+            android:padding="0dp"
+            android:textColor="@color/bluemarin"
+            android:textStyle="bold"
+            android:text="@string/send_eng"/>
+    </LinearLayout>
 </FrameLayout>

@@ -85,4 +85,7 @@
     <string name="decline_eng">Decline</string>
     <string name="data_publication_eng">Fill in all the necessary information</string>
     <string name="no_style_eng">This offer not have any style</string>
+    <string name="send_eng">Send</string>
+    <string name="send_message_eng">Send a message to the Restaurant</string>
+    <string name="doesnt_exist_text_eng">You have to write a message to Restaurant</string>
 </resources>

@@ -68,7 +68,7 @@ class FragmentMenu : Fragment() {
             val listaDeOfertas = Tools.getOffersIn()
             val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
             recyclerView?.layoutManager = LinearLayoutManager(context)
-            val adapter = OfferInAdapter(listaDeOfertas,lifecycleScope,requireContext())
+            val adapter = OfferInAdapter(listaDeOfertas,lifecycleScope,requireContext(),user.user_id)
             recyclerView?.adapter = adapter
         }
 
