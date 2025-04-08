@@ -2,12 +2,14 @@ package com.example.naivybeats.adapters
 
 import Tools
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -39,6 +41,7 @@ class OfferInAdapter(
         val buttonReadMore: Button = itemView.findViewById(R.id.read_more)
         val buttonFollow:Button = itemView.findViewById(R.id.follow_button)
         val buttonPostulate : Button = itemView.findViewById(R.id.postulate)
+        val imageRest : ImageView = itemView.findViewById(R.id.image_restaurant)
         val information : LinearLayout = itemView.findViewById(R.id.more_info)
         val sendFirstMessageMusician : LinearLayout = itemView.findViewById(R.id.send_first_message)
         val buttonSendFirstMessageMusician : Button = itemView.findViewById(R.id.button_send_first)
@@ -63,7 +66,11 @@ class OfferInAdapter(
                 holder.salaryText.text = offer.salary.toString() + " €"
                 val user = Tools.userOrRestaurant(offer.restaurant_id)
                 holder.restaurantName.text = user?.name
-
+                val file = user?.let { Tools.getImage(Tools.generatePathForImages(user.photo)) }
+                file?.let {
+                    val bitmap = BitmapFactory.decodeFile(it.absolutePath)
+                    holder.imageRest.setImageBitmap(bitmap)
+                }
                 holder.buttonReadMore.setOnClickListener(){
                     val text = holder.buttonReadMore.text.toString()
                     if (text == getString(requireContext,R.string.read_more_eng)) {
@@ -112,6 +119,8 @@ class OfferInAdapter(
         }
         return string
     }
+
+
 
     override fun getItemCount(): Int = offerList.size
 }

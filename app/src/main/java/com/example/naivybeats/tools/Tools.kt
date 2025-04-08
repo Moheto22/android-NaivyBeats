@@ -90,6 +90,12 @@ class Tools{
             context.startActivity(intent)
         }
 
+        fun generatePathForImages(path : String):String{
+            return path.replace("\\", "_")
+                .replace(".", ",")
+                .replace(":", "-")
+        }
+
         fun createActivityGetStylesTime(
             context: Context,
             musician: Musician
