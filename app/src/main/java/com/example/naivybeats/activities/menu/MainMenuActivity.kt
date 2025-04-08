@@ -12,7 +12,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
+import kotlinx.coroutines.launch
 
 
 class MainMenuActivity: AppCompatActivity() {
@@ -40,6 +42,7 @@ class MainMenuActivity: AppCompatActivity() {
         val publication = findViewById<ImageView>(R.id.publicate)
         val chat = findViewById<ImageView>(R.id.chat)
         val edit = findViewById<ImageView>(R.id.edit)
+
 
         startAnimations(home,search,publication,chat,edit,listTextButtons)
 

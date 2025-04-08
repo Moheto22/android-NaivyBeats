@@ -13,6 +13,7 @@ class ChatController {
     @RequiresApi(Build.VERSION_CODES.O)
     private val service = RetrofitClient.createService(ChatService::class.java)
 
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun newChat(chat: Chat): Boolean {
         return withContext(Dispatchers.IO) {
             val response = service.newChat(chat)

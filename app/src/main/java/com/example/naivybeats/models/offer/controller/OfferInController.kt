@@ -40,8 +40,8 @@ class OfferInController: BaseController() {
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun newOffer(offerIn: OfferIn): Boolean {
         return withContext(Dispatchers.IO) {
-            var json = Gson().toJson(offerIn)
-            println(json)
+        /*    var json = Gson().toJson(offerIn)
+            println(json)*/
             val response = service.newOffer(offerIn)
             if (response.isSuccessful) {
                 true
