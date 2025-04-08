@@ -1,21 +1,27 @@
 package com.example.naivybeats.models.message.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 
 public class Message
 {
     int messageId;
     String text;
-    Date publishDate;
-    Date readingDate;
+    @SerializedName("publish_date")
+    String publishDate;
+    @SerializedName("reading_date")
+    String readingDate;
+    @SerializedName("chat_id")
     int chatId;
+    @SerializedName("user_id")
     int userId;
 
     public Message()
     {
     }
 
-    public Message(int messageId, Date readingDate, int chatId, int userId, Date publishDate, String text)
+    public Message(int messageId, String readingDate, int chatId, int userId, String publishDate, String text)
     {
         this.messageId = messageId;
         this.readingDate = readingDate;
@@ -45,22 +51,22 @@ public class Message
         this.text = text;
     }
 
-    public Date getPublishDate()
+    public String getPublishDate()
     {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate)
+    public void setPublishDate(String publishDate)
     {
         this.publishDate = publishDate;
     }
 
-    public Date getReadingDate()
+    public String getReadingDate()
     {
         return readingDate;
     }
 
-    public void setReadingDate(Date readingDate)
+    public void setReadingDate(String readingDate)
     {
         this.readingDate = readingDate;
     }
