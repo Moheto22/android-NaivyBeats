@@ -43,7 +43,7 @@ class OfferInController: BaseController() {
             var json = Gson().toJson(offerIn)
             println(json)
             val response = service.newOffer(offerIn)
-            if (response.body() == true) {
+            if (response.isSuccessful) {
                 true
             } else {
                false
