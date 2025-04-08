@@ -11,6 +11,8 @@ import com.example.naivybeats.R
 import com.example.naivybeats.activities.login.ChoseStyleArtistActivity
 import com.example.naivybeats.activities.login.GetDirectionActivity
 import com.example.naivybeats.activities.menu.MainMenuActivity
+import com.example.naivybeats.models.chat.controller.ChatController
+import com.example.naivybeats.models.chat.model.Chat
 import com.example.naivybeats.models.municipality.controller.MunicipalityController
 import com.example.naivybeats.models.municipality.model.Municipality
 import com.example.naivybeats.models.province.models.City
@@ -40,16 +42,17 @@ import java.io.Serializable
 @RequiresApi(Build.VERSION_CODES.O)
 class Tools{
     companion object {
-        val timeController = TimeController()
-        val musicianController = MusicianController()
-        val userController = UserController()
-        val restaurantController = RestaurantController()
-        val cityController = ProvinceController()
-        var municipalityController = MunicipalityController()
-        var styleController = StyleController()
-        var postController = PostController()
-        var offerInController = OfferInController()
-        var offerInStylesController = OfferInStylesController()
+        private val timeController = TimeController()
+        private  val musicianController = MusicianController()
+        private val userController = UserController()
+        private val restaurantController = RestaurantController()
+        private  val cityController = ProvinceController()
+        private var municipalityController = MunicipalityController()
+        private  var styleController = StyleController()
+        private var postController = PostController()
+        private var offerInController = OfferInController()
+        private var offerInStylesController = OfferInStylesController()
+        private var chatController = ChatController()
 
         fun createActivityNewDataUser(context: Context, activityClass: Class<*>, userType: String) {
             val intent = Intent(context, activityClass)
@@ -248,6 +251,13 @@ class Tools{
             }
         }
 
+        //CHAT
+        suspend fun newChat(chat: Chat): Boolean {
+            return withContext(Dispatchers.IO) {
+                chatController.newChat(chat)
+            }
+        }
+
         //OFFERS IN
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getOffersIn(): List<OfferIn> {
@@ -279,6 +289,5 @@ class Tools{
                 return userLog
             }
         }
-
-        }
     }
+}

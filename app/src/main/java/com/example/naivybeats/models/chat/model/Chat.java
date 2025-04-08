@@ -1,17 +1,21 @@
-package com.example.naivybeats.models.chat;
+package com.example.naivybeats.models.chat.model;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.sql.Date;
 
 public class Chat
 {
     int chatId;
-    Date creationDate;
+    String creationDate;
+    @SerializedName("restaurant_id")
     int restaurantId;
+    @SerializedName("musician_id")
     int musicianId;
 
     public Chat() {}
 
-    public Chat(int chatId, Date creationDate, int restaurantId, int musicianId)
+    public Chat(int chatId, String creationDate, int restaurantId, int musicianId)
     {
         this.chatId = chatId;
         this.creationDate = creationDate;
@@ -29,12 +33,12 @@ public class Chat
         this.chatId = chatId;
     }
 
-    public Date getCreationDate()
+    public String getCreationDate()
     {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate)
+    public void setCreationDate(String creationDate)
     {
         this.creationDate = creationDate;
     }

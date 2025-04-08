@@ -1,4 +1,4 @@
-package com.example.naivybeats.models.message;
+package com.example.naivybeats.models.message.model;
 
 import java.sql.Date;
 
