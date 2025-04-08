@@ -80,7 +80,6 @@ class FragmentPublicate : Fragment() {
                 is Musician-> setMusicianContent(create_publication,create_offer,user)
                 is Restaurant -> setRestaurantContent(create_publication,create_offer,user)
             }
-
         }
     }
 

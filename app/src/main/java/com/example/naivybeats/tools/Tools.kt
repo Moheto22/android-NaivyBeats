@@ -13,6 +13,9 @@ import com.example.naivybeats.activities.login.GetDirectionActivity
 import com.example.naivybeats.activities.menu.MainMenuActivity
 import com.example.naivybeats.models.chat.controller.ChatController
 import com.example.naivybeats.models.chat.model.Chat
+import com.example.naivybeats.models.image.controller.ImageController
+import com.example.naivybeats.models.message.controller.MessageController
+import com.example.naivybeats.models.message.model.Message
 import com.example.naivybeats.models.municipality.controller.MunicipalityController
 import com.example.naivybeats.models.municipality.model.Municipality
 import com.example.naivybeats.models.province.models.City
@@ -53,6 +56,8 @@ class Tools{
         private var offerInController = OfferInController()
         private var offerInStylesController = OfferInStylesController()
         private var chatController = ChatController()
+        private var messageController = MessageController()
+        private var imageController = ImageController()
 
         fun createActivityNewDataUser(context: Context, activityClass: Class<*>, userType: String) {
             val intent = Intent(context, activityClass)
@@ -275,6 +280,20 @@ class Tools{
         suspend fun getStylesByOfferInId(id: Int) {
             return withContext(Dispatchers.IO) {
                 offerInStylesController.getStylesByOfferInId(id)
+            }
+        }
+
+        //MESSAGE
+        suspend fun newMessage(message: Message) {
+            return withContext(Dispatchers.IO) {
+                messageController.newMessage(message)
+            }
+        }
+
+        //IMAGE
+        suspend fun getImage(path: String): File {
+            return withContext(Dispatchers.IO){
+                imageController.getImage(path)
             }
         }
 
