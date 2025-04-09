@@ -1,12 +1,14 @@
 package com.example.naivybeats.activities.menu
 
 import Tools
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,6 +46,12 @@ class FragmentMenu : Fragment() {
         }
         lifecycleScope.launch {
             val user = Tools.userOrRestaurant(user_id!!)
+            val avatar = view.findViewById<ImageView>(R.id.avatar)
+            val file = user?.let { Tools.getImage(Tools.generatePathForImages(user!!.photo)) }
+            file?.let {
+                val bitmap = BitmapFactory.decodeFile(it.absolutePath)
+                avatar.setImageBitmap(bitmap)
+            }
             when(user){
                 is Musician -> setMusicianContent(user)
                 is Restaurant -> setRestaurantContent(user)

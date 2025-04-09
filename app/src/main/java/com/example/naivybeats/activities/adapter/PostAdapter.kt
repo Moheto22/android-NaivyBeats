@@ -1,5 +1,6 @@
 package com.example.naivybeats.activities.adapter
 
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +28,6 @@ class PostAdapter(
         val avatar: ImageView = view.findViewById(R.id.avatar)
         val likeCount: TextView = view.findViewById(R.id.count_like)
         val likeButton: ImageView = view.findViewById(R.id.like)
-        // Puedes agregar más views si los necesitas
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublicationViewHolder {
@@ -42,12 +42,20 @@ class PostAdapter(
         holder.date.text = publication.postDate
         holder.title.text = publication.title
         holder.description.text = publication.description
-        holder.image.setImageResource(R.color.beig_trans_plus)
-        holder.avatar.setImageResource(R.color.white)
         holder.likeCount.text = "0"
         coroutineScope.launch {
             val user = Tools.userOrRestaurant(publication.userId)
             holder.nameUser.text = user?.name
+            val file = user?.let { Tools.getImage(Tools.generatePathForImages(publication.multimedia)) }
+            file?.let {
+                val bitmap = BitmapFactory.decodeFile(it.absolutePath)
+                holder.image.setImageBitmap(bitmap)
+            }
+            val file2 = user?.let { Tools.getImage(Tools.generatePathForImages(user.photo)) }
+            file2?.let {
+                val bitmap = BitmapFactory.decodeFile(it.absolutePath)
+                holder.avatar.setImageBitmap(bitmap)
+            }
         }
     }
 

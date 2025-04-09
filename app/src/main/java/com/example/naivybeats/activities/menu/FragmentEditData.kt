@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -54,6 +55,12 @@ class FragmentEditData : Fragment() {
         lifecycleScope.launch {
             user = Tools.userOrRestaurant(user_id!!)
             user?.let { setDataInFragment(it) }
+            val avatar = view.findViewById<ImageView>(R.id.avatar)
+            val file = user?.let { Tools.getImage(Tools.generatePathForImages(user!!.photo)) }
+            file?.let {
+                val bitmap = BitmapFactory.decodeFile(it.absolutePath)
+                avatar.setImageBitmap(bitmap)
+            }
         }
 
         val button_addPhoto = view.findViewById<Button>(R.id.addPhoto)
