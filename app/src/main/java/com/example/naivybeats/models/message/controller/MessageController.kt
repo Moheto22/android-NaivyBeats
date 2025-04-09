@@ -3,6 +3,7 @@ package com.example.naivybeats.models.message.controller
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.naivybeats.RetrofitClient
+import com.example.naivybeats.models.chat.model.Chat
 import com.example.naivybeats.models.message.model.Message
 import com.example.naivybeats.models.message.service.MessageService
 import com.example.naivybeats.models.municipality.service.MunicipalityService
@@ -26,10 +27,8 @@ class MessageController {
                 val response = service.newMessage(message)
 
                 if (response.isSuccessful) {
-                    println("Mensaje creado correctamente.")
                     true
                 } else {
-                    println("Error en la respuesta del servidor: ${response.code()}")
                     false
                 }
             } catch (e: HttpException) {
@@ -45,4 +44,23 @@ class MessageController {
             }
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getMessagesById(chat_id: Int): List<Message> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = service.getMessagesByChatId(chat_id)
+
+                if (response.isSuccessful) {
+                    response.body() ?: emptyList()
+                } else {
+                    emptyList()
+                }
+            } catch (e: Exception) {
+                println(e.message)
+                emptyList()
+            }
+        }
+    }
+
 }

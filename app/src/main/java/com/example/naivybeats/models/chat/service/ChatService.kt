@@ -13,4 +13,7 @@ interface ChatService {
 
     @GET("api/Chat/{musician_id}/{restaurant_id}")
     suspend fun getChatByMusicianAndRestaurantId(@Path("musician_id") musician_id: Int, @Path("restaurant_id") restaurant_id: Int): Response<Chat>
+
+    @GET("api/Chat/{user_id}")
+    suspend fun getChatByUserId(@Path("user_id") user_id: Int): Response<List<Chat>>
 }

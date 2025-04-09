@@ -49,4 +49,22 @@ class ChatController {
             }
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getChatByUserId(user_id: Int): List<Chat> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = service.getChatByUserId(user_id)
+
+                if (response.isSuccessful) {
+                    response.body() ?: emptyList()
+                } else {
+                    emptyList()
+                }
+            } catch (e: Exception) {
+                println(e.message)
+                emptyList()
+            }
+        }
+    }
 }

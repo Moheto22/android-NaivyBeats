@@ -259,10 +259,13 @@ class FragmentPublicate : Fragment() {
                 val file = bitmapToFile(requireContext(), bitmap, "img.png")
 
                 lifecycleScope.launch {
-                    Tools.insertPost(title, user_id!!, description, file)
-                    Toast.makeText(requireContext(), "✔️ Publicación creada exitosamente", Toast.LENGTH_LONG).show()
+                    val success = Tools.insertPost(title, user_id!!, description, file)
 
-
+                    if (success){
+                        Toast.makeText(requireContext(), "✔️ Publicación creada exitosamente", Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(requireContext(), "❌ No se ha podido crear la publicacion", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }

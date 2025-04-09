@@ -275,6 +275,12 @@ class Tools{
             }
         }
 
+        suspend fun getChatByUserId(user_id: Int): List<Chat> {
+            return withContext(Dispatchers.IO) {
+                chatController.getChatByUserId(user_id)
+            }
+        }
+
         //OFFERS IN
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getOffersIn(): List<OfferIn> {
@@ -299,6 +305,12 @@ class Tools{
         suspend fun newMessage(message: Message) {
             return withContext(Dispatchers.IO) {
                 messageController.newMessage(message)
+            }
+        }
+
+        suspend fun getMessagesByChatId(chat_id: Int): List<Message> {
+            return withContext(Dispatchers.IO) {
+                messageController.getMessagesById(chat_id)
             }
         }
 
