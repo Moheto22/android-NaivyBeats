@@ -6,13 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.naivybeats.R
-import com.example.naivybeats.models.musician.model.Musician
-import com.example.naivybeats.models.restaurant.model.Restaurant
-import com.example.naivybeats.models.user.model.Users
+import com.example.naivybeats.adapters.ChatAdapter
 import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
@@ -38,9 +40,19 @@ class FragmentChat : Fragment() {
         arguments?.let {
             user_id = it.getInt(USER)
         }
-
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewChats)
+        var panelVisibleChat = view.findViewById<LinearLayout>(R.id.pantalla_lista_chat)
+        var panelChat = view.findViewById<LinearLayout>(R.id.chat)
+        recyclerView?.layoutManager = LinearLayoutManager(view.context)
+        var listMessagesView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        var panelMessage = view.findViewById<LinearLayout>(R.id.panelMessage)
+        var panelAccept = view.findViewById<LinearLayout>(R.id.panelAccept)
+        var text = view.findViewById<EditText>(R.id.text)
+        var sendButton = view.findViewById<ImageView>(R.id.button_send)
         lifecycleScope.launch {
             val user = Tools.userOrRestaurant(user_id!!)
+            val list = Tools.getChatByUserId(user_id!!)
+            recyclerView?.adapter = ChatAdapter(list, lifecycleScope, user!!,panelVisibleChat,panelChat,listMessagesView,panelMessage,panelAccept,text,sendButton)
         }
     }
 
