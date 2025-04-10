@@ -64,6 +64,7 @@ class FragmentChat : Fragment() {
         var sendButton = view.findViewById<ImageView>(R.id.button_send)
         val avatarUserChat = view.findViewById<ImageView>(R.id.avat_user_chat)
         val nameUser = view.findViewById<TextView>(R.id.name_user_chat)
+
         lifecycleScope.launch {
             val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewChats)
             recyclerView?.layoutManager = LinearLayoutManager(requireContext())
