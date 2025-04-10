@@ -13,7 +13,7 @@ interface MessageService {
     suspend fun newMessage(@Body message: Message): Response<Boolean>
 
     @GET("api/Message/{chat_id}")
-    suspend fun getMessagesByChatId(@Path("user_id") chat_id: Int): Response<List<Message>>
+    suspend fun getMessagesByChatId(@Path("chat_id") chat_id: Int): Response<List<Message>>
 
 
 }

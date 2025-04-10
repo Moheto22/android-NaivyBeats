@@ -6,7 +6,9 @@ import java.sql.Date;
 
 public class Message
 {
+    @SerializedName("message_id")
     Integer messageId;
+    @SerializedName("text")
     String text;
     @SerializedName("publish_date")
     String publishDate;
