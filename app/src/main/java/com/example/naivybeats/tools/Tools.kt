@@ -321,6 +321,12 @@ class Tools{
             }
         }
 
+        suspend fun updateImage(file: File, path: String) {
+            return withContext(Dispatchers.IO){
+                imageController.updateImage(file, path)
+            }
+        }
+
         //FUNCTIONS
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun userOrRestaurant(user_id: Int): Users? {
