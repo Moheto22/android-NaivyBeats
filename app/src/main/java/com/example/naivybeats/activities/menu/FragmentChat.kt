@@ -60,6 +60,7 @@ class FragmentChat : Fragment() {
         var panelMessage = view.findViewById<LinearLayout>(R.id.panelMessage)
         var panelAccept = view.findViewById<LinearLayout>(R.id.panelAccept)
         var text = view.findViewById<EditText>(R.id.text)
+        var searcher = view.findViewById<EditText>(R.id.searcher)
         var sendButton = view.findViewById<ImageView>(R.id.button_send)
         val avatarUserChat = view.findViewById<ImageView>(R.id.avat_user_chat)
         val nameUser = view.findViewById<TextView>(R.id.name_user_chat)
