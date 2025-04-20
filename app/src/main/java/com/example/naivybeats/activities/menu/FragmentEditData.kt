@@ -2,6 +2,7 @@ package com.example.naivybeats.activities.menu
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -9,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Im
 import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -26,6 +28,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
 import com.example.naivybeats.models.user.model.Users
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 
 private const val USER: String = "USER_ID"
 private val PICK_IMAGE_REQUEST = 1
@@ -62,10 +66,24 @@ class FragmentEditData : Fragment() {
                 avatar.setImageBitmap(bitmap)
             }
         }
+        val button_save = view.findViewById<Button>(R.id.save)
 
         val button_addPhoto = view.findViewById<Button>(R.id.addPhoto)
         button_addPhoto.setOnClickListener {
             openGallery()
+        }
+        button_save.setOnClickListener(){
+            val image = view.findViewById<ImageView>(R.id.avatar)
+            val bitmap = (image?.drawable as BitmapDrawable).bitmap
+            val file = bitmapToFile(requireContext(), bitmap, "img.png")
+            val name = view.findViewById<EditText>(R.id.name_data)
+            val description = view.findViewById<EditText>(R.id.description_data)
+            val nameString = name.text.toString()
+            val descriptionString = description.text.toString()
+            lifecycleScope.launch {
+                Tools.updateImage(file,user!!.photo,nameString,descriptionString,user_id!! as Integer)
+            }
+
         }
     }
 
@@ -80,6 +98,17 @@ class FragmentEditData : Fragment() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         intent.type = "image/*"
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
+    }
+    private fun bitmapToFile(context: Context, bitmap: Bitmap?, fileName: String): File {
+        val file = File(context.cacheDir, fileName)
+        file.createNewFile()
+
+        val outputStream = FileOutputStream(file)
+        bitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        outputStream.flush()
+        outputStream.close()
+
+        return file
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

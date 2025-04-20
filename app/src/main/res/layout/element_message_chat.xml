@@ -1,55 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/message_body"
+<FrameLayout
+    android:layout_width="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/element_bluesky"
-    android:padding="15dp"
-    android:layout_marginBottom="20dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content">
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/panelAccept"
+        android:layout_width="276dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/avatar"
-            app:shapeAppearanceOverlay="@style/CircularImage"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:scaleType="centerCrop"
-            android:background="@color/white">
-        </com.google.android.material.imageview.ShapeableImageView>
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/design_big_textbox"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:visibility="gone">
         <TextView
-            android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/new_offer_eng"
+            android:textColor="@color/bluemarin"
             android:textSize="25dp"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date_new_offer_eng"
+                    android:textColor="@color/bluemarin"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/salary_new_offer_eng"
+                    android:textColor="@color/bluemarin"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time_eng"
+                    android:textColor="@color/bluemarin"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/date_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01/01/2001"
+                    android:textColor="@color/bluemarin"
+                    android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/salary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20/h"
+                    android:textColor="@color/bluemarin"
+                    android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12:30"
+                    android:textColor="@color/bluemarin"
+                    android:textSize="20dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/decline"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/design_button"
+                android:padding="0dp"
+                android:text="@string/decline_eng"
+                android:textColor="@color/bluemarin"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/accept"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/design_button"
+                android:padding="0dp"
+                android:text="@string/accept_eng"
+                android:textColor="@color/bluemarin"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:backgroundTint="@null" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/message_body"
+        android:visibility="visible"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/element_bluesky"
+        android:padding="15dp"
+        android:layout_marginBottom="20dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/avatar"
+                app:shapeAppearanceOverlay="@style/CircularImage"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:scaleType="centerCrop"
+                android:background="@color/white">
+            </com.google.android.material.imageview.ShapeableImageView>
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:text="Nombre ususario"
+                android:layout_gravity="center"
+                android:textColor="@color/bluemarin"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/message_data"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="El sol se oculta lentamente, tiñendo el cielo de naranja y rojo. La brisa fresca acaricia las hojas de los árboles, susurrando historias antiguas. En el horizonte, la luna comienza a asomar, iluminando la oscuridad con su luz suave."
+            android:textColor="@color/bluemarin"
+            />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Nombre ususario"
-            android:layout_gravity="center"
+            android:textSize="10dp"
+            android:text="fecha de envio y hora"
             android:textColor="@color/bluemarin"
             />
     </LinearLayout>
-    <TextView
-        android:id="@+id/message_data"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="El sol se oculta lentamente, tiñendo el cielo de naranja y rojo. La brisa fresca acaricia las hojas de los árboles, susurrando historias antiguas. En el horizonte, la luna comienza a asomar, iluminando la oscuridad con su luz suave."
-        android:textColor="@color/bluemarin"
-        />
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="10dp"
-        android:text="fecha de envio y hora"
-        android:textColor="@color/bluemarin"
-        />
+</FrameLayout>
 
-</LinearLayout>
+

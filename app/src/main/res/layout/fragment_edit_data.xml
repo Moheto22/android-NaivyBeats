@@ -151,6 +151,7 @@
             android:background="@drawable/design_big_textbox"/>
 
         <Button
+            android:id="@+id/save"
             android:layout_width="160dp"
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal"

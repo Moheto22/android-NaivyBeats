@@ -57,7 +57,6 @@ class FragmentChat : Fragment() {
         var panelVisibleChat = view.findViewById<LinearLayout>(R.id.pantalla_lista_chat)
         var panelChat = view.findViewById<LinearLayout>(R.id.chat_panel)
         listMessagesView = view.findViewById(R.id.recyclerViewMessages)
-
         var panelMessage = view.findViewById<LinearLayout>(R.id.panelMessage)
         var panelAccept = view.findViewById<LinearLayout>(R.id.panelAccept)
         var text = view.findViewById<EditText>(R.id.text)
