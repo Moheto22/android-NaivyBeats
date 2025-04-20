@@ -50,11 +50,14 @@ class ImageController {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun updateImage(file: File, path: String): Boolean {
+    suspend fun updateImage(file: File, path: String, userName: String, description: String, user_id: Integer): Boolean {
         return withContext(Dispatchers.IO) {
             try {
                 val photoPart = MultipartBody.Part.createFormData("photo", file.name, file.asRequestBody("image/png".toMediaTypeOrNull()))
                 val path = RequestBody.create("text/plain".toMediaTypeOrNull(), path)
+                val userNamePart = RequestBody.create("text/plain".toMediaTypeOrNull(), userName)
+                val descriptionPart = RequestBody.create("text/plain".toMediaTypeOrNull(), description)
+                val user_idPart = RequestBody.create("text/plain".toMediaTypeOrNull(), user_id.toString())
 
                 val response = service.updateImage(photoPart, path)
                 if (response.isSuccessful && response.body() != null) {

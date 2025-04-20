@@ -321,9 +321,9 @@ class Tools{
             }
         }
 
-        suspend fun updateImage(file: File, path: String) {
+        suspend fun updateImage(file: File, path: String, userName: String, description: String, user_id: Integer) {
             return withContext(Dispatchers.IO){
-                imageController.updateImage(file, path)
+                imageController.updateImage(file, path, userName, description, user_id)
             }
         }
 

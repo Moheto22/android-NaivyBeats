@@ -17,5 +17,8 @@ interface ImageService {
 
     @PUT("api/Image")
     suspend fun updateImage(@Part file: MultipartBody.Part,
-                            @Path("path") path: RequestBody): Response<ResponseBody>
+                            @Part("path") path: RequestBody,
+                            @Part("user_name") user_name: RequestBody,
+                            @Part("description") description: RequestBody,
+                            @Part("user_id") user_id: RequestBody): Response<ResponseBody>
 }
