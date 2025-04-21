@@ -24,6 +24,7 @@ public class Users implements Serializable
     private int province_id;
     private String latitud;
     private String longitud;
+    @SerializedName("descripcion")
     private String description;
 
     public Users()

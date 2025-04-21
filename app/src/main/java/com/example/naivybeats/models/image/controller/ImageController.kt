@@ -23,7 +23,6 @@ class ImageController {
             try {
                 val response = service.getImageByUrl(path)
 
-                if (response.isSuccessful && response.body() != null) {
                     val responseBody = response.body()
 
                     val file = File.createTempFile("image", ".png") // Puedes ajustar la extensión según el tipo de archivo
@@ -39,10 +38,6 @@ class ImageController {
                     }
 
                     file
-
-                } else {
-                    throw Exception("Error en la respuesta del servidor: ${response.code()}")
-                }
             } catch (e: Exception) {
                 throw Exception("Error al descargar la imagen: ${e.message}")
             }
@@ -61,13 +56,10 @@ class ImageController {
 
                 val response = service.updateImage(photoPart, path,userNamePart,descriptionPart,user_idPart)
                 if (response.isSuccessful && response.body() != null) {
-                    val responseBody = response.body()
-
                     true
                 } else {
                     throw Exception("Error en la respuesta del servidor: ${response.code()}")
                 }
-
             } catch (e: Exception) {
                 throw Exception("Error al descargar la imagen: ${e.message}")
             }

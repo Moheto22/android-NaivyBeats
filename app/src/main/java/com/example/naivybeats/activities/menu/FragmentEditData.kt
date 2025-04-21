@@ -20,6 +20,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.RoundedBitmapDrawable
@@ -81,9 +82,12 @@ class FragmentEditData : Fragment() {
             val nameString = name.text.toString()
             val descriptionString = description.text.toString()
             lifecycleScope.launch {
-                Tools.updateImage(file,user!!.photo,nameString,descriptionString,user_id!! as Integer)
-            }
+                var succes = Tools.updateImage(file,user!!.photo,nameString,descriptionString,user_id!! as Integer)
 
+                if (succes) {
+                    Toast.makeText(requireContext(), "✔️ Datos actualizados con éxito", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 
