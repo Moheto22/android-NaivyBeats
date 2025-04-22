@@ -10,11 +10,12 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.Part
+import retrofit2.http.Path
 
 interface PostService {
 
-    @GET("api/Publication")
-    suspend fun getAllPosts(): Response<List<Post>>
+    @GET("api/Publication/{user_id}")
+    suspend fun getAllPosts(@Path("user_id") user_id: Int): Response<List<Post>>
 
     @Multipart
     @POST("api/Publication")
