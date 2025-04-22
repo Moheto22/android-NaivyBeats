@@ -1,6 +1,7 @@
 package com.example.naivybeats.activities.menu
 
 import Tools
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -94,6 +95,7 @@ class FragmentPublicate : Fragment() {
         startMenuRestaurant(user)
     }
 
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun startMenuRestaurant(user: Restaurant) {
         val buttonDate = view?.findViewById<Button>(R.id.btnDate)
@@ -114,10 +116,12 @@ class FragmentPublicate : Fragment() {
             when (view) {
                 is Button -> {
                     if (!buttonStates[view]!!) {
-                        view.setBackgroundResource(R.drawable.design_button_type_choose)
+                        view.setBackgroundResource(R.drawable.design_textbox)
+
                         buttonStates[view] = true
                     }else {
                         view.setBackgroundResource(R.drawable.design_button_type_choose_not_pressed)
+
                         buttonStates[view] = false
                     }
                 }

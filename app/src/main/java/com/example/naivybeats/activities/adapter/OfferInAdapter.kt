@@ -19,12 +19,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.naivybeats.R
 import com.example.naivybeats.models.chat.model.Chat
 import com.example.naivybeats.models.message.model.Message
+import com.example.naivybeats.models.offer.models.OfferDto
 import kotlinx.coroutines.launch
 import com.example.naivybeats.models.offer.models.OfferIn
+import com.example.naivybeats.models.offer.models.PostOffer
 import kotlinx.coroutines.CoroutineScope
 
 class OfferInAdapter(
-    private val offerList: List<OfferIn>,
+    private val offerList: List<OfferDto>,
     private val coroutineScope: CoroutineScope,
     private val requireContext: Context,
     private val user_id: Int
@@ -39,7 +41,6 @@ class OfferInAdapter(
         val eventDate: TextView = itemView.findViewById(R.id.date_offer)
         var salaryText: TextView = itemView.findViewById(R.id.salary)
         val buttonReadMore: Button = itemView.findViewById(R.id.read_more)
-        val buttonFollow:Button = itemView.findViewById(R.id.follow_button)
         val buttonPostulate : Button = itemView.findViewById(R.id.postulate)
         val imageRest : ImageView = itemView.findViewById(R.id.image_restaurant)
         val information : LinearLayout = itemView.findViewById(R.id.more_info)
@@ -71,6 +72,9 @@ class OfferInAdapter(
                     val bitmap = BitmapFactory.decodeFile(it.absolutePath)
                     holder.imageRest.setImageBitmap(bitmap)
                 }
+                if (offer.postulated == 1){
+                    holder.buttonPostulate.text = getString(requireContext,R.string.all_ready_postulated_eng)
+                }
                 holder.buttonReadMore.setOnClickListener(){
                     val text = holder.buttonReadMore.text.toString()
                     if (text == getString(requireContext,R.string.read_more_eng)) {
@@ -82,7 +86,9 @@ class OfferInAdapter(
                     }
                 }
                 holder.buttonPostulate.setOnClickListener(){
-                    holder.sendFirstMessageMusician.visibility = View.VISIBLE
+                    if (holder.buttonPostulate.text == getString(requireContext,R.string.postulate_eng)){
+                        holder.sendFirstMessageMusician.visibility = View.VISIBLE
+                    }
                 }
                 holder.buttonSendFirstMessageMusician.setOnClickListener(){
                     val text = holder.editTextSendFirstMessageMusician.text.toString()
@@ -95,6 +101,8 @@ class OfferInAdapter(
                             val message = Message(0,null,c.chatId,user_id,null,text)
                             Tools.newMessage(message)
                             holder.sendFirstMessageMusician.visibility = View.INVISIBLE
+                            holder.editTextSendFirstMessageMusician.text.clear()
+                            Tools.newPostOffer(PostOffer(user_id,offer.restaurant_id))
                         }
                     }else{
                         Toast.makeText(requireContext, getString(requireContext,R.string.doesnt_exist_text_eng),Toast.LENGTH_LONG)
