@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import com.example.naivybeats.RetrofitClient
 import com.example.naivybeats.models.BaseController
 import com.example.naivybeats.models.municipality.service.MunicipalityService
+import com.example.naivybeats.models.offer.models.OfferDto
 import com.example.naivybeats.models.offer.models.OfferIn
 import com.example.naivybeats.models.offer.service.OfferInService
 import com.google.gson.Gson
@@ -17,7 +18,7 @@ class OfferInController: BaseController() {
     private val service = RetrofitClient.createService(OfferInService::class.java)
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun getOffersIn(): List<OfferIn> {
+    suspend fun getOffersIn(): List<OfferDto> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = service.getOffersIn()

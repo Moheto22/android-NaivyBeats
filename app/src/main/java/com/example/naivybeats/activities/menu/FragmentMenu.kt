@@ -63,7 +63,7 @@ class FragmentMenu : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setRestaurantContent(user: Restaurant) {
         lifecycleScope.launch {
-        val listaDePublicaciones = Tools.getALlPosts()
+        val listaDePublicaciones = Tools.getALlPosts(user.user_id)
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView?.layoutManager = LinearLayoutManager(context)
         val adapter = PostAdapter(listaDePublicaciones,lifecycleScope)

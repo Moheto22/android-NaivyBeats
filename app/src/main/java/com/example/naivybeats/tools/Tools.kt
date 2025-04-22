@@ -22,6 +22,7 @@ import com.example.naivybeats.models.province.models.City
 import com.example.naivybeats.models.musician.controller.MusicianController
 import com.example.naivybeats.models.musician.model.Musician
 import com.example.naivybeats.models.offer.controller.OfferInController
+import com.example.naivybeats.models.offer.models.OfferDto
 import com.example.naivybeats.models.offer.models.OfferIn
 import com.example.naivybeats.models.offerInStyles.controller.OfferInStylesController
 import com.example.naivybeats.models.post.controller.PostController
@@ -256,9 +257,9 @@ class Tools{
             }
         }
 
-        suspend fun getALlPosts(): List<Post> {
+        suspend fun getALlPosts(user_id: Int): List<Post> {
             return withContext(Dispatchers.IO) {
-                postController.getAllPosts()
+                postController.getAllPosts(user_id)
             }
         }
 
@@ -283,7 +284,7 @@ class Tools{
 
         //OFFERS IN
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun getOffersIn(): List<OfferIn> {
+        suspend fun getOffersIn(): List<OfferDto> {
             return withContext(Dispatchers.IO) {
                 offerInController.getOffersIn()
             }
