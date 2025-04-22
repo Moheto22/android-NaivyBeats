@@ -18,10 +18,10 @@ class OfferInController: BaseController() {
     private val service = RetrofitClient.createService(OfferInService::class.java)
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun getOffersIn(): List<OfferDto> {
+    suspend fun getOffersIn(user_id: Int): List<OfferDto> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = service.getOffersIn()
+                val response = service.getOffersIn(user_id)
 
                 if (response.isSuccessful) {
                     response.body()?: emptyList()

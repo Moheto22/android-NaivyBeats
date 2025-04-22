@@ -6,10 +6,11 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface OfferInService {
-    @GET("api/Offer_In")
-    suspend fun getOffersIn(): Response<List<OfferDto>>
+    @GET("api/Offer_In/{user_id}")
+    suspend fun getOffersIn(@Path("user_id") user_id: Int): Response<List<OfferDto>>
 
     @POST("api/Offer_In")
     suspend fun newOffer(@Body offerIn: OfferIn): Response<Boolean>

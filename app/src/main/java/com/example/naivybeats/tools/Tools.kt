@@ -257,9 +257,9 @@ class Tools{
             }
         }
 
-        suspend fun getALlPosts(user_id: Int): List<Post> {
+        suspend fun getALlPosts(): List<Post> {
             return withContext(Dispatchers.IO) {
-                postController.getAllPosts(user_id)
+                postController.getAllPosts()
             }
         }
 
@@ -284,9 +284,9 @@ class Tools{
 
         //OFFERS IN
         @RequiresApi(Build.VERSION_CODES.O)
-        suspend fun getOffersIn(): List<OfferDto> {
+        suspend fun getOffersIn(user_id: Int): List<OfferDto> {
             return withContext(Dispatchers.IO) {
-                offerInController.getOffersIn()
+                offerInController.getOffersIn(user_id)
             }
         }
 

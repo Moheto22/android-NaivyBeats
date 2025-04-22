@@ -54,9 +54,9 @@ class PostController {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun getAllPosts(user_id: Int): List<Post> {
+    suspend fun getAllPosts(): List<Post> {
         return withContext(Dispatchers.IO) {
-            val response = service.getAllPosts(user_id)
+            val response = service.getAllPosts()
             if (response.isSuccessful) {
                 response.body() ?: emptyList()
             } else {
