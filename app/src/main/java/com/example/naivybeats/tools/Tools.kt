@@ -24,6 +24,7 @@ import com.example.naivybeats.models.musician.model.Musician
 import com.example.naivybeats.models.offer.controller.OfferInController
 import com.example.naivybeats.models.offer.models.OfferDto
 import com.example.naivybeats.models.offer.models.OfferIn
+import com.example.naivybeats.models.offer.models.PostOffer
 import com.example.naivybeats.models.offerInStyles.controller.OfferInStylesController
 import com.example.naivybeats.models.post.controller.PostController
 import com.example.naivybeats.models.post.model.Post
@@ -299,6 +300,12 @@ class Tools{
         suspend fun getStylesByOfferInId(id: Int) {
             return withContext(Dispatchers.IO) {
                 offerInStylesController.getStylesByOfferInId(id)
+            }
+        }
+
+        suspend fun newPostOffer(po: PostOffer): Boolean {
+            return withContext(Dispatchers.IO) {
+                offerInController.postOffer(po)
             }
         }
 

@@ -3,6 +3,7 @@ package com.example.naivybeats.models.offerInStyles.controller
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.naivybeats.RetrofitClient
+import com.example.naivybeats.models.offer.models.PostOffer
 import com.example.naivybeats.models.offerInStyles.service.OfferInStylesService
 import com.example.naivybeats.models.post.service.PostService
 import kotlinx.coroutines.Dispatchers

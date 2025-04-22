@@ -7,6 +7,7 @@ import com.example.naivybeats.models.BaseController
 import com.example.naivybeats.models.municipality.service.MunicipalityService
 import com.example.naivybeats.models.offer.models.OfferDto
 import com.example.naivybeats.models.offer.models.OfferIn
+import com.example.naivybeats.models.offer.models.PostOffer
 import com.example.naivybeats.models.offer.service.OfferInService
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -48,6 +49,19 @@ class OfferInController: BaseController() {
                 true
             } else {
                false
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun postOffer(po: PostOffer): Boolean {
+        return withContext(Dispatchers.IO) {
+            val response = service.newPostOffer(po)
+
+            if (response.isSuccessful) {
+                true
+            } else {
+                false
             }
         }
     }
