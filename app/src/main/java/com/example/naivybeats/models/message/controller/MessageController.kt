@@ -21,9 +21,6 @@ class MessageController {
     suspend fun newMessage(message: Message): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val json = Gson().toJson(message)
-                println("JSON enviado: $json")
-
                 val response = service.newMessage(message)
 
                 if (response.isSuccessful) {
