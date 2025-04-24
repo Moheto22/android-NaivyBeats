@@ -217,7 +217,7 @@ class FragmentPublicate : Fragment() {
 
         for (i in 0..<listOfButtons!!.size){
             if (buttonStates[listOfButtons?.get(i)] == true){
-                listResult.add(i)
+                listResult.add(i+1)
             }
         }
         return listResult

@@ -53,8 +53,7 @@ class ImageController {
                 val userNamePart = RequestBody.create("text/plain".toMediaTypeOrNull(), userName)
                 val descriptionPart = RequestBody.create("text/plain".toMediaTypeOrNull(), description)
                 val user_idPart = RequestBody.create("text/plain".toMediaTypeOrNull(), user_id.toString())
-
-                val response = service.updateImage(photoPart, path,userNamePart,descriptionPart,user_idPart)
+                val response = service.updateImage(photoPart,path,userNamePart,descriptionPart,user_idPart)
                 if (response.isSuccessful && response.body() != null) {
                     true
                 } else {

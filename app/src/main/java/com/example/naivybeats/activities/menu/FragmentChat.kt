@@ -14,18 +14,21 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.naivybeats.R
 import com.example.naivybeats.adapters.ChatAdapter
 import com.example.naivybeats.adapters.MessageAdapter
 import com.example.naivybeats.models.chat.model.Chat
 import com.example.naivybeats.models.message.model.Message
 import com.example.naivybeats.models.musician.model.Musician
+import com.example.naivybeats.models.user.model.Users
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,6 +44,7 @@ class FragmentChat : Fragment() {
     private var user_id: Int? = null
     private var numberOfMessages: Int? = null
     private var chat_id_chating:Int = 0
+    private var list_chats: List<Chat>? = null
     private lateinit var listMessagesView : RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,6 +74,7 @@ class FragmentChat : Fragment() {
             recyclerView?.layoutManager = LinearLayoutManager(requireContext())
             val user = Tools.userOrRestaurant(user_id!!)
             val list = Tools.getChatByUserId(user_id!!)
+            list_chats = list
             val adapterData = ChatAdapter(list, lifecycleScope, user!!,panelVisibleChat,panelChat,listMessagesView,requireContext(),panelMessage,nameUser,avatarUserChat,0)
             recyclerView?.adapter = adapterData
         }
@@ -122,6 +127,46 @@ class FragmentChat : Fragment() {
                 text.setText("")
             }
         }
+        searcher.doOnTextChanged { text, _, _, _ ->
+            lifecycleScope.launch {
+                val filter = filterList(text.toString(),user_id!!,list_chats!!)
+                var panelVisibleChat = view.findViewById<LinearLayout>(R.id.pantalla_lista_chat)
+                val user = Tools.userOrRestaurant(user_id!!)
+                var panelChat = view.findViewById<LinearLayout>(R.id.chat_panel)
+                var panelMessage = view.findViewById<LinearLayout>(R.id.panelMessage)
+                val nameUser = view.findViewById<TextView>(R.id.name_user_chat)
+                val avatarUserChat = view.findViewById<ImageView>(R.id.avat_user_chat)
+                val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewChats)
+                recyclerView?.layoutManager = LinearLayoutManager(requireContext())
+                val adapterData = ChatAdapter(filter, lifecycleScope, user!!,panelVisibleChat,panelChat,listMessagesView,requireContext(),panelMessage,nameUser,avatarUserChat,0)
+                recyclerView?.adapter = adapterData
+            }
+        }
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private suspend fun filterList(text: String?, userId: Int?, list_chats: List<Chat>?): List<Chat> {
+        var userChat : Users
+        var filtred : MutableList<Chat> = mutableListOf()
+        return withContext(Dispatchers.IO) {
+            for (chat in list_chats!!){
+                if (userId == chat.musicianId){
+                    userChat = Tools.userOrRestaurant(chat.restaurantId)!!
+                    if (userChat.name.startsWith(text.toString())){
+                        filtred?.add(chat)
+                    }
+                }else{
+                    userChat = Tools.userOrRestaurant(chat.musicianId)!!
+                    if (userChat.name.startsWith(text.toString())){
+                        filtred?.add(chat)
+                    }
+                }
+            }
+            filtred
+        }
+
+
     }
 
     override fun onCreateView(

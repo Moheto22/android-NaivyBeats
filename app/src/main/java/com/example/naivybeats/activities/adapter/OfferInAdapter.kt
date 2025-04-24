@@ -91,18 +91,23 @@ class OfferInAdapter(
                     }
                 }
                 holder.buttonSendFirstMessageMusician.setOnClickListener(){
+                    var id_chat : Chat
                     val text = holder.editTextSendFirstMessageMusician.text.toString()
                     if (!text.isEmpty()) {
                         val chat = Chat(null, null, offer.restaurant_id, user_id)
                         coroutineScope.launch {
-                            Tools.newChat(chat)
-                            Thread.sleep(1000)
-                            var c = Tools.getChatByMusicianAndRestaurantId(chat)
-                            val message = Message(0,null,c.chatId,user_id,null,text)
+                            id_chat = Tools.getChatByMusicianAndRestaurantId(chat)
+                            if (id_chat == null){
+                                Tools.newChat(chat)
+                                Thread.sleep(1000)
+                                id_chat = Tools.getChatByMusicianAndRestaurantId(chat)
+                            }
+                            val message = Message(0,null,id_chat.chatId,user_id,null,text)
                             Tools.newMessage(message)
                             holder.sendFirstMessageMusician.visibility = View.INVISIBLE
                             holder.editTextSendFirstMessageMusician.text.clear()
-                            Tools.newPostOffer(PostOffer(user_id,offer.restaurant_id))
+                            Tools.newPostOffer(PostOffer(user_id,offer.offer_in_id))
+                            holder.buttonPostulate.text = getString(requireContext,R.string.all_ready_postulated_eng)
                         }
                     }else{
                         Toast.makeText(requireContext, getString(requireContext,R.string.doesnt_exist_text_eng),Toast.LENGTH_LONG)

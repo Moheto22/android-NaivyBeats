@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 object RetrofitClient {
-    private const val BASE_URL = "http://10.0.2.202/NaivyBeats/"
+    private const val BASE_URL = "http://192.168.0.17/NaivyBeats/"
     //private const val BASE_URL = "http://10.0.0.99/dam04/"
     //private const val BASE_URL = "http://192.168.56.1/NaivyBeats/"
 

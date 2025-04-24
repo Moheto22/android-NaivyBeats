@@ -11,11 +11,13 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naivybeats.R
 import com.example.naivybeats.models.post.model.Post
+import com.example.naivybeats.models.post.model.PostDTO
+import com.example.naivybeats.models.post.model.PostLike
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class PostAdapter(
-    private val publications: List<Post>,
+    private val publications: List<PostLike>,
     private val coroutineScope: CoroutineScope
 ) : RecyclerView.Adapter<PostAdapter.PublicationViewHolder>() {
 
@@ -43,6 +45,7 @@ class PostAdapter(
         holder.title.text = publication.title
         holder.description.text = publication.description
         holder.likeCount.text = "0"
+
         coroutineScope.launch {
             val user = Tools.userOrRestaurant(publication.userId)
             holder.nameUser.text = user?.name
