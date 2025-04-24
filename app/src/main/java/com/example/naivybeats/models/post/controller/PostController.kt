@@ -6,6 +6,7 @@ import com.example.naivybeats.RetrofitClient
 import com.example.naivybeats.models.musician.service.MusicianService
 import com.example.naivybeats.models.post.model.Post
 import com.example.naivybeats.models.post.model.PostDTO
+import com.example.naivybeats.models.post.model.PostLike
 import com.example.naivybeats.models.post.service.PostService
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -54,7 +55,7 @@ class PostController {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun getAllPosts(): List<Post> {
+    suspend fun getAllPosts(): List<PostLike> {
         return withContext(Dispatchers.IO) {
             val response = service.getAllPosts()
             if (response.isSuccessful) {

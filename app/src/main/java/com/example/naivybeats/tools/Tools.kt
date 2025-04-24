@@ -29,6 +29,7 @@ import com.example.naivybeats.models.offerInStyles.controller.OfferInStylesContr
 import com.example.naivybeats.models.post.controller.PostController
 import com.example.naivybeats.models.post.model.Post
 import com.example.naivybeats.models.post.model.PostDTO
+import com.example.naivybeats.models.post.model.PostLike
 import com.example.naivybeats.models.province.controller.ProvinceController
 import com.example.naivybeats.models.restaurant.model.Restaurant
 import com.example.naivybeats.models.time.controller.TimeController
@@ -258,7 +259,7 @@ class Tools{
             }
         }
 
-        suspend fun getALlPosts(): List<Post> {
+        suspend fun getALlPosts(): List<PostLike> {
             return withContext(Dispatchers.IO) {
                 postController.getAllPosts()
             }

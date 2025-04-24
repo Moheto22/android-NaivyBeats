@@ -2,6 +2,7 @@ package com.example.naivybeats.models.post.service
 
 import com.example.naivybeats.models.post.model.Post
 import com.example.naivybeats.models.post.model.PostDTO
+import com.example.naivybeats.models.post.model.PostLike
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.POST
@@ -15,7 +16,7 @@ import retrofit2.http.Path
 interface PostService {
 
     @GET("api/Publication")
-    suspend fun getAllPosts(): Response<List<Post>>
+    suspend fun getAllPosts(): Response<List<PostLike>>
 
     @Multipart
     @POST("api/Publication")
