@@ -26,4 +26,18 @@ interface PostService {
         @Part("description") description: RequestBody,
         @Part file: MultipartBody.Part
     ): Response<Boolean>
+
+    @Multipart
+    @POST("api/Like")
+    suspend fun sendLike(
+        @Part("user_id") user_id: RequestBody,
+        @Part("publication_id") publication_id: RequestBody,
+    ) : Response<Boolean>
+
+    @Multipart
+    @POST("api/Follow")
+    suspend fun sendFollow(
+        @Part("restaurant_id") user_id: RequestBody,
+        @Part("musician_id") musician_id: RequestBody,
+    ) : Response<Boolean>
 }

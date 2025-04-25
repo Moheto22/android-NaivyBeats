@@ -259,9 +259,24 @@ class Tools{
             }
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getALlPosts(user_id: Int): List<PostLike> {
             return withContext(Dispatchers.IO) {
                 postController.getAllPosts(user_id)
+            }
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun sendLike(user_id: Int, publication_id: Int): Boolean {
+            return withContext(Dispatchers.IO) {
+                postController.sendLike(user_id, publication_id)
+            }
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun sendFollow(restaurant_id: Int, musician_id: Int): Boolean {
+            return withContext(Dispatchers.IO) {
+                postController.sendFollow(restaurant_id, musician_id)
             }
         }
 

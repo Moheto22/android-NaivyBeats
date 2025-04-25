@@ -65,4 +65,47 @@ class PostController {
             }
         }
     }
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun sendLike(user_id: Int, publication_id: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val user_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), user_id.toString())
+                val publication_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), publication_id.toString())
+
+                val response = service.sendLike(user_id_part, publication_id_part)
+
+                if (response.isSuccessful && response.body() == true) {
+                    true
+                } else {
+                    false
+                }
+            } catch (e: Exception) {
+                println("Excepción en insertPost: ${e.message}")
+                e.printStackTrace()
+                false
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun sendFollow(restaurant_id: Int, musician_id: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val restaurant_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), restaurant_id.toString())
+                val musician_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), musician_id.toString())
+
+                val response = service.sendFollow(restaurant_id_part, musician_id_part)
+
+                if (response.isSuccessful && response.body() == true) {
+                    true
+                } else {
+                    false
+                }
+            } catch (e: Exception) {
+                println("Excepción en insertPost: ${e.message}")
+                e.printStackTrace()
+                false
+            }
+        }
+    }
 }
