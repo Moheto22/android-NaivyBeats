@@ -54,14 +54,14 @@ class OfferInController: BaseController() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun postOffer(po: PostOffer): Boolean {
+    suspend fun postOffer(po: PostOffer): Int? {
         return withContext(Dispatchers.IO) {
             val response = service.newPostOffer(po)
 
             if (response.isSuccessful) {
-                true
+                response.body()
             } else {
-                false
+                0
             }
         }
     }

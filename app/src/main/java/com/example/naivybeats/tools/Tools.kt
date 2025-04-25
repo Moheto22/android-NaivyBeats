@@ -245,7 +245,7 @@ class Tools{
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getOffers(user_id: Int): Int{
             return withContext(Dispatchers.IO) {
-                restaurantController.getOffers(user_id)!!
+                restaurantController.getOffers( user_id)!!
             }
         }
 
@@ -360,7 +360,7 @@ class Tools{
             }
         }
 
-        suspend fun newPostOffer(po: PostOffer): Boolean {
+        suspend fun newPostOffer(po: PostOffer): Int? {
             return withContext(Dispatchers.IO) {
                 offerInController.postOffer(po)
             }

@@ -17,5 +17,5 @@ interface OfferInService {
     suspend fun newOffer(@Body offerIn: OfferIn): Response<Boolean>
 
     @POST("api/post_offer")
-    suspend fun newPostOffer(@Body po: PostOffer): Response<Boolean> 
+    suspend fun newPostOffer(@Body po: PostOffer): Response<Int>
 }
