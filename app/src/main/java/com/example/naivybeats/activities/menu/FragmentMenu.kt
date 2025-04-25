@@ -66,7 +66,7 @@ class FragmentMenu : Fragment() {
         val listaDePublicaciones = Tools.getALlPosts(user.user_id)
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView?.layoutManager = LinearLayoutManager(context)
-        val adapter = PostAdapter(listaDePublicaciones,lifecycleScope)
+        val adapter = PostAdapter(listaDePublicaciones,lifecycleScope,requireContext(),user_id)
         recyclerView?.adapter = adapter
         }
     }

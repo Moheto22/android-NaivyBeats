@@ -1,24 +1,27 @@
 package com.example.naivybeats.activities.adapter
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naivybeats.R
-import com.example.naivybeats.models.post.model.Post
-import com.example.naivybeats.models.post.model.PostDTO
 import com.example.naivybeats.models.post.model.PostLike
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class PostAdapter(
     private val publications: List<PostLike>,
-    private val coroutineScope: CoroutineScope
+    private val coroutineScope: CoroutineScope,
+    private val requireContext: Context,
+    private val user_id: Int?
 ) : RecyclerView.Adapter<PostAdapter.PublicationViewHolder>() {
 
     inner class PublicationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -30,6 +33,7 @@ class PostAdapter(
         val avatar: ImageView = view.findViewById(R.id.avatar)
         val likeCount: TextView = view.findViewById(R.id.count_like)
         val likeButton: ImageView = view.findViewById(R.id.like)
+        val follow :Button = view.findViewById(R.id.follow)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublicationViewHolder {
@@ -45,7 +49,12 @@ class PostAdapter(
         holder.title.text = publication.title
         holder.description.text = publication.description
         holder.likeCount.text = "0"
-
+        if (publication.like == 1){
+            holder.likeButton.setImageResource(R.drawable.heart_on)
+        }
+        if (publication.follow == 1){
+            holder.follow.text = getString(requireContext,R.string.following_eng)
+        }
         coroutineScope.launch {
             val user = Tools.userOrRestaurant(publication.userId)
             holder.nameUser.text = user?.name
@@ -60,6 +69,26 @@ class PostAdapter(
                 holder.avatar.setImageBitmap(bitmap)
             }
         }
+        holder.likeButton.setOnClickListener {
+            if (publication.like == 0) {
+                publication.like = 1
+                coroutineScope.launch {
+                    Tools.sendLike(user_id!!, publication.postId)
+                    holder.likeButton.setImageResource(R.drawable.heart_on)
+                    // actualizar numero de likes
+                }
+            }
+        }
+        holder.follow.setOnClickListener {
+            if (publication.follow == 0){
+                publication.follow = 1
+                coroutineScope.launch {
+                    Tools.sendFollow(user_id!!, publication.userId)
+                    holder.follow.text = getString(requireContext,R.string.following_eng)
+                }
+            }
+        }
+
     }
 
     override fun getItemCount(): Int = publications.size

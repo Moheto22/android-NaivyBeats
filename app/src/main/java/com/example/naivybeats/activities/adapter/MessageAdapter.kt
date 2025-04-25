@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -54,9 +55,13 @@ class MessageAdapter(
                 val bitmap = BitmapFactory.decodeFile(it.absolutePath)
                 holder.avatar.setImageBitmap(bitmap)
             }
-            if (user?.user_id==user_actual_id){
+            if (user?.user_id == user_actual_id) {
                 holder.body.background = holder.itemView.context.getDrawable(R.drawable.element_beig)
-                holder.body.gravity = Gravity.END
+                holder.body.layoutParams = holder.body.layoutParams.apply {
+                    if (this is FrameLayout.LayoutParams) {
+                        gravity = Gravity.END
+                    }
+                }
             }
         }
     }
