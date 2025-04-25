@@ -259,9 +259,9 @@ class Tools{
             }
         }
 
-        suspend fun getALlPosts(): List<PostLike> {
+        suspend fun getALlPosts(user_id: Int): List<PostLike> {
             return withContext(Dispatchers.IO) {
-                postController.getAllPosts()
+                postController.getAllPosts(user_id)
             }
         }
 

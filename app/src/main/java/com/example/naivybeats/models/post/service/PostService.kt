@@ -15,8 +15,8 @@ import retrofit2.http.Path
 
 interface PostService {
 
-    @GET("api/Publication")
-    suspend fun getAllPosts(): Response<List<PostLike>>
+    @GET("api/Publication/{user_id}")
+    suspend fun getAllPosts(@Path("user_id") user_id: Int): Response<List<PostLike>>
 
     @Multipart
     @POST("api/Publication")
