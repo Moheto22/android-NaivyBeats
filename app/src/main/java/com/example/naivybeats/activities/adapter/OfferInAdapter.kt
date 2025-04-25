@@ -102,7 +102,7 @@ class OfferInAdapter(
                                 Thread.sleep(1000)
                                 id_chat = Tools.getChatByMusicianAndRestaurantId(chat)
                             }
-                            val message = Message(0,null,id_chat.chatId,user_id,null,text)
+                            val message = Message(0,null,id_chat.chatId,user_id,null,text,null,null)
                             Tools.newMessage(message)
                             holder.sendFirstMessageMusician.visibility = View.INVISIBLE
                             holder.editTextSendFirstMessageMusician.text.clear()

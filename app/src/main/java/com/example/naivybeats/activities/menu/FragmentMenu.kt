@@ -8,7 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,12 +66,20 @@ class FragmentMenu : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setRestaurantContent(user: Restaurant) {
+        val panelSendOffer = view?.findViewById<LinearLayout>(R.id.sendOffert)
+        val salarys = view?.findViewById<EditText>(R.id.salary)
+        val date = view?.findViewById<TextView>(R.id.date_data)
+        val buttonSend = view?.findViewById<Button>(R.id.send)
+        val buttonCancel = view?.findViewById<Button>(R.id.cancell)
         lifecycleScope.launch {
         val listaDePublicaciones = Tools.getALlPosts(user.user_id)
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView?.layoutManager = LinearLayoutManager(context)
-        val adapter = PostAdapter(listaDePublicaciones,lifecycleScope,requireContext(),user_id)
+        val adapter = PostAdapter(listaDePublicaciones,lifecycleScope,requireContext(),user_id,panelSendOffer,salarys,date,buttonSend)
         recyclerView?.adapter = adapter
+        }
+        buttonCancel?.setOnClickListener {
+            panelSendOffer?.visibility = View.GONE
         }
     }
 

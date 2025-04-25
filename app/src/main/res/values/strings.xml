@@ -89,4 +89,5 @@
     <string name="send_eng">Send</string>
     <string name="send_message_eng">Send a message to the Restaurant</string>
     <string name="doesnt_exist_text_eng">You have to write a message to Restaurant</string>
+    <string name="cancel_eng">Cancel</string>
 </resources>

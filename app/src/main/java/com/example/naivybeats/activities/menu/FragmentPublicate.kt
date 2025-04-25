@@ -202,11 +202,6 @@ class FragmentPublicate : Fragment() {
                     offerIn.styles_ids = listStylesSelected
 
                     val succes =Tools.newOffer(offerIn)
-                    if (succes) {
-                        Toast.makeText(requireContext(), "✔️ Oferta creada correctamente", Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(requireContext(), "❌ Error al crear la oferta", Toast.LENGTH_LONG).show()
-                    }
                 }
             }
         }

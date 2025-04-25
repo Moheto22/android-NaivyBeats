@@ -118,7 +118,7 @@ class FragmentChat : Fragment() {
         sendButton.setOnClickListener(){
             val message = text.text.toString()
             lifecycleScope.launch {
-                Tools.newMessage(Message(null,null,chat_id_chating,user_id!!,null,message))
+                Tools.newMessage(Message(null,null,chat_id_chating,user_id!!,null,message,null,null))
                 delay(500)
                 val list = Tools.getMessagesByChatId(chat_id_chating)
                 listMessagesView.layoutManager= LinearLayoutManager(requireContext())

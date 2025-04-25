@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -34,6 +35,11 @@ class MessageAdapter(
         val messageText: TextView = view.findViewById(R.id.message_data)
         val dateText: TextView = view.findViewById(R.id.date)
         val body : LinearLayout = view.findViewById(R.id.message_body)
+        val bodyAccept : LinearLayout = view.findViewById(R.id.panelAccept)
+        val accept : Button = view.findViewById(R.id.accept)
+        val decline : Button = view.findViewById(R.id.decline)
+        val dateData : TextView = view.findViewById(R.id.date_data)
+        val salary : TextView = view.findViewById(R.id.salary)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
@@ -49,11 +55,35 @@ class MessageAdapter(
         holder.dateText.text = message.publishDate
         coroutineScope.launch {
             val user = Tools.userOrRestaurant(message.userId)
-            holder.userName.text = user?.name
-            val file = user?.let { Tools.getImage(Tools.generatePathForImages(user.photo)) }
-            file?.let {
-                val bitmap = BitmapFactory.decodeFile(it.absolutePath)
-                holder.avatar.setImageBitmap(bitmap)
+            if (message.offer != null){
+                holder.bodyAccept.visibility = View.VISIBLE
+                holder.body.visibility = View.GONE
+                val list = message.text.split("|")
+                holder.dateData.text = list[1]
+                holder.salary.text = list[0]
+                if (message.accept == -1){
+                    //Oscurecer el boton decline
+                }else if(message.accept == 1){
+                    //Oscurcer el boton accept
+                }
+                holder.accept.setOnClickListener {
+                    if (message.accept == null){
+                        //Aceptar la oferta y oscurecer el boton
+                    }
+                }
+                holder.decline.setOnClickListener {
+                    if (message.accept == null){
+                        //Aceptar la oferta y oscurecer el boton
+                    }
+                }
+            }else{
+                holder.userName.text = user?.name
+                val file = user?.let { Tools.getImage(Tools.generatePathForImages(user.photo)) }
+                file?.let {
+                    val bitmap = BitmapFactory.decodeFile(it.absolutePath)
+                    holder.avatar.setImageBitmap(bitmap)
+                }
+
             }
             if (user?.user_id == user_actual_id) {
                 holder.body.background = holder.itemView.context.getDrawable(R.drawable.element_beig)
@@ -63,6 +93,7 @@ class MessageAdapter(
                     }
                 }
             }
+
         }
     }
     override fun getItemCount(): Int = messageList.size

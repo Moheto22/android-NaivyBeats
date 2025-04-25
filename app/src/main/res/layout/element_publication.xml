@@ -93,6 +93,7 @@
                 android:layout_marginLeft="5dp"
                 />
             <Button
+                android:id="@+id/send_personal_offer"
                 android:layout_width="90dp"
                 android:layout_height="40dp"
                 android:gravity="center"

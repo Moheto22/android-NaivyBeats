@@ -7,7 +7,7 @@ import com.example.naivybeats.models.style.model.Style;
 import java.util.List;
 
 public class OfferIn {
-    private int offer_in_id;
+    private Integer offer_in_id;
     private String publish_date;
     private int salary;
     private String event_date;
@@ -20,7 +20,7 @@ public class OfferIn {
     public OfferIn() {
     }
 
-    public OfferIn(int offer_in_id, String publish_date, int salary, String event_date, Integer music_id_final, int restaurant_id, String description, Integer done, List<Integer> styles_ids) {
+    public OfferIn(Integer offer_in_id, String publish_date, int salary, String event_date, Integer music_id_final, int restaurant_id, String description, Integer done, List<Integer> styles_ids) {
         this.offer_in_id = offer_in_id;
         this.publish_date = publish_date;
         this.salary = salary;
@@ -64,12 +64,12 @@ public class OfferIn {
         this.event_date = event_date;
     }
 
-    public Integer getMusic_id_final() {
-        return music_id_final;
-    }
-
     public void setMusic_id_final(Integer music_id_final) {
         this.music_id_final = music_id_final;
+    }
+
+    public Integer getMusic_id_final() {
+        return music_id_final;
     }
 
     public int getRestaurant_id() {

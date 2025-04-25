@@ -18,12 +18,16 @@ public class Message
     int chatId;
     @SerializedName("user_id")
     int userId;
+    @SerializedName("offer")
+    Integer offer;
+    @SerializedName("accept")
+    Integer accept;
 
     public Message()
     {
     }
 
-    public Message(Integer messageId, String readingDate, int chatId, int userId, String publishDate, String text)
+    public Message(Integer messageId, String readingDate, int chatId, int userId, String publishDate, String text, Integer offer, Integer accept)
     {
         this.messageId = messageId;
         this.readingDate = readingDate;
@@ -31,6 +35,8 @@ public class Message
         this.userId = userId;
         this.publishDate = publishDate;
         this.text = text;
+        this.offer = offer;
+        this.accept = accept;
     }
 
     public int getMessageId()
@@ -41,6 +47,14 @@ public class Message
     public void setMessageId(int messageId)
     {
         this.messageId = messageId;
+    }
+    public int getOffer()
+    {
+        return offer;
+    }
+
+    public Integer getAccept() {
+        return accept;
     }
 
     public String getText()
