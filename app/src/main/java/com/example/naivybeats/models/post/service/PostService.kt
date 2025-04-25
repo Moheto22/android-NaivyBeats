@@ -28,14 +28,14 @@ interface PostService {
     ): Response<Boolean>
 
     @Multipart
-    @POST("api/Like")
+    @POST("api/Publication/Like")
     suspend fun sendLike(
         @Part("user_id") user_id: RequestBody,
         @Part("publication_id") publication_id: RequestBody,
     ) : Response<Boolean>
 
     @Multipart
-    @POST("api/Follow")
+    @POST("api/Publication/Follow")
     suspend fun sendFollow(
         @Part("restaurant_id") user_id: RequestBody,
         @Part("musician_id") musician_id: RequestBody,
