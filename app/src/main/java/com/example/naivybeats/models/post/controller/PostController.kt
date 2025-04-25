@@ -108,4 +108,48 @@ class PostController {
             }
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun unFollow(restaurant_id: Int, musician_id: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val restaurant_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), restaurant_id.toString())
+                val musician_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), musician_id.toString())
+
+                val response = service.unfollow(restaurant_id_part, musician_id_part)
+
+                if (response.isSuccessful && response.body() == true) {
+                    true
+                } else {
+                    false
+                }
+            } catch (e: Exception) {
+                println("Excepción en insertPost: ${e.message}")
+                e.printStackTrace()
+                false
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun unlike(user_id: Int, publication_id: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val user_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), user_id.toString())
+                val publication_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), publication_id.toString())
+
+                val response = service.unlike(user_id_part, publication_id_part)
+
+                if (response.isSuccessful && response.body() == true) {
+                    true
+                } else {
+                    false
+                }
+            } catch (e: Exception) {
+                println("Excepción en insertPost: ${e.message}")
+                e.printStackTrace()
+                false
+            }
+        }
+    }
 }

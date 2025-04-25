@@ -274,9 +274,24 @@ class Tools{
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun unlike(user_id: Int, publication_id: Int): Boolean {
+            return withContext(Dispatchers.IO) {
+                postController.unlike(user_id, publication_id)
+            }
+        }
+
+
+            @RequiresApi(Build.VERSION_CODES.O)
         suspend fun sendFollow(restaurant_id: Int, musician_id: Int): Boolean {
             return withContext(Dispatchers.IO) {
                 postController.sendFollow(restaurant_id, musician_id)
+            }
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun unfollow(restaurant_id: Int, musician_id: Int): Boolean {
+            return withContext(Dispatchers.IO) {
+                postController.unFollow(restaurant_id, musician_id)
             }
         }
 

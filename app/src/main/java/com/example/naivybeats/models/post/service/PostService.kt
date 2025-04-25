@@ -35,8 +35,22 @@ interface PostService {
     ) : Response<Boolean>
 
     @Multipart
+    @POST("api/Publication/Unlike")
+    suspend fun unlike(
+        @Part("user_id") user_id: RequestBody,
+        @Part("publication_id") publication_id: RequestBody,
+    ) : Response<Boolean>
+
+    @Multipart
     @POST("api/Publication/Follow")
     suspend fun sendFollow(
+        @Part("restaurant_id") user_id: RequestBody,
+        @Part("musician_id") musician_id: RequestBody,
+    ) : Response<Boolean>
+
+    @Multipart
+    @POST("api/Publication/Unfollow")
+    suspend fun unfollow(
         @Part("restaurant_id") user_id: RequestBody,
         @Part("musician_id") musician_id: RequestBody,
     ) : Response<Boolean>
