@@ -14,7 +14,7 @@ interface OfferInService {
     suspend fun getOffersIn(@Path("user_id") user_id: Int): Response<List<OfferDto>>
 
     @POST("api/Offer_In")
-    suspend fun newOffer(@Body offerIn: OfferIn): Response<Boolean>
+    suspend fun newOffer(@Body offerIn: OfferIn): Response<Int>
 
     @POST("api/post_offer")
     suspend fun newPostOffer(@Body po: PostOffer): Response<Int>
