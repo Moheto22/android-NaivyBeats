@@ -32,4 +32,10 @@ interface MusicianService {
                                @Part("styles") styles: RequestBody,
                                @Part("times") times: RequestBody
                               ): Response<Boolean>
+
+    @GET("api/Musicians/Follows/{user_id}")
+    suspend fun getFollows(@Path("user_id") musicianId: Int): Response<Int>
+
+    @GET("api/Musicians/Likes/{user_id}")
+    suspend fun getLikes(@Path("user_id") musicianId: Int): Response<Int>
 }

@@ -87,5 +87,35 @@ class MusicianController {
             }
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getFollows(id: Int): Int? {
+        return try {
+            val response = service.getFollows(id)
+
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                0
+            }
+        } catch (e: Exception) {
+            0
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getLikes(id: Int): Int? {
+        return try {
+            val response = service.getLikes(id)
+
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                0
+            }
+        } catch (e: Exception) {
+            0
+        }
+    }
 }
 

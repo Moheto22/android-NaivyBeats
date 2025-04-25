@@ -207,6 +207,18 @@ class Tools{
             }
         }
 
+        suspend fun getLikes(user_id: Int): Int?{
+            return withContext(Dispatchers.IO) {
+                musicianController.getLikes(user_id)
+            }
+        }
+
+        suspend fun getFollows(user_id: Int): Int?{
+            return withContext(Dispatchers.IO) {
+                musicianController.getFollows(user_id)
+            }
+        }
+
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun insertMusician(musician: Musician, avatar: File): Boolean{
             return withContext(Dispatchers.IO){
@@ -220,6 +232,20 @@ class Tools{
         suspend fun getRestaurantById(user_id: Int): Restaurant{
             return withContext(Dispatchers.IO) {
                 restaurantController.getRestaurantById(user_id)!!
+            }
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun getEventsDone(user_id: Int): Int{
+            return withContext(Dispatchers.IO) {
+                restaurantController.getEventsDone(user_id)!!
+            }
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun getOffers(user_id: Int): Int{
+            return withContext(Dispatchers.IO) {
+                restaurantController.getOffers(user_id)!!
             }
         }
 

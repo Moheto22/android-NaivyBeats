@@ -27,6 +27,19 @@ class RestaurantController {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getEventsDone(id: Int): Int? {
+        val response = service.getEventsDone(id)
+        return response.body()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getOffers(id: Int): Int? {
+        val response = service.getOffers(id)
+        return response.body()
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun newRestaurant(user_id: Int,
                               name: String,
                               photo: File,

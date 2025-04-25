@@ -15,6 +15,12 @@ interface RestaurantService {
     @GET("api/Restaurants/{id}")
     suspend fun getRestaurantById(@Path("id") restaurantId: Int): Response<Restaurant>
 
+    @GET("api/Restaurants/Actuaciones/{user_id}")
+    suspend fun getEventsDone(@Path("user_id") restaurantId: Int): Response<Int>
+
+    @GET("api/Restaurants/Ofertas/{user_id}")
+    suspend fun getOffers(@Path("user_id") restaurantId: Int): Response<Int>
+
     @Multipart
     @POST("api/Restaurants")
     suspend fun newRestaurant(@Part("user_id") userId: RequestBody,
