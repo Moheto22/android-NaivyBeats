@@ -245,7 +245,7 @@ class Tools{
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getOffers(user_id: Int): Int{
             return withContext(Dispatchers.IO) {
-                restaurantController.getEventsDone(user_id)!!
+                restaurantController.getOffers(user_id)!!
             }
         }
 

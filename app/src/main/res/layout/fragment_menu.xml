@@ -90,13 +90,14 @@
     <LinearLayout
         android:id="@+id/sendOffert"
         android:layout_width="270dp"
+        tools:ignore="RtlCompat"
         android:gravity="center_horizontal"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="center"
         android:background="@drawable/design_big_textbox"
         android:orientation="vertical"
         android:padding="20dp"
-        android:visibility="gone">
+        android:visibility="invisible">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -165,27 +166,27 @@
             <Button
                 android:id="@+id/cancell"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:background="@drawable/design_button"
                 android:padding="0dp"
                 android:text="@string/cancel_eng"
                 android:textColor="@color/bluemarin"
-                android:textSize="15dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/send"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
                 android:background="@drawable/design_button"
                 android:padding="0dp"
                 android:text="@string/send_oferr_eng"
                 android:textColor="@color/bluemarin"
-                android:textSize="15dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 app:backgroundTint="@null"/>
         </LinearLayout>

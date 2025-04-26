@@ -11,4 +11,6 @@
     <color name="bluemarin_trans">#98083D77</color>
     <color name="black_trans">#63000000</color>
     <color name="trans">#00000000</color>
+    <color name="green">#E25BBF0F</color>
+    <color name="red">#E2BF0F0F</color>
 </resources>

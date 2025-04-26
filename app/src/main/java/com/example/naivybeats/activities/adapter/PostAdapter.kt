@@ -1,5 +1,6 @@
 package com.example.naivybeats.activities.adapter
 
+import Tools
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
@@ -24,6 +25,7 @@ import com.example.naivybeats.models.message.model.Message
 import com.example.naivybeats.models.offer.models.OfferIn
 import com.example.naivybeats.models.post.model.PostLike
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -63,14 +65,15 @@ class PostAdapter(
         holder.date.text = publication.postDate
         holder.title.text = publication.title
         holder.description.text = publication.description
-        holder.likeCount.text = "0"
-        if (publication.like == 1){
-            holder.likeButton.setImageResource(R.drawable.heart_on)
-        }
-        if (publication.follow == 1){
-            holder.follow.text = getString(requireContext,R.string.following_eng)
-        }
         coroutineScope.launch {
+            val likes = Tools.getLikes(publication.postId)
+            holder.likeCount.text = likes.toString()
+            if (publication.like == 1){
+                holder.likeButton.setImageResource(R.drawable.heart_on)
+            }
+            if (publication.follow == 1){
+                holder.follow.text = getString(requireContext,R.string.following_eng)
+            }
             val user = Tools.userOrRestaurant(publication.userId)
             holder.nameUser.text = user?.name
             val file = user?.let { Tools.getImage(Tools.generatePathForImages(publication.multimedia)) }
@@ -90,19 +93,25 @@ class PostAdapter(
                 coroutineScope.launch {
                     Tools.sendLike(user_id!!, publication.postId)
                     holder.likeButton.setImageResource(R.drawable.heart_on)
-                    // actualizar numero de likes
+                    delay(500)
+                    val likes = Tools.getLikes(publication.postId)
+                    holder.likeCount.text = likes.toString()
+
                 }
-            }else{
+            } else {
                 publication.like = 0
                 coroutineScope.launch {
                     Tools.unlike(user_id!!, publication.postId)
                     holder.likeButton.setImageResource(R.drawable.heart_off)
-                    // actualizar numero de likes
+                    delay(500)
+                    val likes = Tools.getLikes(publication.postId)
+                    holder.likeCount.text = likes.toString()
+                }
             }
         }
-            holder.buttonSendOffer.setOnClickListener {
+        holder.buttonSendOffer.setOnClickListener {
                 panelSendOffer?.visibility = View.VISIBLE
-            }
+        }
         holder.follow.setOnClickListener {
             if (publication.follow == 0){
                 publication.follow = 1
@@ -120,65 +129,63 @@ class PostAdapter(
         }
 
 
-            dateTextView!!.setOnClickListener(){
-                val currentDate = Calendar.getInstance()
-                DatePickerDialog(
-                    requireContext,
-                    { _, year, month, dayOfMonth ->
-                        // Cuando se selecciona la fecha, mostramos el TimePicker
-                        val selectedDate = Calendar.getInstance()
-                        selectedDate.set(Calendar.YEAR, year)
-                        selectedDate.set(Calendar.MONTH, month)
-                        selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        dateTextView!!.setOnClickListener(){
+            val currentDate = Calendar.getInstance()
+            DatePickerDialog(
+                requireContext,
+                { _, year, month, dayOfMonth ->
+                    // Cuando se selecciona la fecha, mostramos el TimePicker
+                    val selectedDate = Calendar.getInstance()
+                    selectedDate.set(Calendar.YEAR, year)
+                    selectedDate.set(Calendar.MONTH, month)
+                    selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-                        TimePickerDialog(
-                            requireContext,
-                            { _, hourOfDay, minute ->
-                                selectedDate.set(Calendar.HOUR_OF_DAY, hourOfDay)
-                                selectedDate.set(Calendar.MINUTE, minute)
-                                // Formateamos la fecha y la ponemos en el botón
-                                val format = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-                                dateTextView.text = format.format(selectedDate.time)
+                    TimePickerDialog(
+                        requireContext,
+                        { _, hourOfDay, minute ->
+                            selectedDate.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                            selectedDate.set(Calendar.MINUTE, minute)
+                            // Formateamos la fecha y la ponemos en el botón
+                            val format = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                            dateTextView.text = format.format(selectedDate.time)
 
-                            },
-                            currentDate.get(Calendar.HOUR_OF_DAY),
-                            currentDate.get(Calendar.MINUTE),
-                            true
-                        ).show()
+                        },
+                        currentDate.get(Calendar.HOUR_OF_DAY),
+                        currentDate.get(Calendar.MINUTE),
+                        true
+                    ).show()
 
-                    },
-                    currentDate.get(Calendar.YEAR),
-                    currentDate.get(Calendar.MONTH),
-                    currentDate.get(Calendar.DAY_OF_MONTH)
-                ).show()
+                },
+                currentDate.get(Calendar.YEAR),
+                currentDate.get(Calendar.MONTH),
+                currentDate.get(Calendar.DAY_OF_MONTH)
+            ).show()
 
-            }
-            buttonSend?.setOnClickListener {
-                val salary = salarys?.text.toString()
-                val dateText = dateTextView?.text.toString()
-                val message = salary + "|" + dateTextView
-                val chat = Chat(null,null,user_id!!,publication.userId!!)
-                var idOffer : Int
-                var finalChat : Chat
-                coroutineScope.launch {
-                    idOffer = Tools.newOffer(OfferIn(null,null,salary as Int,dateText,null,user_id!!,null,null,null))!!
-                    if (publication.chat == 1){
-                        finalChat = Tools.getChatByMusicianAndRestaurantId(chat)
-                        Tools.newMessage(Message(null,null,finalChat.chatId,user_id,null,message,idOffer,null))
-                    }else{
-                        Tools.newChat(chat)
-                        finalChat = Tools.getChatByMusicianAndRestaurantId(chat)
-                        Tools.newMessage(Message(null,null,finalChat.chatId,user_id,null,message,idOffer,null))
-                    }
-                    salarys?.text?.clear()
-                    dateTextView?.text = "00/00/0000 00:00"
-                    panelSendOffer?.visibility = View.GONE
-                }
-
-            }
         }
+        buttonSend?.setOnClickListener {
+            val salary = salarys?.text.toString()
+            val dateText = dateTextView.text.toString()
+            val message = salary + "|" + dateText
+            val chat = Chat(null,null,user_id!!,publication.userId!!)
+            var idOffer : Int
+            var finalChat : Chat
+            coroutineScope.launch {
+                val salaryInt = salary.toInt()
+                idOffer = Tools.newOffer(OfferIn(null,null,salaryInt,dateText,null,user_id!!,null,null,null))!!
+                if (publication.chat == 1){
+                    finalChat = Tools.getChatByMusicianAndRestaurantId(chat)
+                    Tools.newMessage(Message(null,null,finalChat.chatId,user_id,null,message,idOffer,null))
+                }else{
+                    Tools.newChat(chat)
+                    finalChat = Tools.getChatByMusicianAndRestaurantId(chat)
+                    Tools.newMessage(Message(null,null,finalChat.chatId,user_id,null,message,idOffer,null))
+                }
+                salarys?.text?.clear()
+                dateTextView?.text = "00/00/0000 00:00"
+                panelSendOffer?.visibility = View.GONE
+            }
 
+        }
     }
-
     override fun getItemCount(): Int = publications.size
 }

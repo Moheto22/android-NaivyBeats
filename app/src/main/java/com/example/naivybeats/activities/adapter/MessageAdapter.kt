@@ -17,6 +17,7 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naivybeats.R
 import com.example.naivybeats.models.message.model.Message
+import com.example.naivybeats.models.musician.model.Musician
 import com.example.naivybeats.models.restaurant.model.Restaurant
 import com.google.android.material.imageview.ShapeableImageView
 import kotlinx.coroutines.CoroutineScope
@@ -55,25 +56,50 @@ class MessageAdapter(
         holder.dateText.text = message.publishDate
         coroutineScope.launch {
             val user = Tools.userOrRestaurant(message.userId)
+            val actualUser = Tools.userOrRestaurant(user_actual_id)
             if (message.offer != null){
                 holder.bodyAccept.visibility = View.VISIBLE
                 holder.body.visibility = View.GONE
                 val list = message.text.split("|")
                 holder.dateData.text = list[1]
                 holder.salary.text = list[0]
-                if (message.accept == -1){
-                    //Oscurecer el boton decline
-                }else if(message.accept == 1){
-                    //Oscurcer el boton accept
+                if (message.accept == 1){
+                    if (user!!.user_id == user_actual_id){
+                        holder.decline.background = holder.itemView.context.getDrawable(R.drawable.design_textbox)
+                    }else{
+                        holder.decline.background = holder.itemView.context.getDrawable(R.drawable.beig_trans_style)
+                    }
+                    holder.accept.background = holder.itemView.context.getDrawable(R.drawable.grenn_button_style)
+
+                }else if(message.accept == -1){
+                    if (user!!.user_id == user_actual_id){
+                        holder.accept.background = holder.itemView.context.getDrawable(R.drawable.design_textbox)
+                    }else{
+                        holder.accept.background = holder.itemView.context.getDrawable(R.drawable.beig_trans_style)
+                    }
+                    holder.decline.background = holder.itemView.context.getDrawable(R.drawable.red_button_style)
+
+                }
+                if (user!!.user_id == user_actual_id && message.accept == null){
+                    holder.accept.background = holder.itemView.context.getDrawable(R.drawable.element_bluesky)
+                    holder.decline.background = holder.itemView.context.getDrawable(R.drawable.element_bluesky)
                 }
                 holder.accept.setOnClickListener {
-                    if (message.accept == null){
-                        //Aceptar la oferta y oscurecer el boton
+                    if (message.accept == null && actualUser is Musician){
+                        holder.accept.background = holder.itemView.context.getDrawable(R.drawable.grenn_button_style)
+                        message.accept = 1
+                        coroutineScope.launch {
+                            Tools.responseMessage(1,message.messageId,user_actual_id)
+                        }
                     }
                 }
                 holder.decline.setOnClickListener {
-                    if (message.accept == null){
-                        //Aceptar la oferta y oscurecer el boton
+                    if (message.accept == null && actualUser is Musician){
+                        holder.decline.background = holder.itemView.context.getDrawable(R.drawable.red_button_style)
+                        message.accept = -1
+                        coroutineScope.launch {
+                            Tools.responseMessage(-1,message.messageId,user_actual_id)
+                        }
                     }
                 }
             }else{
@@ -86,14 +112,22 @@ class MessageAdapter(
 
             }
             if (user?.user_id == user_actual_id) {
-                holder.body.background = holder.itemView.context.getDrawable(R.drawable.element_beig)
-                holder.body.layoutParams = holder.body.layoutParams.apply {
-                    if (this is FrameLayout.LayoutParams) {
-                        gravity = Gravity.END
-                    }
+                if (message.offer !=null){
+                    holder.bodyAccept.background = holder.itemView.context.getDrawable(R.drawable.element_beig)
+                    val params = holder.bodyAccept.layoutParams as FrameLayout.LayoutParams
+                    params.gravity = Gravity.END
+                    params.marginStart = 385 // Margen izquierdo para mensajes enviados
+                    params.marginEnd = 0  // Margen derecho reducido
+                    holder.bodyAccept.layoutParams = params
+                }else{
+                    holder.body.background = holder.itemView.context.getDrawable(R.drawable.element_beig)
+                    val params = holder.body.layoutParams as FrameLayout.LayoutParams
+                    params.gravity = Gravity.END
+                    params.marginStart = 385 // Margen izquierdo para mensajes enviados
+                    params.marginEnd = 0  // Margen derecho reducido
+                    holder.body.layoutParams = params
                 }
             }
-
         }
     }
     override fun getItemCount(): Int = messageList.size

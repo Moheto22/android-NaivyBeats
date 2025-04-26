@@ -48,9 +48,12 @@ public class Message
     {
         this.messageId = messageId;
     }
-    public int getOffer()
+    public Integer getOffer()
     {
         return offer;
+    }
+    public void setAccept(int accept){
+        this.accept = accept;
     }
 
     public Integer getAccept() {

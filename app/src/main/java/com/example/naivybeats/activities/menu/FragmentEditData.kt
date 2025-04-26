@@ -1,5 +1,6 @@
 package com.example.naivybeats.activities.menu
 
+import Tools
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
@@ -20,6 +21,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -27,6 +29,7 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.lifecycle.lifecycleScope
 import com.example.naivybeats.R
+import com.example.naivybeats.models.musician.model.Musician
 import com.example.naivybeats.models.user.model.Users
 import kotlinx.coroutines.launch
 import java.io.File
@@ -48,6 +51,7 @@ class FragmentEditData : Fragment() {
         super.onCreate(savedInstanceState)
 
     }
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,6 +69,25 @@ class FragmentEditData : Fragment() {
             file?.let {
                 val bitmap = BitmapFactory.decodeFile(it.absolutePath)
                 avatar.setImageBitmap(bitmap)
+            }
+            if (user is Musician) {
+                val numFollowers = view.findViewById<TextView>(R.id.value_1)
+                val numFollowersValue = Tools.getFollows(user_id!!)
+                numFollowers.text = numFollowersValue.toString()
+                val numLikes = view.findViewById<TextView>(R.id.value_2)
+                val numLikesValue = Tools.getPostLikes(user_id!!)
+                numLikes.text = numLikesValue.toString()
+            }else{
+                val titleTotalOffers = view.findViewById<TextView>(R.id.key_1)
+                titleTotalOffers.text = getString(R.string.total_offers_eng)
+                val numOffers = view.findViewById<TextView>(R.id.value_1)
+                val numOffersValue = Tools.getOffers(user_id!!)
+                numOffers.text = numOffersValue.toString()
+                val titleNumDone = view.findViewById<TextView>(R.id.key_2)
+                titleNumDone.text = getString(R.string.total_concerts_done_eng)
+                val numDone = view.findViewById<TextView>(R.id.value_2)
+                val numDoneValue = Tools.getEventsDone(user_id!!)
+                numDone.text = numDoneValue.toString()
             }
         }
         val button_save = view.findViewById<Button>(R.id.save)

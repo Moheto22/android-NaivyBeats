@@ -90,4 +90,7 @@
     <string name="send_message_eng">Send a message to the Restaurant</string>
     <string name="doesnt_exist_text_eng">You have to write a message to Restaurant</string>
     <string name="cancel_eng">Cancel</string>
+    <string name="total_likes_eng">Total Likes</string>
+    <string name="total_offers_eng">Total offers</string>
+    <string name="total_concerts_done_eng">Concerts done</string>
 </resources>

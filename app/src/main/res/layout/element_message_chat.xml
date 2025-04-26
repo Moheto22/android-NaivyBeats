@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<FrameLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content">
-
     <LinearLayout
         android:id="@+id/panelAccept"
         android:layout_width="300dp"
@@ -13,7 +12,9 @@
         android:background="@drawable/design_big_textbox"
         android:orientation="vertical"
         android:padding="20dp"
-        android:visibility="visible">
+        tools:ignore="RtlCompat"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,40 +75,45 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:textAlignment="gravity">
 
             <Button
                 android:id="@+id/decline"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:background="@drawable/design_button"
                 android:padding="0dp"
                 android:text="@string/decline_eng"
                 android:textColor="@color/bluemarin"
-                android:textSize="15dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/accept"
+                android:gravity="end"
+                android:textAlignment="center"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="55dp"
                 android:background="@drawable/design_button"
                 android:padding="0dp"
                 android:text="@string/accept_eng"
                 android:textColor="@color/bluemarin"
-                android:textSize="15dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
-                app:backgroundTint="@null" />
+                app:backgroundTint="@null"
+                tools:ignore="RtlCompat" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/message_body"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="350dp"
+        tools:ignore="RtlCompat"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/element_bluesky"
