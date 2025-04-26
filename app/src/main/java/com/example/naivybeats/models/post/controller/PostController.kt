@@ -152,4 +152,17 @@ class PostController {
             }
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getLikes(publication_id: Int): Int? {
+        return withContext(Dispatchers.IO) {
+            val response = service.getLikes(publication_id)
+
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                0
+            }
+        }
+    }
 }

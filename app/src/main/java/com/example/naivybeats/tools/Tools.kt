@@ -207,7 +207,7 @@ class Tools{
             }
         }
 
-        suspend fun getLikes(user_id: Int): Int?{
+        suspend fun getPostLikes(user_id: Int): Int?{
             return withContext(Dispatchers.IO) {
                 musicianController.getLikes(user_id)
             }
@@ -318,6 +318,13 @@ class Tools{
         suspend fun unfollow(restaurant_id: Int, musician_id: Int): Boolean {
             return withContext(Dispatchers.IO) {
                 postController.unFollow(restaurant_id, musician_id)
+            }
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun getLikes(publication_id: Int): Int? {
+            return withContext(Dispatchers.IO) {
+                postController.getLikes(publication_id)
             }
         }
 

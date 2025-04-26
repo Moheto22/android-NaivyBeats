@@ -54,4 +54,7 @@ interface PostService {
         @Part("restaurant_id") user_id: RequestBody,
         @Part("musician_id") musician_id: RequestBody,
     ) : Response<Boolean>
+
+    @GET("api/Publication/GetLikes/{publication_id}")
+    suspend fun getLikes(@Path("publication_id") publication_id: Int): Response<Int>
 }
