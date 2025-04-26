@@ -4,6 +4,7 @@ import com.example.naivybeats.models.message.model.Message
 import com.example.naivybeats.models.offer.models.OfferIn
 import com.example.naivybeats.models.offer.models.OfferDto
 import com.example.naivybeats.models.offer.models.PostOffer
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -24,7 +25,12 @@ interface OfferInService {
 
     @Multipart
     @POST("api/Offer_In/Response")
-    suspend fun responseMessage(@Part("offer_response") offer_response: Int,
-                                    @Part("message_id") message_id: Int,
-                                    @Part("musician_id") musician_id: Int): Response<List<Message>>
+    suspend fun responseMessage(@Part("offer_response") offer_response: RequestBody,
+                                    @Part("message_id") message_id: RequestBody,
+                                    @Part("musician_id") musician_id: RequestBody): Response<List<Message>>
+
+    @Multipart
+    @GET("api/Offer_In/ListOffers")
+    suspend fun getListOffers(@Part("restaurant_id") restaurant_id: RequestBody,
+                              @Part("musician_id") musician_id: RequestBody): Response<List<OfferIn>>
 }

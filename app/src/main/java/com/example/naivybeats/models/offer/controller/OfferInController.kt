@@ -87,13 +87,41 @@ class OfferInController: BaseController() {
                 val message_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), message_id.toString())
                 val musician_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), musician_id.toString())
 
-                service.responseMessage(offer_response, message_id, musician_id)
+                service.responseMessage(offer_response_part, message_id_part, musician_id_part)
 
                 true
             } catch (e: Exception) {
                 println("Excepción en insertMusician: ${e.message}")
                 e.printStackTrace()
                 false
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getOffersList(
+        restaurant_id: Int,
+        musician_id: Int
+        ): List<OfferIn> {
+        return withContext(Dispatchers.IO) {
+            try {
+
+                val restaurant_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), restaurant_id.toString())
+                val musician_id_part = RequestBody.create("text/plain".toMediaTypeOrNull(), musician_id.toString())
+
+                val response = service.getListOffers(restaurant_id_part, musician_id_part)
+
+                if (response.isSuccessful) {
+                    response.body() ?: emptyList()
+                } else {
+                    emptyList()
+                }
+
+
+            } catch (e: Exception) {
+                println("Excepción en insertMusician: ${e.message}")
+                e.printStackTrace()
+                emptyList()
             }
         }
     }

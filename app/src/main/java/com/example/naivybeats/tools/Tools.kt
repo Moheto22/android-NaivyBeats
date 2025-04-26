@@ -381,6 +381,12 @@ class Tools{
             }
         }
 
+        suspend fun getOffersList(restaurant_id: Int, musician_id: Int): List<OfferIn> {
+            return withContext(Dispatchers.IO) {
+                offerInController.getOffersList(restaurant_id, musician_id)
+            }
+        }
+
         //MESSAGE
         suspend fun newMessage(message: Message) {
             return withContext(Dispatchers.IO) {
