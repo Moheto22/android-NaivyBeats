@@ -366,6 +366,14 @@ class Tools{
             }
         }
 
+        suspend fun responseMessage(offer_response: Int,
+                                    message_id: Int,
+                                    musician_id: Int,): Boolean {
+            return withContext(Dispatchers.IO) {
+                offerInController.responseMessage(offer_response, message_id, musician_id)
+            }
+        }
+
         //MESSAGE
         suspend fun newMessage(message: Message) {
             return withContext(Dispatchers.IO) {
